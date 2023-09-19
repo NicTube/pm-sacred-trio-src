@@ -1,0 +1,90 @@
+#import scrdtrio_enemy/1A_BuzzyBeetle.bpat
+
+@ $1A_BuzzyBeetle {
+    % stats
+    [Index]        17b 
+    [Level]        21`b 
+    [MaxHP]         3`b 
+    [Coins]         8`b 
+    [Flags]       00000800 
+    [StatusTable] $StatusTable_802289D8_1A 
+    % ai
+    [PartsCount]    1`s 
+    [PartsTable]  $PartsTable_80228A84_1A 
+    [Script]      $Script_Init_80228BAC_1A 
+    % move effectiveness
+    [Escape]       60`b 
+    [Item]         75`b 
+    [AirLift]      75`b 
+    [Hurricane]    75`b % Bow's "Spook" as well
+    [UpAndAway]    95`b 
+    [PowerBounce]  90`b 
+    [SpinSmash]     0`b % weight (0-4)
+    % ui positions
+    [Size]         22`b  18`b % width height
+    [HealthBar]     0`b   0`b % dx dy
+    [StatusTurn]   -8`b  16`b % dx dy
+    [StatusIcon]    8`b  13`b % dx dy
+    }
+
+@ $Formation_01 {
+    $1A_BuzzyBeetle 00000001 00000014 00000000 00000000 00000000 00000000
+    $1A_BuzzyBeetle 00000002 00000013 00000000 00000000 00000000 00000000
+}
+
+@ $FormationTable {
+    $SJIS_80231600 00000002 $Formation_00 $Stage_8022F3B4 00000000
+    $SJIS_802315F4 00000002 $Formation_01 $Stage_8022F3B4 00000000
+    $SJIS_802315E8 00000008 $Formation_02 $Stage_8022F3B4 00000000
+    $SJIS_802315CC 00000008 $Formation_03 $Stage_8022F3B4 00000000
+    $SJIS_802315A8 00000008 $Formation_04 $Stage_8022F3B4 00000000
+    $SJIS_80231578 00000009 $Formation_05 $Stage_8022F3B4 00000000
+    $SJIS_80231564 00000002 $Formation_06 $Stage_8022F3B4 00000000
+    $SJIS_80231550 00000004 $Formation_07 $Stage_8022F3B4 00000000
+    $SJIS_80231534 00000008 $Formation_08 $Stage_8022F3B4 00000000
+    $SJIS_8023150C 00000008 $Formation_09 $Stage_8022F3B4 00000000
+    $SJIS_802314DC 00000009 $Formation_0A $Stage_8022F3B4 00000000
+    $SJIS_802314C8 00000002 $Formation_0B $Stage_8022F3B4 00000000
+    $SJIS_802314A0 00000004 $Formation_0C $Stage_8022F3B4 00000000
+    $SJIS_80231470 00000004 $Formation_0D $Stage_8022F3B4 00000000
+    00000000 00000000 00000000 00000000 00000000
+}
+
+@ $Stage_8022F3B4 {
+    $ASCII_80231378  % sam_tex
+    $ASCII_80231368  % sam_bt01_shape
+    $ASCII_80231358  % sam_bt01_hit
+    $Script_BeforeBattle_8022F288
+    $Script_AfterBattle_8022F398
+    "kpa_bg"
+    $ForegroundModelList_8022F3A8
+    00000000
+    00000000
+    00000000
+}
+
+@ $Stage_8022F7EC {
+    $ASCII_802313A8  % sam_tex
+    $ASCII_80231398  % sam_bt02_shape
+    $ASCII_80231388  % sam_bt02_hit
+    $Script_BeforeBattle_8022F698
+    $Script_AfterBattle_8022F7D0
+    "kpa_bg"
+    $ForegroundModelList_8022F7E0
+    00000000
+    00000000
+    00000000
+}
+
+@ $Stage_8022FB48 {
+    $ASCII_802313D8  % sam_tex
+    $ASCII_802313C8  % sam_bt02_shape
+    $ASCII_802313B8  % sam_bt02_hit
+    $Script_BeforeBattle_8022FAD8
+    $Script_AfterBattle_8022FB2C
+    "kpa_bg"
+    $ForegroundModelList_8022FB3C
+    00000000
+    00000000
+    00000000
+}

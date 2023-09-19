@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Map name="cos_01" author="unnamed" background="hos_bg" textures="hos_tex">
+	<Editor>
+		<Camera pos="-443.828094,-0.302044,361.127777" pitch="32.640015" yaw="331.710602"/>
+		<Camera pos="-59.277599,65536.000000,-33.809048"/>
+		<Camera pos="65536.000000,7.329619,-503.731110"/>
+		<Camera pos="120.882484,50.348339,65536.000000"/>
+	</Editor>
+	<ModelTree>
+		<Node name="Root" id="0"/>
+	</ModelTree>
+	<ColliderTree>
+		<Node name="Root" id="11">
+			<Node name="g1" id="A">
+				<Node name="g3" id="0"/>
+				<Node name="g6" id="4">
+					<Node name="g53" id="1"/>
+					<Node name="g54" id="2"/>
+					<Node name="g55" id="3"/>
+				</Node>
+				<Node name="g4" id="5"/>
+				<Node name="g49" id="9">
+					<Node name="g50" id="6"/>
+					<Node name="g51" id="7"/>
+					<Node name="g52" id="8"/>
+				</Node>
+			</Node>
+			<Node name="colliders_west" id="C">
+				<Node name="star_house1_c_g" id="B"/>
+			</Node>
+			<Node name="colliders_east" id="F">
+				<Node name="g30" id="E">
+					<Node name="g68" id="D"/>
+				</Node>
+			</Node>
+			<Node name="lower_colliders_g" id="10"/>
+		</Node>
+	</ColliderTree>
+	<ZoneTree>
+		<Node name="Root" id="8">
+			<Node name="g1" id="1">
+				<Node name="o38" id="0"/>
+			</Node>
+			<Node name="g6" id="2"/>
+			<Node name="g9" id="3"/>
+			<Node name="g7" id="4"/>
+			<Node name="o223" id="5"/>
+			<Node name="house1_camera" id="6"/>
+			<Node name="house2_camera" id="7"/>
+		</Node>
+	</ZoneTree>
+	<MarkerTree>
+		<Node name="Root" id="7">
+			<Node name="Entrances" id="1">
+				<Node name="Entry0" id="FFFFFFFF"/>
+				<Node name="Entry1" id="0"/>
+			</Node>
+			<Node name="NPCs" id="5">
+				<Node name="NPC_StarKid1" id="2"/>
+				<Node name="NPC_StarKid2" id="3"/>
+				<Node name="NPC_StarKid3" id="4"/>
+			</Node>
+			<Node name="Entities" id="6"/>
+		</Node>
+	</MarkerTree>
+	<LightSets>
+		<LightSet name="Lights_None" a="0">
+		</LightSet>
+		<LightSet name="Lights_80215A10" a="0">
+		</LightSet>
+	</LightSets>
+	<Models>
+		<Model ver="2" type="ROOT" lightset="1">
+			<MapObject name="Root" id="0" dumped="true" fileOffset="1E180"/>
+			<BoundingBox empty="true" min="-1190,-206,-1795" max="1824,391,803"/>
+			<PropertyList>
+			</PropertyList>
+		</Model>
+	</Models>
+	<Colliders>
+		<Collider ver="0" flags="0">
+			<MapObject name="Root" id="11"/>
+			<HitObject type="ROOT"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="lower_colliders_g" id="10"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="colliders_east" id="F"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="g30" id="E"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="g68" id="D"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="colliders_west" id="C"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="star_house1_c_g" id="B"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="g1" id="A" dumped="true" fileOffset="1198"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="g49" id="9" dumped="true" fileOffset="118C"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="g52" id="8" dumped="true" fileOffset="1180"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="g51" id="7" dumped="true" fileOffset="1144"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="g50" id="6" dumped="true" fileOffset="1120"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="g4" id="5" dumped="true" fileOffset="10E4"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="g6" id="4" dumped="true" fileOffset="106C"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="g55" id="3" dumped="true" fileOffset="1060"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="g54" id="2" dumped="true" fileOffset="103C"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="g53" id="1" dumped="true" fileOffset="1018"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+		<Collider ver="0" flags="0">
+			<MapObject name="g3" id="0" dumped="true" fileOffset="FF4"/>
+			<HitObject type="GROUP"/>
+		</Collider>
+	</Colliders>
+	<Zones>
+		<Zone ver="0">
+			<MapObject name="Root" id="8"/>
+			<HitObject type="ROOT"/>
+		</Zone>
+		<Zone ver="0">
+			<MapObject name="house2_camera" id="7" hidden="true"/>
+			<HitObject type="HIT"/>
+			<HitMesh ver="0">
+				<TriangleBatch ver="0">
+					<VertexTable>
+						<Vertex xyz="676,21,-37" uv="-512,512"/>
+						<Vertex xyz="929,21,-36" uv="512,-512"/>
+						<Vertex xyz="861,21,-155" uv="-512,-512"/>
+						<Vertex xyz="929,21,-36" uv="512,-512"/>
+						<Vertex xyz="676,21,-37" uv="-512,512"/>
+						<Vertex xyz="756,21,77" uv="512,512"/>
+					</VertexTable>
+					<TriangleList>
+						<Triangle ijk="0,1,2"/>
+						<Triangle ijk="3,4,5"/>
+					</TriangleList>
+				</TriangleBatch>
+			</HitMesh>
+			<Camera type="TYPE_6" flag="false" boomLength="450.000000" boomPitch="16.000000" viewPitch="-6.000000" posA="755,10,-60" posB="790,10,-84" posC="10,0,10"/>
+		</Zone>
+		<Zone ver="0">
+			<MapObject name="house1_camera" id="6" hidden="true"/>
+			<HitObject type="HIT"/>
+			<HitMesh ver="0">
+				<TriangleBatch ver="0">
+					<VertexTable>
+						<Vertex xyz="-254,-1,10" uv="-512,512"/>
+						<Vertex xyz="-280,-1,-203" uv="512,-512"/>
+						<Vertex xyz="-364,-1,-134" uv="-512,-512"/>
+						<Vertex xyz="-170,-1,-59" uv="512,512"/>
+					</VertexTable>
+					<TriangleList>
+						<Triangle ijk="0,1,2"/>
+						<Triangle ijk="1,0,3"/>
+					</TriangleList>
+				</TriangleBatch>
+			</HitMesh>
+			<Camera type="TYPE_6" flag="false" boomLength="450.000000" boomPitch="16.000000" viewPitch="-6.000000" posA="-279,10,-112" posB="-252,10,-80" posC="10,0,10"/>
+		</Zone>
+		<Zone ver="0">
+			<MapObject name="o223" id="5" hidden="true"/>
+			<HitObject type="HIT"/>
+			<HitMesh ver="0">
+				<TriangleBatch ver="0">
+					<VertexTable>
+						<Vertex xyz="378,67,-660"/>
+						<Vertex xyz="518,67,-660"/>
+						<Vertex xyz="518,67,-864"/>
+						<Vertex xyz="378,67,-660"/>
+						<Vertex xyz="518,67,-864"/>
+						<Vertex xyz="378,67,-864"/>
+						<Vertex xyz="414,67,-650"/>
+						<Vertex xyz="473,67,-650"/>
+						<Vertex xyz="473,67,-660"/>
+						<Vertex xyz="414,67,-650"/>
+						<Vertex xyz="473,67,-660"/>
+						<Vertex xyz="413,67,-660"/>
+					</VertexTable>
+					<TriangleList>
+						<Triangle ijk="0,1,2"/>
+						<Triangle ijk="3,4,5"/>
+						<Triangle ijk="6,7,8"/>
+						<Triangle ijk="9,10,11"/>
+					</TriangleList>
+				</TriangleBatch>
+			</HitMesh>
+			<Camera type="TYPE_4" flag="false" boomLength="400.000000" boomPitch="22.000000" viewPitch="-6.000000" posA="519,65,-758" posB="449,65,-758" posC="25,0,25"/>
+		</Zone>
+		<Zone ver="0">
+			<MapObject name="g7" id="4" dumped="true" fileOffset="185C"/>
+			<HitObject type="GROUP"/>
+		</Zone>
+		<Zone ver="0">
+			<MapObject name="g9" id="3" dumped="true" fileOffset="182C"/>
+			<HitObject type="GROUP"/>
+		</Zone>
+		<Zone ver="0">
+			<MapObject name="g6" id="2" dumped="true" fileOffset="1814"/>
+			<HitObject type="GROUP"/>
+		</Zone>
+		<Zone ver="0">
+			<MapObject name="g1" id="1" dumped="true" fileOffset="17E4"/>
+			<HitObject type="GROUP"/>
+		</Zone>
+		<Zone ver="0">
+			<MapObject name="o38" id="0" hidden="true" dumped="true" fileOffset="17CC"/>
+			<HitObject type="HIT"/>
+			<HitMesh ver="0">
+				<TriangleBatch ver="0">
+					<VertexTable>
+						<Vertex xyz="-531,-350,593"/>
+						<Vertex xyz="-210,-350,724"/>
+						<Vertex xyz="837,-350,672"/>
+						<Vertex xyz="1101,-350,529"/>
+						<Vertex xyz="1479,-350,-227"/>
+						<Vertex xyz="750,-350,-524"/>
+						<Vertex xyz="-298,-350,-472"/>
+						<Vertex xyz="-1019,-350,-84"/>
+						<Vertex xyz="-1013,-350,0"/>
+					</VertexTable>
+					<TriangleList>
+						<Triangle ijk="0,1,2"/>
+						<Triangle ijk="0,2,3"/>
+						<Triangle ijk="0,3,4"/>
+						<Triangle ijk="0,4,5"/>
+						<Triangle ijk="0,5,6"/>
+						<Triangle ijk="0,6,7"/>
+						<Triangle ijk="0,7,8"/>
+					</TriangleList>
+				</TriangleBatch>
+			</HitMesh>
+			<Camera type="TYPE_6" flag="false" boomLength="450.000000" boomPitch="17.000000" viewPitch="-7.000000" posA="-889,0,-25" posB="1007,0,-24" posC="0,0,0"/>
+		</Zone>
+	</Zones>
+	<Markers>
+		<Marker ver="4" type="Root">
+			<MapObject name="Root" id="7"/>
+		</Marker>
+		<Marker ver="4" type="Group">
+			<MapObject name="Entities" id="6"/>
+		</Marker>
+		<Marker ver="4" type="Group">
+			<MapObject name="NPCs" id="5"/>
+		</Marker>
+		<Marker ver="4" type="NPC" pos="279,25,212" yaw="-0.000000">
+			<MapObject name="NPC_StarKid3" id="4"/>
+			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
+			<Sprite sprite="20" palette="0" animations="1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
+		</Marker>
+		<Marker ver="4" type="NPC" pos="-52,25,-76" yaw="-0.000000">
+			<MapObject name="NPC_StarKid2" id="3"/>
+			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
+			<Sprite sprite="20" palette="0" animations="1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
+		</Marker>
+		<Marker ver="4" type="NPC" pos="-296,23,-149" yaw="-0.000000">
+			<MapObject name="NPC_StarKid1" id="2"/>
+			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
+			<Sprite sprite="20" palette="0" animations="1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
+		</Marker>
+		<Marker ver="4" type="Group">
+			<MapObject name="Entrances" id="1"/>
+		</Marker>
+		<Marker ver="4" type="Entry" pos="531,4,-234" yaw="187.822790">
+			<MapObject name="Entry1" id="0"/>
+		</Marker>
+		<Marker ver="4" type="Entry" pos="-464,-57,318" yaw="103.154767">
+			<MapObject name="Entry0" id="FFFFFFFF"/>
+		</Marker>
+	</Markers>
+	<ScriptData>
+		<TexPanners>
+			<TexPanner id="0" generate="false"/>
+			<TexPanner id="1" generate="true" mainStep="18,35" auxStep="88,124" mainFreq="1,0" auxFreq="1,0"/>
+			<TexPanner id="2" generate="false"/>
+			<TexPanner id="3" generate="false" mainStep="-100,0" auxStep="40,0" mainFreq="1,0" auxFreq="1,0"/>
+			<TexPanner id="4" generate="false"/>
+			<TexPanner id="5" generate="false"/>
+			<TexPanner id="6" generate="false"/>
+			<TexPanner id="7" generate="false"/>
+			<TexPanner id="8" generate="false"/>
+			<TexPanner id="9" generate="false"/>
+			<TexPanner id="A" generate="false"/>
+			<TexPanner id="B" generate="false"/>
+			<TexPanner id="C" generate="false" mainStep="16384,0" mainFreq="3,0"/>
+			<TexPanner id="D" generate="false"/>
+			<TexPanner id="E" generate="false"/>
+			<TexPanner id="F" generate="false"/>
+		</TexPanners>
+		<Generators>
+			<Exit type="Walk" hasCallback="false" entry="Entry0" destMap="hos_07" destEntry="Entry2" trigger="deiliw"/>
+			<Exit type="Walk" hasCallback="false" entry="Entry1" destMap="hos_09" destEntry="Entry2" trigger="deilin"/>
+		</Generators>
+		<Camera vfov="25" near="16" far="4096" bgcolor="0,0,0" leadsPlayer="false"/>
+		<Fog world="0,10,10,10,255,950,1000" entity="0,10,10,10,255,950,1000"/>
+		<Options location="1B" hasMusic="true" song="61" hasSounds="false" sounds="1" hasShading="true" shadingName="None"/>
+		<Override tex="true"/>
+	</ScriptData>
+</Map>

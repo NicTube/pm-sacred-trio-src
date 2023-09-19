@@ -1,0 +1,660 @@
+#new:Header $Header
+{
+	[MainScript] $Script_Main
+	[Background] 80200000
+	[EntryList] $EntryList
+	[EntryCount] 1
+	[MapTattle]   00000000
+}
+
+#new:EntryList $EntryList
+{
+~Vec4f:Entry0
+}
+
+#new:Script_Main $Script_Main
+{
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True )
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+	Call  SetMusicTrack     ( 00000000 .Song:ShootingStarSummit 00000000 00000008 )
+	Set	   *Var[0] $Script_CreateExitTriggers
+    Exec    EnterWalk
+	Wait 1
+	Exec    $Script_SetupTexturePan
+	Exec    $WaterfallSounds
+    Exec    $FellDown
+    If *GB_StoryProgress < .Story:Ch0_HitGatehouseSwitch
+        Call     MakeNpcs  ( .False $NpcGroupList_First )
+        Exec     $SalmosJumping
+        Bind     $SalmosStarAltar  .Trigger:FloorTouch ~Collider:ground1_c 1 0
+    EndIf
+    If *GF_HOS23_Item_StarStone == .True
+        If *GF_SAM13_Item_LunarStone == .True
+            If *GF_NOK04_Item_SolarStone == .True
+                Set *GB_StoryProgress .Story:Ch7_ArrivedAtCrystalPalace
+            EndIf
+        EndIf
+    EndIf
+    If *GB_StoryProgress >= .Story:Ch1_FuzzyThiefHidInTree
+        If *SAM13_Tree1_LunarStone == .True
+        Call     MakeNpcs  ( .False $NpcGroupList_FinalBoss )
+        Bind     $FinalBossAppears  .Trigger:FloorAbove ~Collider:podest1_c 1 0
+        EndIf
+    EndIf
+        Wait 1
+	Return
+	End
+}
+#new:Script $FellDown {
+    Loop
+        Call GetPlayerPos ( *Var1 *Var2 *Var3 )
+        If *Var2 < -100`
+            Call PlaySound ( 3E3 )
+            Call SetPlayerPos ( ~Vec3d:Entry0 )
+        EndIf
+        Wait 1
+    EndLoop
+    Return
+    End
+}
+#new:Script $FinalBossAppears
+{
+    Call    DisablePlayerInput ( .True )
+    %Call    ShowMessageAtScreenPos    ( 002F0028  160`  40` ) % GRAAAAHHHH!
+    %Call    ShowMessageAtScreenPos    ( 002F002B  160`  40` ) % CREDITS
+    Set *GF_StandOnPodest .True
+    Set *GF_NOK04_Item_SolarStone .False
+    Return
+    End
+}
+
+#new:Script $SalmosJumping
+{
+    Call    PlaySound ( 3E2 )
+    Call    SetNpcJumpscale ( 2 *Fixed[0.2] )
+    Call    NpcJump0 ( 2 -58` -62` -40` 20` )
+    Wait    5`
+    Call    PlaySound ( 3E2 )
+    Call    NpcJump0 ( 2 2` -50` -102` 25` )
+    Call    SetNpcAnimation ( 2 00070002 )
+    Call    NpcMoveTo ( 2 72` -120` 35` )
+    Wait    1
+    Call    SetNpcAnimation ( 2 00070001 )
+    Return
+    End
+}
+
+#new:Script $SalmosStarAltar
+{
+    If *GB_StoryProgress < .Story:Ch0_HitGatehouseSwitch
+        Call    DisablePlayerInput ( .True )
+        Set *GB_StoryProgress .Story:Ch0_HitGatehouseSwitch
+        Wait    5`
+        Call    SpeakToPlayer ( 2 00070004 00070001 00000000 002F000D )
+        Call    SetPanTarget ( .Cam:Default 16` 60` -376` )
+        Call    UseSettingsFrom       ( .Cam:Default FFFFFF10 00000000 00000000 )
+        Call    SetCamPitch   ( .Cam:Default 00000012 FFFFFFFD )
+        Call    SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
+        Call    PanToTarget ( .Cam:Default 00000000 1 )
+        Call    WaitForCam ( .Cam:Default *Fixed[1.0] )
+        Thread
+            Wait    65`
+            Call    SetPanTarget ( .Cam:Default 16` -46` -158` )
+            Call    UseSettingsFrom       ( .Cam:Default FFFFFF10 00000000 00000000 )
+            Call    SetCamPitch   ( .Cam:Default 00000012 FFFFFFFD )
+            Call    SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
+            Call    PanToTarget ( .Cam:Default 00000000 1 )
+        EndThread
+        Call    SpeakToPlayer ( 2 00070004 00070001 00000000 002F000E )
+        Call    ShowChoice    ( 002F000F ) % Choices
+        Wait    2
+        Call    CloseMessage ( )
+        Wait    8`
+        Call    SpeakToPlayer ( 2 00070004 00070001 00000000 002F0010 )
+        Call    ShowChoice    ( 002F0011 ) % Choices
+        Wait    2
+        Call    CloseMessage ( )
+        Call    PushSong  ( 96 00000000 )
+        Call    $PartnerImage ( )
+        Call    $NPCtoPartner    ( 2 7 )
+        Call    ShowMessageAtScreenPos    ( 001D018F  160`  40` ) % Salmos joined your party!!
+        Exec    $FadeOutSong
+        Wait    5
+        Call    SpeakToPlayer ( 2 00070004 00070001 00000000 002F0012 )
+        Call    PanToTarget ( .Cam:Default 0 0 )
+        Call    EnablePartnerAI ( )
+        Call    DisablePlayerInput ( .False )
+        Label 1
+        Wait 1`
+    EndIf
+    Return
+    End
+}
+#new:Function $NPCtoPartner
+{
+    0:  ADDIU     SP, SP, FFD8
+    4:  SW        S2, 18 (SP)
+    8:  COPY      S2, A0
+    C:  SW        S1, 14 (SP)
+   10:  COPY      S1, A1
+   14:  SW        RA, 24 (SP)
+   18:  SW        S4, 20 (SP)
+   1C:  SW        S3, 1C (SP)
+   20:  SW        S0, 10 (SP)
+   24:  LW        S0, C (S2)
+   28:  LW        A1, 0 (S0)
+   2C:  JAL       ~Func:get_variable
+   30:  ADDIU     S0, S0, 4
+   34:  COPY      A0, S2
+   38:  LW        A1, 0 (S0)
+   3C:  JAL       ~Func:get_variable
+   40:  COPY      S0, V0
+   44:  COPY      A0, S0
+   48:  JAL       ~Func:get_npc_safe
+   4C:  COPY      S4, V0
+   50:  LA        S3, 8010F290
+   58:  BEQ       S1, R0, .o74
+   5C:  COPY      S0, V0
+   60:  LB        V0, 12 (S3)
+   64:  BNEL      V0, R0, .o74
+   68:  SW        R0, 70 (S2)
+   6C:  LI        V0, 2
+   70:  SW        V0, 70 (S2)
+        .o74
+   74:  LW        V1, 70 (S2)
+   78:  LI        S1, 1
+   7C:  BEQ       V1, S1, .oCC
+   80:  SLTI      V0, V1, 2
+   84:  BEQ       V0, R0, .o9C
+   88:  LI        V0, 2
+   8C:  BEQ       V1, R0, .oB4
+   90:  CLEAR     V0
+   94:  BEQ       R0, R0, .o164
+   98:  NOP
+        .o9C
+   9C:  BEQ       V1, V0, .oEC
+   A0:  LI        V0, 3
+   A4:  BEQ       V1, V0, .o120
+   A8:  CLEAR     V0
+   AC:  BEQ       R0, R0, .o164
+   B0:  NOP
+        .oB4
+   B4:  JAL       800EB168
+   B8:  CLEAR     A0
+   BC:  LI        V0, 1E
+   C0:  SW        V0, 74 (S2)
+   C4:  BEQ       R0, R0, .o160
+   C8:  SW        S1, 70 (S2)
+        .oCC
+   CC:  LW        V0, 74 (S2)
+   D0:  LI        V1, FFFF
+   D4:  ADDIU     V0, V0, FFFF
+   D8:  BNE       V0, V1, .o160
+   DC:  SW        V0, 74 (S2)
+   E0:  LI        V0, 2
+   E4:  BEQ       R0, R0, .o160
+   E8:  SW        V0, 70 (S2)
+        .oEC
+   EC:  COPY      A0, S0
+   F0:  SLL       V0, S4, 18
+   F4:  SRA       V0, V0, 15
+   F8:  ADDU      V0, S3, V0
+   FC:  SB        S4, 12 (S3)
+  100:  JAL       ~Func:partner_clear_player_tracking
+  104:  SB        S1, 14 (V0)
+  108:  LB        A0, 12 (S3)
+  10C:  JAL       800EB2A4
+  110:  NOP
+  114:  LI        V0, 3
+  118:  BEQ       R0, R0, .o160
+  11C:  SW        V0, 70 (S2)
+        .o120
+  120:  JAL       ~Func:get_npc_safe
+  124:  LI        A0, FFFC
+  128:  LW        A1, C (S0)
+  12C:  JAL       ~Func:set_npc_yaw
+  130:  COPY      A0, V0
+  134:  COPY      A0, S0
+  138:  LW        V0, 0 (S0)
+  13C:  LI        V1, FFFB
+  140:  AND       V0, V0, V1
+  144:  JAL       ~Func:disable_npc_shadow
+  148:  SW        V0, 0 (S0)
+  14C:  LIF       F0, -1000.0
+  154:  LI        V0, 2
+  158:  BEQ       R0, R0, .o164
+  15C:  SWC1      F0, 3C (S0)
+        .o160
+  160:  CLEAR     V0
+        .o164
+  164:  LW        RA, 24 (SP)
+  168:  LW        S4, 20 (SP)
+  16C:  LW        S3, 1C (SP)
+  170:  LW        S2, 18 (SP)
+  174:  LW        S1, 14 (SP)
+  178:  LW        S0, 10 (SP)
+  17C:  JR        RA
+  180:  ADDIU     SP, SP, 28
+}
+#new:Script $FadeOutSong
+{
+    0:  Call  FadeOutMusic  ( 00000000 000001F4 )
+   14:  Wait  15`
+   20:  Call  PopSong ( )
+   2C:  Return
+   34:  End
+}
+#new:Function $PartnerImage
+{
+    0:  ADDIU     SP, SP, FFD8
+    4:  LA        A0, $ASCII_Partner
+    C:  ADDIU     A1, SP, 10
+   10:  SW        RA, 20 (SP)
+   14:  SW        S1, 1C (SP)
+   18:  JAL       ~Func:load_asset_by_name
+   1C:  SW        S0, 18 (SP)
+   20:  COPY      S0, V0
+   24:  COPY      A0, S0
+   28:  LA        S1, $End[220]
+   30:  JAL       ~Func:decode_yay0
+   34:  COPY      A1, S1
+   38:  JAL       ~Func:general_heap_free
+   3C:  COPY      A0, S0
+   40:  LA        A0, $End[41B0]
+   48:  LA        V0, $End[420]
+   50:  SW        V0, 0 (A0)
+   54:  LI        V0, 96
+   58:  SH        V0, 8 (A0)
+   5C:  LI        V0, 69
+   60:  SH        V0, A (A0)
+   64:  LI        V0, 2
+   68:  SW        V0, C (A0)
+   6C:  LI        V0, 1
+   70:  SW        S1, 4 (A0)
+   74:  JAL       ~Func:set_message_images
+   78:  SW        V0, 10 (A0)
+   7C:  LW        RA, 20 (SP)
+   80:  LW        S1, 1C (SP)
+   84:  LW        S0, 18 (SP)
+   88:  LI        V0, 2
+   8C:  JR        RA
+   90:  ADDIU     SP, SP, 28
+}
+#new:ASCII $ASCII_Partner
+{
+	"party_opuku"
+}
+
+#new:NpcGroupList $NpcGroupList_First
+{
+    00000001 $NpcGroup_Salmos 04020003
+	00000000 00000000 00000000
+}
+#new:NpcGroup $NpcGroup_Salmos
+{
+    00000002 $NpcSettings_Normal ~Vec3f:NPC_Salmos % -66 20 -532
+    00000D09 $Script_Init_Salmos 00000000 00000000 0000010E
+    ~NoDrops
+    ~Movement:NPC_Salmos
+    ~AnimationTable:NPC_Salmos % .Sprite:Bowser
+    00000000 00000000 00000000 001A0008 % He's Russ T. Everyone says he's the smartest Toad  ...
+
+}
+#new:NpcGroupList $NpcGroupList_FinalBoss
+{
+    00000001 $NpcGroup_FinalBoss 04030002
+	00000000 00000000 00000000
+}
+#new:NpcGroup $NpcGroup_FinalBoss
+{
+    00000003 $NpcSettings_Normal ~Vec3f:NPC_FinalBoss % -66 20 -532
+    00000D09 $Script_Init_NepEnut 00000000 00000000 0000010E
+    ~NoDrops
+    ~Movement:NPC_FinalBoss
+    ~AnimationTable:NPC_FinalBoss % .Sprite:Bowser
+    00000000 00000000 00000000 001A0008 % He's Russ T. Everyone says he's the smartest Toad  ...
+
+}
+#new:Script $Script_Init_NepEnut
+{
+    0:  Call  BindNpcIdle   ( .Npc:Self $Script_Idle_NepEnut )
+        Call  BindNpcDefeat   ( .Npc:Self $Script_Defeat_NepEnut )
+   14:  Return
+   1C:  End
+}
+#new:Script $Script_Idle_NepEnut
+{
+    Label 1
+        If *GF_StandOnPodest == .False
+            Wait 1
+            Goto 1
+        EndIf
+        Call DisablePartnerAI ( 0 )
+        Call SpeakToPlayer ( .Npc:Partner 00070004 00070001 00000000 002F0032 )
+        Call ShowMessageAtScreenPos    ( 002F0028 000000A0 00000028 ) % GRAAAAAAH
+        Call StartBossBattle ( .Song:FinalBowserBattle )
+   14:  Return
+   1C:  End
+}
+#new:Script $Script_Defeat_NepEnut
+{
+    Call GotoMap ( "hos_20" 0 )
+    Wait 30`
+    Return
+    End
+}
+#new:NpcSettings $NpcSettings_Normal
+{
+	00000000 001E0018 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00630000
+}
+#new:Script $Script_Init_Salmos
+{
+    0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_Salmos )
+   14:  Return
+   1C:  End
+}
+#new:Script $Script_Interact_Salmos
+{
+18:  Call  SpeakToPlayer ( .Npc:Self 00B60008 00B60001 00000000 002F0006 )
+90:  Return
+98:  End
+}
+
+
+#new:Script $WaterfallSounds
+{
+Call PlaySoundAt ( 00000278 0 -270` -47` -245` )
+Return
+End
+}
+
+#new:Script $Script_CreateExitTriggers
+{
+    Bind     $Script_Exit0  .Trigger:FloorAbove ~Collider:deiliv 1 0
+	Return
+	End
+}
+
+#new:Script $Script_Exit0
+{
+    Call    UseExitHeading  	( 3C ~Entry:Entry0 )
+    Exec    ExitWalk
+    Call    GotoMap         	( "hos_23" 1 )
+    Wait    100` 
+    Return
+    End
+}
+
+#new:Script $Script_TexturePan_Update
+{
+    SetGroup  00000000
+    If  *Var[5]  ==  00000001
+        If  *Var[6]  ==  00000001
+            If  *Var[7]  ==  00000001
+                If  *Var[8]  ==  00000001
+                    Call  $Function_TexturePan_Simple ( )
+                    Return
+                EndIf
+            EndIf
+        EndIf
+    EndIf
+    Call  $Function_TexturePan_Complex ( )
+    Return
+    End
+}
+#new:Script $Script_SetupTexturePan
+{
+	Call     SetTexPanner 	( ~Model:waterfall1 1 )
+	Thread
+		Set  *Var[0] 1
+		Set  *Var[1] 0
+		Set  *Var[2] 13F
+		Set  *Var[3] FFFFFFB9
+		Set  *Var[4] D4
+		Set  *Var[5] 0
+		Set  *Var[6] 0
+		Set  *Var[7] 0
+		Set  *Var[8] 0
+		Set  *Var[9] 0
+		Set  *Var[A] 0
+		Set  *Var[B] 0
+		Set  *Var[C] 0
+		Exec $Script_TexturePan_Update
+	EndThread
+	Return
+	End
+}
+#new:Function $Function_TexturePan_Simple
+{
+    ADDIU       SP, SP, FFE8
+    SW          S0, 10 (SP)
+    COPY        S0, A0
+    SW          RA, 14 (SP)
+    LW          V1, A8 (S0)
+    LW          V0, 88 (S0)
+    ADDU        V1, V1, V0
+    BGEZ        V1, .o30
+    SW          V1, A8 (S0)
+    LUI         V0, 2
+    BEQ         R0, R0, .o40
+    ADDU        V0, V1, V0
+    .o30
+    LUI         A0, 2
+    SLT         V0, A0, V1
+    BEQ         V0, R0, .o44
+    SUBU        V0, V1, A0
+    .o40
+    SW          V0, A8 (S0)
+    .o44
+    LW          V1, AC (S0)
+    LW          V0, 8C (S0)
+    ADDU        V1, V1, V0
+    BGEZ        V1, .o64
+    SW          V1, AC (S0)
+    LUI         V0, 2
+    BEQ         R0, R0, .o74
+    ADDU        V0, V1, V0
+    .o64
+    LUI         A0, 2
+    SLT         V0, A0, V1
+    BEQ         V0, R0, .o78
+    SUBU        V0, V1, A0
+    .o74
+    SW          V0, AC (S0)
+    .o78
+    LW          V1, B0 (S0)
+    LW          V0, 90 (S0)
+    ADDU        V1, V1, V0
+    BGEZ        V1, .o98
+    SW          V1, B0 (S0)
+    LUI         V0, 2
+    BEQ         R0, R0, .oA8
+    ADDU        V0, V1, V0
+    .o98
+    LUI         A0, 2
+    SLT         V0, A0, V1
+    BEQ         V0, R0, .oAC
+    SUBU        V0, V1, A0
+    .oA8
+    SW          V0, B0 (S0)
+    .oAC
+    LW          V1, B4 (S0)
+    LW          V0, 94 (S0)
+    ADDU        V1, V1, V0
+    BGEZ        V1, .oCC
+    SW          V1, B4 (S0)
+    LUI         V0, 2
+    BEQ         R0, R0, .oDC
+    ADDU        V0, V1, V0
+    .oCC
+    LUI         A0, 2
+    SLT         V0, A0, V1
+    BEQ         V0, R0, .oE0
+    SUBU        V0, V1, A0
+    .oDC
+    SW          V0, B4 (S0)
+    .oE0
+    LW          A0, 84 (S0)
+    JAL         8011BC1C
+    LW          A1, A8 (S0)
+    LW          A0, 84 (S0)
+    JAL         8011BC34
+    LW          A1, AC (S0)
+    LW          A0, 84 (S0)
+    JAL         8011BC4C
+    LW          A1, B0 (S0)
+    LW          A0, 84 (S0)
+    JAL         8011BC64
+    LW          A1, B4 (S0)
+    LW          RA, 14 (SP)
+    LW          S0, 10 (SP)
+    CLEAR       V0
+    JR          RA
+    ADDIU       SP, SP, 18
+}
+#new:Function $Function_TexturePan_Complex
+{
+    ADDIU       SP, SP, FFE8
+    SW          S0, 10 (SP)
+    COPY        S0, A0
+    BEQ         A1, R0, .o24
+    SW          RA, 14 (SP)
+    SW          R0, 70 (S0)
+    SW          R0, 74 (S0)
+    SW          R0, 78 (S0)
+    SW          R0, 7C (S0)
+    .o24
+    LW          V0, 70 (S0)
+    BNE         V0, R0, .o64
+    NOP
+    LW          V1, A8 (S0)
+    LW          V0, 88 (S0)
+    ADDU        V1, V1, V0
+    BGEZ        V1, .o50
+    SW          V1, A8 (S0)
+    LUI         V0, 2
+    BEQ         R0, R0, .o60
+    ADDU        V0, V1, V0
+    .o50
+    LUI         A0, 2
+    SLT         V0, A0, V1
+    BEQ         V0, R0, .o64
+    SUBU        V0, V1, A0
+    .o60
+    SW          V0, A8 (S0)
+    .o64
+    LW          V0, 74 (S0)
+    BNE         V0, R0, .oA4
+    NOP
+    LW          V1, AC (S0)
+    LW          V0, 8C (S0)
+    ADDU        V1, V1, V0
+    BGEZ        V1, .o90
+    SW          V1, AC (S0)
+    LUI         V0, 2
+    BEQ         R0, R0, .oA0
+    ADDU        V0, V1, V0
+    .o90
+    LUI         A0, 2
+    SLT         V0, A0, V1
+    BEQ         V0, R0, .oA4
+    SUBU        V0, V1, A0
+    .oA0
+    SW          V0, AC (S0)
+    .oA4
+    LW          V0, 78 (S0)
+    BNE         V0, R0, .oE4
+    NOP
+    LW          V1, B0 (S0)
+    LW          V0, 90 (S0)
+    ADDU        V1, V1, V0
+    BGEZ        V1, .oD0
+    SW          V1, B0 (S0)
+    LUI         V0, 2
+    BEQ         R0, R0, .oE0
+    ADDU        V0, V1, V0
+    .oD0
+    LUI         A0, 2
+    SLT         V0, A0, V1
+    BEQ         V0, R0, .oE4
+    SUBU        V0, V1, A0
+    .oE0
+    SW          V0, B0 (S0)
+    .oE4
+    LW          V0, 7C (S0)
+    BNE         V0, R0, .o124
+    NOP
+    LW          V1, B4 (S0)
+    LW          V0, 94 (S0)
+    ADDU        V1, V1, V0
+    BGEZ        V1, .o110
+    SW          V1, B4 (S0)
+    LUI         V0, 2
+    BEQ         R0, R0, .o120
+    ADDU        V0, V1, V0
+    .o110
+    LUI         A0, 2
+    SLT         V0, A0, V1
+    BEQ         V0, R0, .o124
+    SUBU        V0, V1, A0
+    .o120
+    SW          V0, B4 (S0)
+    .o124
+    LW          A0, 84 (S0)
+    JAL         8011BC1C
+    LW          A1, A8 (S0)
+    LW          A0, 84 (S0)
+    JAL         8011BC34
+    LW          A1, AC (S0)
+    LW          A0, 84 (S0)
+    JAL         8011BC4C
+    LW          A1, B0 (S0)
+    LW          A0, 84 (S0)
+    JAL         8011BC64
+    LW          A1, B4 (S0)
+    LW          V0, 70 (S0)
+    LW          V1, 78 (S0)
+    LW          A0, 98 (S0)
+    ADDIU       V0, V0, 1
+    SW          V0, 70 (S0)
+    LW          V0, 74 (S0)
+    ADDIU       V1, V1, 1
+    SW          V1, 78 (S0)
+    LW          V1, 70 (S0)
+    ADDIU       V0, V0, 1
+    SW          V0, 74 (S0)
+    LW          V0, 7C (S0)
+    SLT         V1, V1, A0
+    ADDIU       V0, V0, 1
+    BNE         V1, R0, .o198
+    SW          V0, 7C (S0)
+    SW          R0, 70 (S0)
+    .o198
+    LW          V0, 74 (S0)
+    LW          V1, 9C (S0)
+    SLT         V0, V0, V1
+    BEQL        V0, R0, .o1AC
+    SW          R0, 74 (S0)
+    .o1AC
+    LW          V0, 78 (S0)
+    LW          V1, A0 (S0)
+    SLT         V0, V0, V1
+    BEQL        V0, R0, .o1C0
+    SW          R0, 78 (S0)
+    .o1C0
+    LW          V0, 7C (S0)
+    LW          V1, A4 (S0)
+    SLT         V0, V0, V1
+    BEQL        V0, R0, .o1D4
+    SW          R0, 7C (S0)
+    .o1D4
+    LW          RA, 14 (SP)
+    LW          S0, 10 (SP)
+    CLEAR       V0
+    JR          RA
+    ADDIU       SP, SP, 18
+}

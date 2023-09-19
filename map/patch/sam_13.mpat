@@ -1,0 +1,504 @@
+#new:Header $Header
+{
+	[MainScript] $Script_Main
+	[Background] 80200000
+	[EntryList] $EntryList
+	[EntryCount] 1
+	[MapTattle]   00000000
+}
+
+#new:EntryList $EntryList
+{
+~Vec4f:Entry0
+}
+
+#new:Script_Main $Script_Main
+{
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True )
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+	Call  SetMusicTrack     ( 00000000 .Song:ShiverSnowfield 00000000 00000008 )
+	Exec  $EnterByJump
+    If    *SAM13_Tree1_LunarStone == .False
+	    Call  MakeNpcs ( .False $NpcGroupList_First )
+        EndIf
+	Exec  $Script_MakeEntities
+	Exec  $Trees
+	Exec  $GettingLunarStone
+	Wait 1
+	Return
+	End
+}
+
+#new:Script $GettingLunarStone {
+	Label 1
+	If *GF_SAM13_Item_LunarStone == .False
+		Wait 1
+		Goto 1
+	EndIf
+	If *GF_SalmosTalked == .True
+		Goto 2
+	EndIf
+	Call  DisablePlayerInput ( .True )
+	Wait  1`
+	Call  SpeakToPlayer ( .Npc:Partner 00070004 00070001 00000000 002F0024 )
+	Call  DisablePlayerInput ( .False )
+	Set   *GF_SalmosTalked .True
+	Label 2
+	Return
+	End
+}
+#new:Script $Script_MakeEntities {
+	%Call  MakeItemEntity ( .Item:LunarStone ~Vec3d:Item_LunarStone .ItemSpawnMode:Fixed_NeverVanish *GF_SAM13_Item_LunarStone )
+	Call  MakeEntity        ( .Entity:YellowBlock ~Vec4d:Entity_YellowBlock1 .Item:SpicySoup 80000000 )
+   	Call  AssignBlockFlag   ( *GF_SAM13_Item_Porridge )
+	Return
+	End
+}
+
+#new:Script $EnterByJump
+{
+	Call  DisablePlayerInput ( .True )
+	Call  DisablePartnerAI ( 0 )
+	Call  SetNpcJumpscale ( .Npc:Partner *Fixed[1.5] )
+	Call  SetPlayerJumpscale    ( *Fixed[1.5] )
+	Thread
+		Call  PlayerJump ( 268` -149` -105` 20` )
+		Wait  1
+		Call  SetPlayerAnimation ( 00010030 )
+		Wait  2
+		Call  PlaySound ( 3E3 )
+	EndThread
+	Wait  20`
+	Call  PlaySound ( 3E2 )
+	Call  NpcJump1 ( .Npc:Partner 228` -149` -105` 40` )
+	Wait  2
+	If *SAM13_Tree1_LunarStone == .True
+		Wait 1
+		Goto 1
+	EndIf
+	Wait 1
+		Wait  40`
+		Call  SetPlayerAnimation ( 00010030 )
+		Thread
+		Wait  10`
+		Call  SetPlayerAnimation ( 00010031 )
+		Wait  10`
+		EndThread
+		Call  SpeakToPlayer ( .Npc:Partner 00070004 00070001 00000000 002F0023 )
+		Call  EnablePartnerAI ( )
+	Label 1
+	Exec $Script_CreateExitTriggers
+    Call  EnablePartnerAI ( )
+	Call  DisablePlayerInput ( .False )
+	Return
+	End
+}
+#new:NpcGroupList $NpcGroupList_First
+{
+    00000001 $NpcGroup_JrTroopa 02060000
+	00000000 00000000 00000000
+}
+
+#new:NpcGroup $NpcGroup_JrTroopa
+{
+    00000002 $NpcSettings_Normal ~Vec3f:NPC_JrTroopa % -66 20 -532
+    00000D09 $Script_Init_JrTroopa 00000000 00000000 0000010E
+    ~NoDrops
+    ~Movement:NPC_JrTroopa
+    ~AnimationTable:NPC_JrTroopa % .Sprite:Bowser
+    00000000 00000000 00000000 001A0008 % He's Russ T. Everyone says he's the smartest Toad  ...
+
+}
+#new:Script $Script_Init_JrTroopa
+{
+    0:  Call  BindNpcIdle   ( .Npc:Self $Script_Idle_JrTroopa )
+        Call  BindNpcDefeat   ( .Npc:Self $Script_Defeat_JrTroopa )
+   14:  Return
+   1C:  End
+}
+#new:Script $Script_Idle_JrTroopa
+{
+    Label 0
+    If *MapFlag[0C] == .False
+        If *SAM13_Tree1_LunarStone == .True
+        Call    GetPlayerPos ( *Var1 *Var2 *Var3 )
+        If      *Var1 < 400`
+            Call    DisablePlayerInput ( .True )
+            Set *MapFlag[0C] .True
+            Wait    5`
+            Call    SpeakToPlayer ( 2 0024000E 00240003 00000000 002F002E )
+            Call    SetPanTarget ( .Cam:Default 145` -102` 206` )
+            Call    UseSettingsFrom   ( .Cam:Default *Var1 *Var2 *Var3 )
+            Call    SetCamPitch   ( .Cam:Default 00000012 FFFFFFFD )
+            Call    SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
+            Call    PanToTarget ( .Cam:Default 00000000 1 )
+            Call    WaitForCam ( .Cam:Default *Fixed[1.0] )
+            Call    PlaySound ( 3E2 )
+            Call    SetMusicTrack   ( 00000000 .Song:JrTroopaTheme 00000000 00000008 )
+            Call    SetNpcJumpscale ( 2 *Fixed[0.2] )
+            Call    NpcJump0 ( 2 93` -183` 204` 15` )
+            Call    SetPanTarget ( .Cam:Default 141` -171` 275` )
+            Call    UseSettingsFrom   ( .Cam:Default *Var1 *Var2 *Var3 )
+            Call    PanToTarget ( .Cam:Default 00000000 1 )
+            Call    WaitForCam ( .Cam:Default *Fixed[1.0] )
+            Call    SpeakToPlayer ( 2 0024000E 00240003 00000000 002F002F )
+            Wait    5`
+            Call    StartBossBattle ( .Song:JrTroopaBattle )
+            Call    DisablePlayerInput ( .False )
+            EndIf
+        EndIf
+    EndIf
+    Wait 1`
+    Goto 0
+    Return
+    End
+}
+
+#new:Script $Script_Defeat_JrTroopa
+{
+    Wait 1
+    Call    SetNpcAnimation ( 2 0024000A )
+    Call    SpeakToPlayer ( 2 0024000A 0024000A 00000000 002F0030 )
+    Call    PlaySound ( 385 )
+    Thread
+    Call    NpcJump1 ( 2 80` 2 292` 30` )
+    EndThread
+    Call    SetMusicTrack     ( 00000000 .Song:ShiverSnowfield 00000000 00000008 )
+    Call    PanToTarget ( .Cam:Default 0 0 )
+    Wait    20`
+    Call    SpeakToPlayer ( .Npc:Partner 00070004 00070001 00000000 002F0031 )
+    Call    EnablePartnerAI ( )
+    Call    DisablePlayerInput ( .False )
+    Return
+    End
+}
+
+#new:NpcSettings $NpcSettings_Normal
+{
+	00000000 001E0018 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00630000
+}
+#new:Script $Script_CreateExitTriggers
+{
+    Bind     $Script_Exit0  .Trigger:FloorAbove ~Collider:deiliv 1 0
+	Return
+	End
+}
+
+
+#new:Script $Script_Exit0
+{
+	Call	DisablePlayerInput ( .True )
+	Call    ModifyColliderFlags ( 0 ~Collider:deiliv 7FFFFE00 )
+	Call    ModifyColliderFlags ( 0 ~Collider:snow_ground1_c 7FFFFE00 )
+	Call    GotoMap         	( "sam_03" ~Entry:sam_03:Entry2 )
+    %Call    GotoMap         	( "hos_25" ~Entry:hos_25:Entry0 )
+    Wait    100` 
+    Return
+    End
+}
+
+#new:Script $Trees
+{
+Set   *Var0  $ShakeTreeEvent_Tree1
+  1E8:  Bind  $Script_ShakeTree_802423F0 .Trigger:WallHammer ~Collider:tree1_c 00000001 00000000
+  204:  Bind  $Script_ShakeTree_802423F0 .Trigger:PointBomb $TriggerCoord_BombPosition1 00000001 00000000
+  Return
+  End
+}
+#new:TriggerCoord $TriggerCoord_BombPosition1
+{
+	~BombPos:Bomb_Position1 % -352,000000 0,000000 10,000000 0,000000
+}
+#new:ShakeTreeEvent $ShakeTreeEvent_Tree1
+{
+	$TreeModelList_Tree1_Leaves
+	$TreeModelList_Tree1_Trunk
+	$TreeDropList_Tree1
+	$TreeEffectVectors_Tree1
+	00000000
+}
+#new:TreeModelList $TreeModelList_Tree1_Leaves
+{
+	00000001 ~Model:leaves1
+}
+#new:TreeModelList $TreeModelList_Tree1_Trunk
+{
+	00000001 ~Model:tree1
+}
+#new:TreeDropList $TreeDropList_Tree1
+{
+	00000001
+	.Item:LunarStone ~Vec3d:Tree1_Drop1 .ItemSpawnMode:Fall_NeverVanish *SAM13_Tree1_LunarStone 00000000
+}
+#new:TreeEffectVectors $TreeEffectVectors_Tree1
+{
+	00000002
+	~Vec3f:TreeFX_Tree1_0 %    -391     150      20
+	~Vec3f:TreeFX_Tree1_1 %    -267     150      22
+}
+#new:Script $Script_ShakeTree_802423F0
+{
+    0:  SetTimescale  *Fixed[2.0]
+    C:  UseIntBuffer  *Var0
+   18:  Get4Int  *Var1 *Var2 *Var3 *Var4
+   30:  Get1Int  *Var5
+   3C:  Call  GetPlayerPos  ( *Var6 *VarF *Var8 )
+   54:  Call  PlaySound     ( 00000165 )
+   64:  Call  PlaySound     ( 00000166 )
+   74:  Thread
+   7C:  	Set   *Flag[00]  .False
+   8C:  	If  *Var1  !=  00000000
+   9C:  		Wait  1`
+   A8:  		Loop  00000005
+   B4:  			UseIntBuffer  *Var1
+   C0:  			Get1Int  *Var2
+   CC:  			Loop  *Var2
+   D8:  				Get1Int  *Var3
+   E4:  				Call  $Function_802400D0    ( *Var3 *Fixed[0.1] *Fixed[0.2] *VarF 00000000 )
+  104:  				If  *Flag[00]  ==  .False
+  114:  					Set   *Flag[00]  .True
+  124:  					Call  PlaySoundAtModel  ( *Var3 00000166 00000000 )
+  13C:  				EndIf
+  144:  			EndLoop
+  14C:  			Wait  1`
+  158:  			UseIntBuffer  *Var1
+  164:  			Get1Int  *Var2
+  170:  			Loop  *Var2
+  17C:  				Get1Int  *Var3
+  188:  				Call  $Function_802400D0    ( *Var3 *Fixed[0.1] *Fixed[-0.2] *VarF 00000000 )
+  1A8:  			EndLoop
+  1B0:  			Wait  1`
+  1BC:  		EndLoop
+  1C4:  		UseIntBuffer  *Var1
+  1D0:  		Get1Int  *Var2
+  1DC:  		Loop  *Var2
+  1E8:  			Get1Int  *Var3
+  1F4:  			Call  TranslateModel    ( *Var3 00000000 00000000 00000000 )
+  210:  		EndLoop
+  218:  		Wait  1`
+  224:  	EndIf
+  22C:  EndThread
+  234:  Thread
+  23C:  	Set   *Flag[00]  .False
+  24C:  	If  *Var2  !=  00000000
+  25C:  		Loop  00000005
+  268:  			UseIntBuffer  *Var2
+  274:  			Get1Int  *Var3
+  280:  			Loop  *Var3
+  28C:  				Get1Int  *Var4
+  298:  				Call  $Function_802400D0    ( *Var4 *Fixed[0.1] *Fixed[0.2] *VarF 00000000 )
+  2B8:  				If  *Flag[00]  ==  .False
+  2C8:  					Set   *Flag[00]  .True
+  2D8:  					Call  PlaySoundAtModel  ( *Var4 00000165 00000000 )
+  2F0:  				EndIf
+  2F8:  			EndLoop
+  300:  			Wait  1`
+  30C:  			UseIntBuffer  *Var2
+  318:  			Get1Int  *Var3
+  324:  			Loop  *Var3
+  330:  				Get1Int  *Var4
+  33C:  				Call  $Function_802400D0    ( *Var4 *Fixed[0.1] *Fixed[-0.2] *VarF 00000000 )
+  35C:  			EndLoop
+  364:  			Wait  1`
+  370:  		EndLoop
+  378:  		UseIntBuffer  *Var2
+  384:  		Get1Int  *Var3
+  390:  		Loop  *Var3
+  39C:  			Get1Int  *Var4
+  3A8:  			Call  TranslateModel    ( *Var4 00000000 00000000 00000000 )
+  3C4:  		EndLoop
+  3CC:  		Wait  1`
+  3D8:  	EndIf
+  3E0:  EndThread
+  3E8:  Thread
+  3F0:  	If  *Var3  !=  00000000
+  400:  		UseIntBuffer  *Var3
+  40C:  		Get1Int  *Var4
+  418:  		Loop  *Var4
+  424:  			Get1Int  *Var5
+  430:  			Get3Int  *Var6 *Var7 *Var8
+  444:  			Get3Int  *Var9 *VarA *VarB
+  458:  			If  *VarB  ==  00000000
+  468:  				Call  DropItemEntity    ( *Var5 *Var6 *Var7 *Var8 *Var9 *VarA )
+  48C:  			Else
+  494:  				Call  GetValueByRef ( *VarB *VarC )
+  4A8:  				If  *VarC  ==  00000000
+  4B8:  					Call  SetValueByRef     ( *VarB 00000001 )
+  4CC:  					Call  DropItemEntity    ( *Var5 *Var6 *Var7 *Var8 *Var9 *VarA )
+  4F0:  				EndIf
+  4F8:  			EndIf
+  500:  		EndLoop
+  508:  	EndIf
+  510:  EndThread
+  518:  Thread
+  520:  	If  *Var4  !=  00000000
+  530:  		UseIntBuffer  *Var4
+  53C:  		Get1Int  *Var5
+  548:  		Loop  *Var5
+  554:  			Get3Int  *Var6 *Var7 *Var8
+  568:  			Call  PlayEffect    ( ~FX:DropLeaves:Random *Var6 *Var7 *Var8 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+  5AC:  		EndLoop
+  5B4:  	EndIf
+  5BC:  EndThread
+  5C4:  If  *Var5  !=  00000000
+  5D4:  	ExecWait  *Var5
+  5E0:  EndIf
+  5E8:  Wait  15`
+  5F4:  Return
+  5FC:  End
+}
+
+#new:Function $Function_802400D0
+{
+    0:  ADDIU     SP, SP, FF78
+    4:  SW        S1, 54 (SP)
+    8:  COPY      S1, A0
+    C:  SW        RA, 5C (SP)
+   10:  SW        S2, 58 (SP)
+   14:  SW        S0, 50 (SP)
+   18:  SDC1      F28, 80 (SP)
+   1C:  SDC1      F26, 78 (SP)
+   20:  SDC1      F24, 70 (SP)
+   24:  SDC1      F22, 68 (SP)
+   28:  SDC1      F20, 60 (SP)
+   2C:  LW        S0, C (S1)
+   30:  LW        A1, 0 (S0)
+   34:  JAL       ~Func:get_variable
+   38:  ADDIU     S0, S0, 4
+   3C:  JAL       ~Func:get_model_list_index_from_tree_index
+   40:  COPY      A0, V0
+   44:  LW        A1, 0 (S0)
+   48:  ADDIU     S0, S0, 4
+   4C:  COPY      A0, S1
+   50:  JAL       ~Func:get_float_variable
+   54:  COPY      S2, V0
+   58:  LW        A1, 0 (S0)
+   5C:  ADDIU     S0, S0, 4
+   60:  COPY      A0, S1
+   64:  JAL       ~Func:get_float_variable
+   68:  MOV.S     F28, F0
+   6C:  LW        A1, 0 (S0)
+   70:  ADDIU     S0, S0, 4
+   74:  COPY      A0, S1
+   78:  JAL       ~Func:get_float_variable
+   7C:  MOV.S     F26, F0
+   80:  COPY      A0, S1
+   84:  LW        A1, 0 (S0)
+   88:  JAL       ~Func:get_float_variable
+   8C:  MOV.S     F22, F0
+   90:  COPY      A0, S2
+   94:  JAL       ~Func:get_model_from_list_index
+   98:  MOV.S     F24, F0
+   9C:  COPY      S1, V0
+   A0:  LHU       V0, 0 (S1)
+   A4:  ANDI      V0, V0, 400
+   A8:  BNE       V0, R0, .o124
+   AC:  ADDIU     S0, S1, 58
+   B0:  MTC1      R0, F20
+   B4:  MFC1      A2, F22
+   B8:  MFC1      A1, F20
+   BC:  MFC1      A3, F20
+   C0:  JAL       ~Func:guTranslateF
+   C4:  COPY      A0, S0
+   C8:  MFC1      A1, F28
+   CC:  MFC1      A2, F26
+   D0:  MFC1      A3, F24
+   D4:  JAL       $Function_80240060
+   D8:  ADDIU     A0, SP, 10
+   DC:  ADDIU     A0, SP, 10
+   E0:  COPY      A1, S0
+   E4:  JAL       ~Func:guMtxCatF
+   E8:  COPY      A2, S0
+   EC:  ADDIU     A0, SP, 10
+   F0:  NEG.S     F22, F22
+   F4:  MFC1      A1, F20
+   F8:  MFC1      A2, F22
+   FC:  JAL       ~Func:guTranslateF
+  100:  COPY      A3, A1
+  104:  ADDIU     A0, SP, 10
+  108:  COPY      A1, S0
+  10C:  JAL       ~Func:guMtxCatF
+  110:  COPY      A2, A1
+  114:  LHU       V0, 0 (S1)
+  118:  ORI       V0, V0, 1400
+  11C:  BEQ       R0, R0, .o19C
+  120:  SH        V0, 0 (S1)
+        .o124
+  124:  MTC1      R0, F20
+  128:  MFC1      A2, F22
+  12C:  MFC1      A1, F20
+  130:  MFC1      A3, F20
+  134:  JAL       ~Func:guTranslateF
+  138:  ADDIU     A0, SP, 10
+  13C:  ADDIU     A0, SP, 10
+  140:  ADDIU     S0, S1, 58
+  144:  COPY      A1, S0
+  148:  JAL       ~Func:guMtxCatF
+  14C:  COPY      A2, S0
+  150:  MFC1      A1, F28
+  154:  MFC1      A2, F26
+  158:  MFC1      A3, F24
+  15C:  JAL       $Function_80240060
+  160:  ADDIU     A0, SP, 10
+  164:  ADDIU     A0, SP, 10
+  168:  COPY      A1, S0
+  16C:  JAL       ~Func:guMtxCatF
+  170:  COPY      A2, S0
+  174:  ADDIU     A0, SP, 10
+  178:  NEG.S     F22, F22
+  17C:  MFC1      A1, F20
+  180:  MFC1      A2, F22
+  184:  JAL       ~Func:guTranslateF
+  188:  COPY      A3, A1
+  18C:  ADDIU     A0, SP, 10
+  190:  COPY      A1, S0
+  194:  JAL       ~Func:guMtxCatF
+  198:  COPY      A2, A1
+        .o19C
+  19C:  LW        RA, 5C (SP)
+  1A0:  LW        S2, 58 (SP)
+  1A4:  LW        S1, 54 (SP)
+  1A8:  LW        S0, 50 (SP)
+  1AC:  LDC1      F28, 80 (SP)
+  1B0:  LDC1      F26, 78 (SP)
+  1B4:  LDC1      F24, 70 (SP)
+  1B8:  LDC1      F22, 68 (SP)
+  1BC:  LDC1      F20, 60 (SP)
+  1C0:  LI        V0, 2
+  1C4:  JR        RA
+  1C8:  ADDIU     SP, SP, 88
+}
+#new:Function $Function_80240060
+{
+    0:  ADDIU     SP, SP, FFD0
+    4:  SDC1      F20, 18 (SP)
+    8:  MTC1      A1, F20
+    C:  SDC1      F22, 20 (SP)
+   10:  MTC1      A2, F22
+   14:  SW        S0, 10 (SP)
+   18:  SDC1      F24, 28 (SP)
+   1C:  MTC1      A3, F24
+   20:  SW        RA, 14 (SP)
+   24:  JAL       ~Func:guMtxIdentF
+   28:  COPY      S0, A0
+   2C:  MUL.S     F22, F20, F22
+   30:  NOP
+   34:  MUL.S     F20, F20, F24
+   38:  NOP
+   3C:  LIF       F0, 1.0
+   44:  NOP
+   48:  SWC1      F0, 14 (S0)
+   4C:  SWC1      F22, 10 (S0)
+   50:  SWC1      F20, 18 (S0)
+   54:  LW        RA, 14 (SP)
+   58:  LW        S0, 10 (SP)
+   5C:  LDC1      F24, 28 (SP)
+   60:  LDC1      F22, 20 (SP)
+   64:  LDC1      F20, 18 (SP)
+   68:  JR        RA
+   6C:  ADDIU     SP, SP, 30
+}

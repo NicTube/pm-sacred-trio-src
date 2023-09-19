@@ -1,0 +1,328 @@
+#message:2F:000
+{
+	[Style Right]
+	Companions, we're getting close[BR]to our goal location![BR][Wait][Next]Get ready for landing![Wait][End]
+}
+
+#message:2F:001
+{
+	[DelayOff][Style Sign]
+	[CenterX 255][BR]
+	[Down 3][SaveColor][Color:38]The Great Cosmos [DOWN][RestoreColor][BR]
+	[DelayOn][Wait][End]
+}
+
+#message:2F:002
+{
+	[Style Right]
+	[Wave]OUUUCH!![/fx][BR][Wait][Next]Man, that DID hurt![Wait][End]
+}
+
+#message:2F:003
+{
+	[Style Right]
+	Ooooh my goodness,[Pause 5] no![BR][Pause 10]The [Color 1]Starshroom[Color 10] is broken![BR][Wait][Next]Gosh..[Pause 10] if I don't find a way to[BR]repair it, [SaveColor][Color:02]Inven T.[RestoreColor] will be[BR]incredibly mad at me..[BR][Wait][Next]And more importantly,[BR]I'll be stranded here[BR]for the rest of my life![Wait][End]
+}
+
+#message:2F:004
+{
+	[Style Right]
+	MARIO, old pal![BR]You're okay![BR][Wait][Next]Ohh buddy, never before have I[BR]been that glad to see you alive.[BR][Wait][Next]So, you know..[BR][Pause 10]It seems like we crashed.[BR]And just before reaching our[BR]destination, as well![Wait][End]
+}
+
+#message:2F:005
+{
+	[Style Right]
+	Though.. what exactly even is[BR]this place?[BR][Wait][Next]It feels so.[Pause 5].[Pause 15] stellar.[BR][Pause 10]Sacred almost, even.[BR][Wait][Next]Well.. either way![BR]Our most important goal still is[BR]leaving it![BR]And in order to achieve that..[BR][Wait][Next]We gotta find something[BR]nearby usable as energy for[BR]the Starshroom.[BR][Wait][Next]And since we're a team, it'd be[BR]beneficial to split up, y'know?[BR][Wait][Next]So, I'll stay here and..[BR][Pause 5]watch our vessel not doing[BR]anything suspicious.[BR]You never know in space, pal![BR][Wait][Next]Don't worry, I'm well suited![BR]After all, I have studied Cosmic[BR]Spaceship Defense and[BR]Observation for Sudden Crashes.[BR][Wait][Next]In the meanwhile,[BR]you're going to look for anything[BR]valuable to use. I'll wait here.[BR]Good luck, bud![BR][Wait][End]
+}
+
+#message:2F:006
+{
+	[Style Right]
+	I really hope [SaveColor][Color:02]Inven T.[RestoreColor] won't[BR]stop the cooperation with[BR]our archeology research team.[BR]His inventions are essential![BR][Wait][Next]Anyways.. what exactly is[BR]this place?[BR][Wait][Next]It feels so.[Pause 5].[Pause 15] stellar.[BR][Pause 10]Sacred almost, even.[BR][Wait][Next]Well.. either way![BR]Our most important goal still is:[BR][Pause 5]leaving it![Pause 15][BR]And in order to achieve that..[BR][Wait][Next]We gotta find something[BR]nearby usable as energy for[BR]the Starshroom.[BR][Wait][Next]And since we're a team, it'd be[BR]beneficial to split up, y'know?[BR][Wait][Next]So, I'll stay here and..[BR][Pause 5]watch our vessel not doing[BR]anything suspicious.[BR]You never know in space, pal![BR][Wait][Next]Don't worry, I'm well suited![BR]After all, I have studied Cosmic[BR]Spaceship Defense and[BR]Observation for Sudden Crashes.[BR][Wait][Next]In the meanwhile,[BR]you're going to look for anything[BR]valuable to use. I'll wait here.[BR]Good luck, bud![BR][Wait][End]
+}
+
+#message:2F:007
+{
+	[Style Right]
+	Ohh?[BR][Wait][End]
+}
+
+#message:2F:008
+{
+	[Style Right]
+	Stop right there, [SaveColor][Color:20]red man[RestoreColor]![BR][Wait][Next]You came from the same[BR]direction that [SaveColor][Color:26]loud crash[RestoreColor][BR]originated from![BR][Wait][Next]You're the one accountable for[BR]that, aren't you?[Wait][End]
+}
+
+#message:2F:009
+{
+	[Style Right]
+	Mario, huh?[BR][Wait][Next]And..[Pause 5] what do you say?[BR][Pause 5]You were on a mission to fly[BR]through space with your[BR]spaceship and crashed?[BR][Wait][Next]Crashed as in..[Pause 5] unintentionally?[BR]Well, that surely changes the[BR]whole situation..[Wait][End]
+}
+
+#message:2F:00A
+{
+	[Style Right]
+	Hm..[Pause 5] you know what?[Yield][End]
+}
+
+#message:2F:00B
+{
+	[Style Choice pos=100,70 size=90,48]
+	[StartChoice]
+	[Option 0]What?[BR]
+	[Option 1]Do I?[BR]
+	[EndChoice][End]
+}
+
+#message:2F:00C
+{
+	[Style Right]
+	That was a rhetorical que-[BR][Wait][Next]Well anyway,[Pause 10][BR]I know how you might be able[BR]to repair your ship.[BR][Wait][Next]Follow me, I'll show you[BR]something..[BR][Wait][End]
+}
+
+#message:2F:00D
+{
+	[Style Right]
+	Alright![BR]Take a look at[BR]that [SaveColor][Color:22]ancient building[RestoreColor] floating in[BR]the middle of space right there.[BR][Wait][End]
+}
+
+#message:2F:00E
+{
+	[Style Right]
+	Uh-huh![BR][Wait][Next]That is what we call the[BR][SaveColor][Color:22]Star Altar[RestoreColor].[Pause 10][BR]It's basically the landmark of[BR]our planet.[BR][Wait][Next]You might be wondering what its[BR]use is..[BR][Wait][Next]The Star Altar has multiple[BR]abilities, one of them being[BR]the [SaveColor][Color:26]Power of Warp Travel[RestoreColor].[BR][Wait][Next]Yup, that's the one important[BR]for you, huh?[BR][Wait][Next]Problem is, it has just recently[BR]been activated, using up all[BR]energy.[BR][Yield][End]
+}
+
+#message:2F:00F
+{
+	[Style Choice pos=50,70 size=195,48]
+	[StartChoice]
+	[Option 0]Can we reactivate it?[BR]
+	[Option 1]How sad.[BR]
+	[EndChoice][End]
+}
+
+#message:2F:010
+{
+	[Style Right]
+	Well..[BR][Wait][Next]You'd need [SaveColor][Color:26]three sacred stones[RestoreColor][BR]to power it up once again.[BR][Wait][Next]We've tried to locate them[BR]and it seems they're all on[BR]different planets, respectively.[BR][Wait][Next]Which.. doesn't make it easier[BR]to search for them.[BR][Wait][Next]However..[BR]luckily, I was about to look[BR]for them as well![BR][Wait][Next]And since you're not that[BR]experienced with our planet[BR]and its surroundings..[BR]Let's team up![BR][Yield][End]
+}
+
+#message:2F:011
+{
+	[Style Choice pos=100,70 size=130,48]
+	[StartChoice]
+	[Option 0]Let's-a go![BR]
+	[Option 1]Fair enough.[BR]
+	[EndChoice][End]
+}
+
+#message:2F:012
+{
+	[Style Right]
+	Galactical![BR]We'll make for a good team,[BR]I'm sure.[BR][Wait][Next]For now..[Pause 10] feel free to explore[BR]our wonderful planet and[BR]warm up to it.[BR][Wait][End]
+}
+
+#message:2F:013
+{
+	[Style Right]
+	Hehehe![BR]That's ours now![BR][Wait][Next]Mates, let's get outta here.[BR][Pause 5]We're about to sell this thing[BR]for thousands of Cosmoshrooms![BR][Pause 5]Eheheh...[BR][Wait][End]
+}
+
+#message:2F:014
+{
+	[Style Right]
+	Sure, Bundee![BR][Wait][End]
+}
+
+#message:2F:015
+{
+	[Style Right]
+	Yee, we 'boutta be rich![BR][Pause 5]We'll float through space[BR]with our newly bought[BR]private jets soon, yuhh![BR][Wait][End]
+}
+
+#message:2F:016
+{
+	[Style Right]
+	[PrintRising][Size 45]HEY![/fx][BR][Wait][End]
+}
+
+#message:2F:017
+{
+	[Style Right]
+	I've heard what you've done![BR]You stole one of the[BR]sacred stones![BR]And let me tell you..[BR][Wait][Next]What an unfortunate moment[BR]to get caught during your[BR]oh-so-successful robbery,[BR]isn't it?![BR][Wait][End]
+}
+
+#message:2F:018
+{
+	[Style Right]
+	You wanna clash with us,[BR]you little salmon?[BR][Wait][Next]Eheheheheee, funny..[Pause 5][BR]Come on guys, let's show this poor[BR]fish who's the real gangsters[BR]real quick.[BR][Wait][End]
+}
+
+#message:2F:019
+{
+	[Style Right]
+	Huh..?![BR][Pause 10]Fine, if you're in for a brawl,[BR]we have no choice.[BR][Wait][Next]Let's go Mario, let's defeat[BR]those puny evildoers![BR][Wait][End]
+}
+
+#message:2F:01A
+{
+	[Style Right]
+	Ughh...[Pause 10] no...[BR][Wait][End]
+}
+
+#message:2F:01B
+{
+	[Style Right]
+	Hey Mario,[Pause 5] you know you should[BR]first pick up the stone those[BR]bandits dropped, yeah?[BR][Wait][End]
+}
+
+#message:2F:01C
+{
+	[Style Right]
+	Wooo! You saved us![BR][Wait][Next]Thank you so much, Salmos![BR]Those bandits have been lurking[BR]for such a long time now![BR][Wait][Next]TOO long of a time![Pause 6] Yesss![BR][Wait][Next]And who is the mustache man?[BR]I[Pause 5]-[Pause 10]I[Pause 5] saw him j-[Pause 5]jump,[Pause 5] so cool!![BR][Wait][End]
+}
+
+#message:2F:01D
+{
+	[Style Right]
+	Ohh, Etoilo! Long time no see![BR]Have you been hiding?[BR][Wait][Next]Anyway, heehee, you're welcome![BR][Wait][Next]And the mustachioed man that[BR]battled alongside me is[BR]named Mario.[BR][Wait][Next]He's the one who crash-landed[BR]on our planet recently.[BR]And well, he seems pretty skilled,[BR][Pause 5]heehee.[BR][Wait][End]
+}
+
+#message:2F:01E
+{
+	[Style Right]
+	Thank you for saving us![BR]I guess my wish came true.[BR][Wait][Next]Those bandits have been[BR]terrorizing us for some time now.[BR]But you made easy work of them.[BR]Maybe you have a chance...[BR][Wait][Next]Oh,[Pause 10] nevermind...[Pause 5][BR]I was thinking about something[BR]else.[Pause 10] Thanks, you are our[BR]guardian angel!![BR][Wait][End]
+}
+
+#message:2F:01F
+{
+	[Style Right]
+	Alright Mario, seems like[BR]the Star Kids have opened[BR]their houses and ways out of[BR]the town.[BR][Wait][End]
+}
+
+#message:2F:020
+{
+	[Style Right]
+	Hah! Never trust some[BR]friendly-looking creatures[BR]before you get to know them,[BR]right?[BR][Wait][Next]However, they weren't evil in[BR]the sense of pure hostility..[BR]They were scared of that huge[BR]monster at the Star Altar.[BR][Wait][Next]As they told us, they needed to[BR]keep the altar filled with enough[BR]energy, in order to prevent the[BR]monster from obliterating[BR][Wait][Next]their planet.[BR]And well.. for that they needed[BR]the sacred stones.[BR]I..[Pause 5] I do understand them.[BR][Wait][Next]Either way![BR]We did it, pal![BR]We managed to escape.[BR][Wait][Next]Who could've known that a huge[BR]monster was after those stones[BR]as well?[BR][Wait][Next]I wonder..[BR]has it been lurking at the[BR]Star Altar the whole time?[BR][Wait][Next]Either way![BR]Mario, old friend, this marks[BR]the end of [Wave]our[/fx] journey through[BR]all those interesting planets.[BR][Wait][Next]Let's rest a little for now.[BR]We've deserved it![BR][Wait][End]
+}
+
+#message:2F:021
+{
+	[Style Right]
+	Uuuuhhh...[BR][Wait][Next]Who's talkin' there?[BR][Pause 10]Is it time for presents?[Pause 10][BR]Is it our chance to wish for[BR]three things or what?[BR][Wait][Next]Alright! I bet no one has[BR]ever wished for something like[BR][SaveColor][Color:21]that[RestoreColor]:[BR][Wait][Next]I wish to somehow get[BR]upside-down to reach the other[BR]side of this planet.[BR][Wait][Next]Yes, that's my wish.[BR][Wait][End]
+}
+
+#message:2F:022
+{
+	[Style Right]
+	[Wave]Foooohoooools...[BR]I laugh, I am indeed laughing![BR][Wait][Next](You really have no idea who[BR]you're talking to, are you?)[BR][Wait][Next]Sure, I may be able to grant you[BR]your wish.[BR][Pause 10]HOWEVER...[BR][Wait][Next]You first need to answer my[BR]questions correctly..[BR][Wait][End]
+}
+
+#message:2F:023
+{
+	[Style Right]
+	Wow, seems like we..[BR][Wait][Next]Seems like we turned[BR]upside-down.[BR]I gotta be honest, this feels like[BR]a fever dream...[BR][Wait][Next]Even to a creature calling[BR]space its home, like me.[BR][Wait][Next]Well, now let's look for the[BR][SaveColor][Color:26]Golden Spruce[RestoreColor] and get the[BR]sacred stone![BR][Wait][End]
+}
+
+#message:2F:024
+{
+	[Style Right]
+	Got it, that's the Lunar Stone![BR]Do we have all the stones we need now?[BR][Wait][End]
+}
+
+#message:2F:025
+{
+	[Style Right]
+	Perfect, we've got all the[BR]sacred stones we need![BR]Let's head back to the[BR]Star Altar.[BR][Wait][End]
+}
+
+#message:2F:026
+{
+	[Style Right]
+	Hi.[BR]We are all very grateful for your[BR]heroic act.[BR][Wait][Next]I would normally be a better[BR]host but I didn't have the[BR]chance to go to the store and[BR]get some food.[BR][Wait][Next]You know, because of the[BR]bandits.[Pause 5][BR]But you are welcome to stay at[BR]my house as long as you want![BR][Wait][Next]Oh, by the way..[BR][Wait][Next]Have you heard of the[BR]legendary event called[BR]the [SaveColor][Color:21]Star Nova[RestoreColor]?[BR][Wait][Next]Many say, it's the origin of[BR]everything and especially[BR]the Star Spirits..[Pause 10][BR]But..[Pause 5] is that true?[BR][Wait][End]
+}
+
+#message:2F:027
+{
+	[Style Right]
+	Welcome!![BR][Wait][Next]I must say, we've never had a[BR]visitor from.. out of space.[BR]I'm really excited![BR][Wait][Next]You really did a number on those[BR]bandits by the way.[BR]Very impressive.[BR][Wait][Next]Anyway, make yourself at home.[BR][Wait][End]
+}
+
+#message:2F:028
+{
+	[Style Right]
+	[Wave][Size 40]GRAAAAAH![/fx][BR][Wait][End]
+}
+
+#message:2F:029
+{
+	[Style Right]
+	You actually found that message?[BR][Wait][Next]gg
+}
+
+#message:2F:02A
+{
+	[Style Right]
+	See you in Star Nova :)[BR][Wait][End]
+}
+
+#message:2F:02B
+{
+	[Style Narrate][BR]
+	[Down 3][SaveColor][Color:6]CREDITS[BR][Wait][Next]Maps: [SaveColor][Color:08]NicTube[RestoreColor][BR]Characters & Sprites: [SaveColor][Color:08]NicTube[RestoreColor][BR]OST remixed by: [SaveColor][Color:08]NicTube[RestoreColor] (Mamar)[BR][Wait][Next]Special thanks to [SaveColor][Color:03]elDexter,[BR]Alex, Wrymouth and Quackles[RestoreColor]!
+	[BR][Wait][Next]And [SaveColor][Color:05]YOU[RestoreColor], for playing! :)[BR][Wait][Next]See you in[BR]Paper Mario: Star Nova :)[BR][Wait][End]
+}
+#message:2F:02C
+{
+	[Style Right]
+	Huh?![BR][Pause 10]Look, Mario![BR][Wait][End]
+}
+#message:2F:02D
+{
+	[Style Right]
+	That must be the [SaveColor][Color:26]Golden Spruce[RestoreColor][BR]people told me about..[BR][Wait][Next]It seemingly holds one of the[BR]three sacred stones.[BR][Wait][Next]But..[Pause 10] it's upside-down..?[BR][Pause 5]How in the star world are we[BR]supposed to reach that?[BR][Wait][End]
+}
+#message:2F:02E
+{
+	[Style Right]
+	HEEEY!![BR][Wait][END]
+}
+#message:2F:02F
+{
+	[Style Right]
+	[PrintRising][Shake]Y-y-you again!![BR][Wait][Next]I can't brrrelieve it!!![BR][Pause 5]I spent HOURS climbing that[BR]tree.. and then you just grab[BR]the treasure?![BR][Wait][Next]As if it wasn't cold enough[BR]al-alweady![BR]But I don't care!![BR][Wait][Next](Gosh, my l-lips...)[Pause 10][BR]Either w-way!![BR]I'll beat you while fw-fweezing!![/fx][BR][Wait][END]
+}
+#message:2F:030
+{
+	[Style Right]
+	[PrintRising]Noo...![/fx][BR][Wait][Next]I'll.. I'll return!![BR]This is just because of how cold[BR]it is here!![BR]I couldn't focus!![BR][Wait][Next](wait.. I'm not freezing[BR]anymore..[Pause 5][BR]seems like that battle[BR]at least warmed me up..)[BR][Wait][END]
+}
+#message:2F:031
+{
+	[Style Right]
+	Uhh..[Pause 5] sure, whoever that was.[Pause 7][BR]You know, otherworldly[BR]confrontations are the norm[BR]here at space.[Pause 5] Not surprised.[BR][Wait][Next]Well anyway, we got the stone[BR]now and that's what counts,[BR]ain't it?[BR][Wait][END]
+}
+#message:2F:032
+{
+	[Style Right]
+	Hey..[Pause 5] wait a sec,[Pause 5] Mario..[BR][Wait][Next]I gotta tell ya somethin'[BR]before you activate the[BR]Star Altar.[BR][Wait][Next]Well, so you know, this planet[BR]is..[Pause 5] how do I put it..[BR][Wait][Next]Remember your crash landing?[BR][Pause 10]It was supposed to happen.[BR][Pause 5]Everything was planned.[BR][Wait][Next]The seemingly nice and friendly[BR]"Star Kids" inhabitin' this[BR]planet aren't as nice as you[BR]may think..[BR][Wait][Next]We use the Star Altar's ability[BR]to let spaceships' fuel implode,[BR]for said spaceships to crash[BR]somewhere nearby.[BR][Wait][Next]Yes, I am a part of this too.[BR]But.. I noticed you seem to be[BR]strong enough.[BR][Wait][Next]Why we..[Pause 5] or rather, they do this,[BR]you ask?[BR][Wait][Next]Well--[Pause 5][BR][Next]Oh no, what's that in the[BR]distance?![BR][Pause 10]WAIT, WATCH OUT![Pause 10][BR][End]
+}
+#message:2F:033
+{
+	[DelayOff][Style Sign]
+	[CenterX 255][BR][Up 2][SaveColor][Color:6] Welcome to[RestoreColor][BR][Color 5]Aquaticalma[BR]
+	[DelayOn][Wait][End]
+}
+#message:2F:034
+{
+	[DelayOff][Style Sign]
+	[CenterX 255][BR][Up 2][SaveColor][Color:2]   W-[Pause 5]welcome to[RestoreColor][BR][Color 1]Planet Frostdown[BR]
+	[DelayOn][Wait][End]
+}
+
+#message:2F:035
+{
+	[Style Right]
+	Did you know that within the[BR]closer distance of our planet,[BR]there is hidden Star Pieces?[BR][Wait][Next]Yes![BR]In total, it sums up to..[BR][Color 34]5[Color 10] Star Pieces.[Pause 10][BR][Wait][Next]I know that there's two[BR]somewhere on [SaveColor][Color:23]our planet[RestoreColor], one[BR]on a [SaveColor][Color:22]mini island[RestoreColor]..[BR][Wait][Next]..one on [SaveColor][Color:26]Aquaticalma[RestoreColor],[BR]and another one on[BR][SaveColor][Color:24]Planet Frostdown[RestoreColor].[BR][Wait][Next]Good luck finding them all![BR][Wait][End]
+}

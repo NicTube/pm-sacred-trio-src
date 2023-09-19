@@ -1,0 +1,625 @@
+#new:Header $Header
+{
+	[MainScript] $Script_Main
+	[Background] 80200000
+	[EntryList] $EntryList
+	[EntryCount] 3
+	[MapTattle]   00000000
+}
+
+#new:EntryList $EntryList
+{
+~Vec4f:Entry0
+~Vec4f:Entry1
+~Vec4f:Entry2
+}
+
+#new:Script_Main $Script_Main
+{
+    If *GB_StoryProgress == .Story:Ch0_HitGatehouseSwitch
+    Wait 10`
+    EndIf
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True )
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+	Call  SetMusicTrack     ( 00000000 .Song:ShootingStarSummit 00000000 00000008 )
+    Call  StopSound ( 278 )
+    If *GB_StoryProgress != .Story:Ch0_HitGatehouseSwitch
+        Set	   *Var[0] $Script_CreateExitTriggers
+        Exec    EnterWalk
+    EndIf
+	Wait 1
+	Exec    $Script_MakeEntities
+    If *GB_StoryProgress < .Story:Ch0_FoundGatehouseSwitch
+        Call    MakeNpcs  ( .False $NpcGroupList_First )
+        EndIf
+    If *GB_StoryProgress == .Story:Ch0_HitGatehouseSwitch
+        Call    MakeNpcs  ( .False $NpcGroupList_Bandits )
+        EndIf
+    If *GB_StoryProgress > .Story:Ch0_HitGatehouseSwitch
+        Call    ModifyColliderFlags ( 0 ~Collider:wall1_c 7FFFFE00 )
+        Call    ModifyColliderFlags ( 0 ~Collider:wall2_c 7FFFFE00 )
+        Call    EnableModel ( ~Model:wall1 .False )
+        Call    MakeNpcs  ( .False $NpcGroupList_Normal )
+        Call    SetNpcPos ( 6 -106` 20` -40` )
+    EndIf
+    Exec    $Shop
+    Exec    $Script_Doors
+    Exec    $SalmosCutscene
+	Return
+	End
+}
+
+#new:Script $SalmosCutscene
+{
+Label 0
+If *GB_StoryProgress < .Story:Ch0_FoundGatehouseSwitch
+    Call    GetPlayerPos ( *Var1 *Var2 *Var3 )
+    If      *Var1 < 240`
+        Call    DisablePlayerInput ( .True )
+        Set *GB_StoryProgress .Story:Ch0_FoundGatehouseSwitch
+        Wait    5`
+        Call    SpeakToPlayer ( 2 00070004 00070001 00000000 002F0007 )
+        Call    GetPlayerPos (*Var1 *Var2 *Var3 )
+        Thread
+            Sub     *Var1 15`
+            %Sub     *Var2 20`
+            Sub     *Var3 20`
+            Call    SetPanTarget ( .Cam:Default *Var1 *Var2 *Var3 )
+            Call    UseSettingsFrom       ( .Cam:Default FFFFFF10 00000000 00000000 )
+            Call    SetCamPitch   ( .Cam:Default 00000012 FFFFFFFD )
+    94:  Call    SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
+            Call    PanToTarget ( .Cam:Default 00000000 1 )
+        EndThread
+        Call    SetNpcAnimation ( 2 00070002 )
+        Call    NpcMoveTo ( 2 185` 107` 25` )
+        Wait    3`
+        Call    SetNpcAnimation ( 2 00070001 )
+        Wait    2`
+        Call    SpeakToPlayer ( 2 00070004 00070001 00000000 002F0008 )
+        Wait    1`
+        Call    SetPlayerAnimation ( 0001002B )
+        Wait    16`
+        Call    SetPlayerAnimation ( 0001002D )
+        Wait    12`
+        Call    SpeakToPlayer ( 2 00070004 00070001 00000000 002F0009 )
+        Wait    1`
+        Call    SetPlayerAnimation ( 00010002 )
+        Wait    1`
+        Call    SpeakToPlayer ( 2 00070004 00070001 00000000 002F000A )
+        Wait    5
+        Call    ShowChoice    ( 002F000B ) % What? Do I?
+        Wait    2
+        Call    CloseMessage ( )
+        Wait    2
+        Call    SpeakToPlayer    ( 2 00070004 00070001 00000000 002F000C )
+        Wait    10`
+        Call    SetNpcAnimation ( 2 00070002 )
+        Wait    2`
+        Thread
+        Call    NpcMoveTo ( 2 8 -41` 40` )
+        Call    NpcMoveTo ( 2 -11` -324` 80` ) 
+        EndThread
+        Wait    3`
+        Call    SetPanTarget ( .Cam:Default 4 25` 38` )
+        Call    PanToTarget ( .Cam:Default 0 1 )
+        Call    WaitForCam    ( .Cam:Default *Fixed[1.0] )
+        Wait    25`
+        Call    PanToTarget ( .Cam:Default 0 0 )
+        Call    WaitForCam    ( .Cam:Default *Fixed[1.0] )
+        Call    SetNpcPos ( 2 0 -1000` 0 )
+        Wait    2`
+        Call    DisablePlayerInput ( .False )
+        EndIf
+    EndIf
+Wait 1`
+Goto 0
+Return
+End
+}
+#new:NpcGroupList $NpcGroupList_First
+{
+    00000001 $NpcGroup_Salmos 04020003
+	00000000 00000000 00000000
+}
+#new:NpcGroup $NpcGroup_Salmos
+{
+    00000002 $NpcSettings_Normal ~Vec3f:NPC_Salmos % -66 20 -532
+    00000D09 $Script_Init_Salmos 00000000 00000000 0000010E
+    ~NoDrops
+    ~Movement:NPC_Salmos
+    ~AnimationTable:NPC_Salmos % .Sprite:Bowser
+    00000000 00000000 00000000 001A0008 % He's Russ T. Everyone says he's the smartest Toad  ...
+
+}
+#new:NpcGroupList $NpcGroupList_Bandits
+{
+    00000001 $NpcGroup_Bandit1 04010003
+    00000001 $NpcGroup_Bandit2 04020003
+    00000001 $NpcGroup_Bandit3 04020003
+    00000001 $NpcGroup_StarKid1 04020003
+    00000001 $NpcGroup_StarKid2 04020003
+    00000001 $NpcGroup_StarKid3 04020003
+    00000001 $NpcGroup_Shopkeeper1 04020003
+	00000000 00000000 00000000
+}
+#new:NpcGroup $NpcGroup_Bandit1
+{
+    00000003 $NpcSettings_Normal ~Vec3f:NPC_Bandit1 % -66 20 -532
+    00000D09 $Script_Init_Bandit1 00000000 00000000 0000010E
+    ~NoDrops
+    ~Movement:NPC_Bandit1
+    ~AnimationTable:NPC_Bandit1 % .Sprite:Bowser
+    00000000 00000000 00000000 001A0008 % He's Russ T. Everyone says he's the smartest Toad  ...
+
+}
+#new:NpcGroup $NpcGroup_Bandit2
+{
+    00000004 $NpcSettings_Normal ~Vec3f:NPC_Bandit2 % -66 20 -532
+    00000D09 $Script_Init_Salmos 00000000 00000000 0000010E
+    ~NoDrops
+    ~Movement:NPC_Bandit2
+    ~AnimationTable:NPC_Bandit2 % .Sprite:Bowser
+    00000000 00000000 00000000 001A0008 % He's Russ T. Everyone says he's the smartest Toad  ...
+
+}
+#new:NpcGroup $NpcGroup_Bandit3
+{
+    00000005 $NpcSettings_Normal ~Vec3f:NPC_Bandit3 % -66 20 -532
+    00000D09 $Script_Init_Salmos 00000000 00000000 0000010E
+    ~NoDrops
+    ~Movement:NPC_Bandit3
+    ~AnimationTable:NPC_Bandit3 % .Sprite:Bowser
+    00000000 00000000 00000000 001A0008 % He's Russ T. Everyone says he's the smartest Toad  ...
+
+}
+#new:Script $Script_Init_Bandit1
+{
+    0:  Call  BindNpcIdle   ( .Npc:Self $Script_Idle_Bandit1 )
+        Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_Bandit1 )
+   14:  Return
+   1C:  End
+}
+
+#new:Script $Script_Idle_Bandit1
+{
+    Call    DisablePlayerInput ( .True )
+    Set     *GB_StoryProgress .Story:Ch0_OpenedBridgeToToadTown
+    Call    SetMusicTrack     ( 00000000 .Song:GourmetGuyFreakout 00000000 00000008 )
+    Call    MakeItemEntity    ( .Item:StarStone ~Vec3d:Entity_StarStone .ItemSpawnMode:Fixed_NeverVanish *GF_HOS23_Item_StarStone )
+    Call    GetPlayerPos ( *Var1 *Var2 *Var3 )
+    Call    SetPanTarget ( .Cam:Default 180` 18` 100` )
+    Call    UseSettingsFrom       ( .Cam:Default *Var1 *Var2 *Var3 )
+    Call    SetCamPitch   ( .Cam:Default 00000012 FFFFFFFD )
+    Call    SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
+    Call    PanToTarget ( .Cam:Default 00000000 1 )
+
+    Wait    20`
+    Call    SpeakToNpc ( 3 0032000F 00320002 00000000 5 002F0013 )
+    Call    SpeakToNpc ( 4 00320012 00320001 00000000 3 002F0014 )
+    Call    SpeakToNpc ( 5 00320012 00320001 00000000 3 002F0015 )
+    Wait    10`
+    Thread
+        Call    InterpNpcYaw ( 3 270` 10` )
+        Call    InterpNpcYaw ( 4 270` 10` )
+        Call    InterpNpcYaw ( 5 270` 10` )
+    EndThread
+    Call    PlaySound ( 263 )
+    Call    SpeakToNpc ( .Npc:Partner 00070004 00070001 00000000 3 002F0016 )
+    Call    SetPanTarget ( .Cam:Default 126` 0 93` )
+    Call    UseSettingsFrom       ( .Cam:Default 137` 800` 76` )
+    Call    SetCamPitch   ( .Cam:Default 00000012 FFFFFFFD )
+    Call    SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
+    Call    PanToTarget ( .Cam:Default 00000000 1 )
+    Call    PlayerMoveTo ( 79` 76` 60` )
+    Wait    5`
+    Call    DisablePartnerAI ( 0 )
+    Wait 1
+    Call    SpeakToNpc ( .Npc:Partner 00070004 00070001 00000000 3 002F0017 )
+    Wait    2
+    Call    SpeakToNpc ( 3 0032000F 00320002 00000000 .Npc:Partner 002F0018 )
+    Wait    1
+    Call    SetPlayerAnimation ( 00010006 )
+    Wait    1
+    Call    SpeakToNpc ( .Npc:Partner 00070004 00070001 00000000 3 002F0019 )
+    Call    StartBossBattle ( .Song:SpecialBattle )
+    Wait    20`
+    Call    DisablePlayerInput ( .False )
+    Return
+    End
+}
+
+#new:Script $Script_Defeat_Bandit1
+{
+    Wait 1
+    Call    SetNpcAnimation ( 3 00320009 )
+    Call    SetNpcAnimation ( 4 00320009 )
+    Call    SetNpcAnimation ( 5 00320009 )
+    Wait 1
+    Call    SpeakToPlayer ( 3 00320009 00320009 00000000 002F001A )
+    Call    PlaySound ( 385 )
+    Thread
+    Call    NpcJump1 ( 4 80` 2 292` 30` )
+    EndThread
+    Thread
+    Call    NpcJump1 ( 3 214` 2 252` 30` )
+    EndThread
+    Thread
+    Call    NpcJump1 ( 5 360` 2 252` 30` )
+    EndThread
+    Call    RemoveItemEntity ( *Var0 )
+    Call    PlaySound ( 219 )
+    Thread
+    Call    MakeItemEntity    ( .Item:StarStone ~Vec3d:Entity_StarStone .ItemSpawnMode:Toss_NeverVanish *GF_HOS23_Item_StarStone )
+    EndThread
+    Call    SetMusicTrack     ( 00000000 .Song:ShootingStarSummit 00000000 00000008 )
+    Call    PanToTarget ( .Cam:Default 0 0 )
+    Wait    20`
+    Call    RemoveNpc ( 4 )
+    Call    RemoveNpc ( 5 )
+    Call    ModifyColliderFlags ( 0 ~Collider:wall1_c 7FFFFE00 )
+    Call    ModifyColliderFlags ( 0 ~Collider:wall2_c 7FFFFE00 )
+    Call    EnableModel ( ~Model:wall1 .False )
+    Call    DisablePartnerAI ( 0 )
+    Call    NpcFlyTo ( 6 8` 24` 91` 33` 2 .Easing:CosInOut )
+    Call    InterpNpcYaw ( .Npc:Partner 270` 10` )
+    Call    SpeakToPlayer ( 6 00200009 00200001 00000000 002F001C )
+    Wait    3
+    Call    SpeakToNpc ( .Npc:Partner 00070004 00070001 00000000 6 002F001D )
+    Call    SpeakToPlayer ( 6 00200009 00200001 00000000 002F001E )
+    Call    SpeakToNpc ( .Npc:Partner 00070004 00070001 00000000 6 002F001F )
+    Call    NpcFlyTo ( 6 -106` 20` -40` 15` 2 .Easing:CosInOut )
+    Exec    $Script_CreateExitTriggers
+    Call    EnablePartnerAI ( )
+    Call    DisablePlayerInput ( .False )
+    Return
+    End
+}
+
+#new:Script $Script_Init_Salmos
+{
+    0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_Salmos )
+   14:  Return
+   1C:  End
+}
+#new:Script $Script_Interact_Salmos
+{
+18:  Call  SpeakToPlayer ( .Npc:Self 00B60008 00B60001 00000000 002F0006 )
+90:  Return
+98:  End
+}
+
+#new:Script $Script_MakeEntities
+{
+    Call  MakeEntity    ( .Entity:Signpost ~Vec4d:Entity_Signpost1 80000000 )
+    Call  AssignScript  ( $Script_ReadingSign )
+    Call  MakeEntity    ( .Entity:SavePoint ~Vec4d:Entity_SaveBlock1 80000000 )
+    Call  MakeItemEntity ( .Item:StarPiece ~Vec3d:Item_StarPiece1 .ItemSpawnMode:Fixed_NeverVanish *GF_HOS23_Item_StarPiece1 )
+    Call  MakeEntity        ( .Entity:RedBlock ~Vec4d:Entity_RedBlock1 .Item:PowerJump 80000000 )
+   	Call  AssignBlockFlag   ( *GF_HOS23_Item_Badge1 )
+    If *GB_StoryProgress == .Story:Ch0_OpenedBridgeToToadTown
+        Call    MakeItemEntity    ( .Item:StarStone ~Vec3d:Entity_StarStone .ItemSpawnMode:Toss_NeverVanish *GF_HOS23_Item_StarStone )
+        EndIf
+    Return
+    End
+}
+
+#new:Script $Script_ReadingSign
+{
+    0:  Call  DisablePlayerInput        ( .True )
+   10:  Call  ShowMessageAtScreenPos    ( 002F0001 000000A0 00000028 ) % The Great Cosmos
+   28:  Call  DisablePlayerInput        ( .False )
+   38:  Return
+   40:  End
+}
+
+#new:Script $Script_CreateExitTriggers
+{
+    Bind     $Script_Exit0  .Trigger:FloorAbove ~Collider:deiliv 1 0
+	Bind     $Script_Exit1  .Trigger:FloorAbove ~Collider:deilin 1 0
+	Bind     $Script_Exit2  .Trigger:FloorAbove ~Collider:deilie 1 0
+	Return
+	End
+}
+
+#new:Script $Script_Exit0
+{
+    If *GF_HOS23_Item_StarStone == .True
+        Call    UseExitHeading  	( 3C ~Entry:Entry0 )
+        Exec    ExitWalk
+        Call    GotoMap         	( "hos_24" 0 )
+        Wait    100`
+    Else
+        Call    DisablePlayerInput ( .True )
+        Call    SpeakToPlayer ( .Npc:Partner 00070004 00070001 00000000 002F001B )
+        Call    PlayerMoveTo ( -60` 476` 10` )
+        Call    DisablePlayerInput ( .False )
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Script_Exit1
+{
+    If *GB_StoryProgress >= .Story:Ch0_HitGatehouseSwitch
+        If *GF_HOS23_Item_StarStone == .True
+            Call    UseExitHeading  	( 3C ~Entry:Entry1 )
+            Exec    ExitWalk
+            Call    GotoMap         	( "hos_21" 0 )
+            Wait    100` 
+        Else
+            Call    DisablePlayerInput ( .True )
+            Call    SpeakToPlayer ( .Npc:Partner 00070004 00070001 00000000 002F001B )
+            Call    PlayerMoveTo ( -16` -236` 20` )
+            Call    DisablePlayerInput ( .False )
+        EndIf
+    Else
+        Call    UseExitHeading  	( 3C ~Entry:Entry1 )
+        Exec    ExitWalk
+        Call    GotoMap         	( "hos_21" 0 )
+        Wait    100` 
+    EndIf
+    Return
+    End
+}
+
+#new:Script $Script_Exit2
+{
+    If *GB_StoryProgress >= .Story:Ch0_HitGatehouseSwitch
+        If *GF_HOS23_Item_StarStone == .True
+            Call    UseExitHeading  	( 3C ~Entry:Entry2 )
+            Exec    ExitWalk
+            Call    GotoMap         	( "hos_22" 0 )
+            Wait    100`
+        Else
+            Call    DisablePlayerInput ( .True )
+            Call    SpeakToPlayer ( .Npc:Partner 00070004 00070001 00000000 002F001B )
+            Call    PlayerMoveTo ( 643` 8` 10` )
+            Call    DisablePlayerInput ( .False )
+        EndIf
+    Else
+        Call    UseExitHeading  	( 3C ~Entry:Entry2 )
+        Exec    ExitWalk
+        Call    GotoMap         	( "hos_22" 0 )
+        Wait    100`
+    EndIf
+    Return
+    End
+}
+
+% Star Kids (+ Shopkeeper)
+
+#new:NpcGroupList $NpcGroupList_Normal
+{
+    00000001 $NpcGroup_StarKid1 04020003
+    00000001 $NpcGroup_StarKid2 04020003
+    00000001 $NpcGroup_StarKid3 04020003
+    00000001 $NpcGroup_Shopkeeper1 04020003
+	00000000 00000000 00000000
+}
+#new:NpcGroup $NpcGroup_StarKid1
+{
+    00000006 $NpcSettings_Normal ~Vec3f:NPC_StarKid1 % -66 20 -532
+    00000D09 $Script_Init_StarKid1 00000000 00000000 0000010E
+    ~NoDrops
+    ~Movement:NPC_StarKid1
+    ~AnimationTable:NPC_StarKid1 % .Sprite:Bowser
+    00000000 00000000 00000000 001A0007 % He's Russ T. Everyone says he's the smartest Toad  ...
+}
+#new:NpcGroup $NpcGroup_StarKid2
+{
+    00000007 $NpcSettings_Normal ~Vec3f:NPC_StarKid2 % -66 20 -532
+    00000D09 $Script_Init_StarKid2 00000000 00000000 0000010E
+    ~NoDrops
+    ~Movement:NPC_StarKid2
+    ~AnimationTable:NPC_StarKid2 % .Sprite:Bowser
+    00000000 00000000 00000000 001A0007 % He's Russ T. Everyone says he's the smartest Toad  ...
+}
+
+#new:NpcGroup $NpcGroup_Shopkeeper1
+{
+    00000008 $NpcSettings_Normal ~Vec3f:NPC_Shopkeeper1 % -66 20 -532
+    00000D09 $Script_Init_Shopkeeper1 00000000 00000000 0000010E
+    ~NoDrops
+    ~Movement:NPC_Shopkeeper1
+    ~AnimationTable:NPC_Shopkeeper1 % .Sprite:Bowser
+    00000000 00000000 00000000 001A0007 % He's Russ T. Everyone says he's the smartest Toad  ...
+}
+#new:NpcGroup $NpcGroup_StarKid3
+{
+    00000009 $NpcSettings_Normal ~Vec3f:NPC_StarKid3 % -66 20 -532
+    00000D09 $Script_Init_StarKid3 00000000 00000000 0000010E
+    ~NoDrops
+    ~Movement:NPC_StarKid3
+    ~AnimationTable:NPC_StarKid3 % .Sprite:Bowser
+    00000000 00000000 00000000 001A0007 % He's Russ T. Everyone says he's the smartest Toad  ...
+}
+#new:Script $Shop
+{
+Call  MakeShop      ( $ShopItemPositions1 $ShopInventory1 $ShopPriceList1 00000000 )
+Call  MakeShopOwner ( $ShopOwnerNPC_Shopkeeper1 )
+Return
+End
+}
+
+
+#new:ShopOwnerNPC $ShopOwnerNPC_Shopkeeper1
+{
+00000008 00200001 00200009 $Script_8024BC34 00000000 00000000 $IntTable_8024BB00
+}
+#new:IntTable $IntTable_8024BB00
+{
+	002700A5 002700A6 002700A7 002700A8 002700A9 002700AA 002700AB 002700AC
+	002700AD 002700AE 002700AF 002700B0 002700B1 002700B2 002700B3 002700B4
+	002700B5 002700B6 002700B7 002700B8 002700B9 002700BA 002700BB
+}
+#new:Script $Script_8024BC34
+{
+    0:  Switch  *Var0
+    C:  	Case  ==  00000003
+   18:  	Case  ==  00000004
+   24:  	Case  ==  00000001
+   30:  	Case  ==  00000002
+   3C:  EndSwitch
+   44:  Return
+   4C:  End
+}
+#new:Script $Script_Init_Shopkeeper1
+{
+    0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_Shopkeeper1 )
+   14:  Return
+   1C:  End
+}
+#new:Script $Script_Interact_Shopkeeper1
+{
+     %Call  SpeakToPlayer ( .Npc:Self 00200009 00200001 00000000 002F0027 )
+18:  ExecWait  ItemShopInteract
+90:  Return
+98:  End
+}
+#new:ShopInventory $ShopInventory1
+{
+	.Item:SuperShroom      3` 0024000A % Cosmoshroom Desc.
+	.Item:MapleSyrup   4` 00240017 % Maple Syrup Desc.
+	.Item:FireFlower      5 00240000 % Fire Flower Desc.
+	.Item:Goomnut     2` 0025001B % Goomnut Desc.
+	.Item:SpicySoup     77` 0025002D % Porrdige Desc.
+	00000000 00000000 00000000
+}
+#new:ShopItemPositions $ShopItemPositions1
+{
+	~Short:Model:o121 ~Short:Collider:o203
+	~Short:Model:o122 ~Short:Collider:o204
+	~Short:Model:o123 ~Short:Collider:o205
+	~Short:Model:o124 ~Short:Collider:o206
+	~Short:Model:o125 ~Short:Collider:o207
+}
+#new:ShopPriceList $ShopPriceList1
+{
+	.Item:SuperShroom     00000007 00000000
+	.Item:MapleSyrup    0000000F 00000000
+	.Item:FireFlower   0000000E 00000000
+	.Item:Goomnut    0000000F 00000000
+	.Item:SpicySoup    0000000A 00000000
+	.Item:Cake           0000000F 00000000
+	.Item:StopWatch      0000000E 00000000
+	.Item:Koopasta       0000000F 00000000
+	.Item:ShroomCake     0000001E 00000000
+	.Item:SweetShroom    00000046 00000000
+	00000000 00000000 00000000
+}
+#new:NpcSettings $NpcSettings_Normal
+{
+	00000000 001E0018 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00630000
+}
+#new:Script $Script_Init_StarKid1
+{
+    0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_StarKid1 )
+   14:  Return
+   1C:  End
+}
+#new:Script $Script_Interact_StarKid1
+{
+ 18:   Call  SpeakToPlayer ( .Npc:Self 00200009 00200001 00000000 002F0026 )
+90:  Return
+98:  End
+}
+#new:Script $Script_Init_StarKid2
+{
+    0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_StarKid2 )
+   14:  Return
+   1C:  End
+}
+#new:Script $Script_Interact_StarKid2
+{
+ 18:   Call  SpeakToPlayer ( .Npc:Self 00200009 00200001 00000000 002F0027 )
+90:  Return
+98:  End
+}
+#new:Script $Script_Init_StarKid3
+{
+    0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_StarKid3 )
+   14:  Return
+   1C:  End
+}
+#new:Script $Script_Interact_StarKid3
+{
+ 18:   Call  SpeakToPlayer ( .Npc:Self 00200009 00200001 00000000 002F0035 )
+90:  Return
+98:  End
+}
+#new:Script $Script_Doors
+{
+   30:  Call  MakeDoorAdvanced  ( 00000002 $Script_OpenDoor_House1 $Script_MoveWalls_House1 0 00000000 ~Collider:door1_out_c ~Collider:door1_in_c ~Model:star_house1_in_g $NPCListHouse1 )
+        If *GB_StoryProgress > .Story:Ch0_HitGatehouseSwitch
+        Call  MakeDoorAdvanced  ( 00000002 $Script_OpenDoor_House2 $Script_MoveWalls_House2 0 00000000 ~Collider:door2_out_c ~Collider:door2_in_c ~Model:star_house2_in_g $NPCListHouse2 )
+        EndIf
+        %Exec  $Script_ToggleVis_House2
+   D0:  Return
+   D8:  End
+}
+#new:NpcList $NPCListHouse1
+{
+	00000006 FFFFFFFF
+}
+#new:NpcList $NPCListHouse2
+{
+	00000008 FFFFFFFF
+}
+#new:Script $Script_OpenDoor_House1
+{
+        Call  EnableModel  ( ~Model:o121 .True )
+        Call  EnableModel  ( ~Model:o122 .True )
+        Call  EnableModel  ( ~Model:o123 .True )
+        If *GB_StoryProgress >= .Story:Ch0_ArrivedAtToadTown
+        Call  EnableModel  ( ~Model:o124 .True )
+        Call  EnableModel  ( ~Model:o125 .True )
+        EndIf
+    0:  Call  RotateModel   ( ~Model:door1 *Var0 00000000 FFFFFFFF 00000000 )
+   20:  Return
+   28:  End
+}
+#new:Script $Script_MoveWalls_House1
+{
+    0:  Set   *Var1  *Var0
+   10:  MulF  *Var1  *Fixed[1.0]
+   20:  Call  RotateModel   ( ~Model:walls_out1 *Var1 00000000 00000000 00000001 )
+   40:  %Call  RotateModel   ( ~Model:leaves_up3 *Var1 00000000 00000000 00000001 )
+  100:  Switch  *Var0
+  10C:  	Case  ==  0000005A
+  118:  		%Call  EnableGroup   ( ~Model:kino_out_2 .False )
+  12C:  	Default
+  134:  		%Call  EnableGroup   ( ~Model:kino_out_2 .True )
+  148:  EndSwitch
+  150:  Return
+  158:  End
+}
+#new:Script $Script_OpenDoor_House2
+{
+        Call  EnableModel  ( ~Model:o121 .False )
+        Call  EnableModel  ( ~Model:o122 .False )
+        Call  EnableModel  ( ~Model:o123 .False )
+        Call  EnableModel  ( ~Model:o124 .False )
+        Call  EnableModel  ( ~Model:o125 .False )
+    0:  Call  RotateModel   ( ~Model:door2 *Var0 00000000 FFFFFFFF 00000000 )
+   20:  Return
+   28:  End
+}
+#new:Script $Script_MoveWalls_House2
+{
+    0:  Set   *Var1  *Var0
+   10:  MulF  *Var1  *Fixed[1.0]
+   20:  Call  RotateModel   ( ~Model:walls_out2 *Var1 00000000 00000000 00000001 )
+   40:  %Call  RotateModel   ( ~Model:leaves_up3 *Var1 00000000 00000000 00000001 )
+  100:  Switch  *Var0
+  10C:  	Case  ==  0000005A
+  118:  		%Call  EnableGroup   ( ~Model:kino_out_2 .False )
+  12C:  	Default
+  134:  		%Call  EnableGroup   ( ~Model:kino_out_2 .True )
+  148:  EndSwitch
+  150:  Return
+  158:  End
+}

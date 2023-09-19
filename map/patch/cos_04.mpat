@@ -1,0 +1,51 @@
+#new:Header $Header
+{
+	[MainScript] $Script_Main
+	[Background] 00000000
+	[EntryList] $EntryList
+	[EntryCount] 1
+}
+
+#new:EntryList $EntryList
+{
+~Vec4f:Entry0
+}
+
+#new:Script_Main $Script_Main
+{
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True )
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+	Exec  $Script_SetupMusic
+	Set	   *Var[0] $Script_CreateExitTriggers
+    Exec    EnterWalk
+	Return
+	End
+}
+
+#new:Script $Script_SetupMusic
+{
+	Call  FadeOutMusic  ( 00000000 500` ) % usually between 500-1000
+	Call  ClearAmbientSounds ( 250` )
+	Return
+	End
+}
+
+#new:Script $Script_CreateExitTriggers
+{
+    Bind     $Script_Exit0  .Trigger:FloorAbove ~Collider:deiliv 1 0
+	Return
+	End
+}
+
+#new:Script $Script_Exit0
+{
+    Call    UseExitHeading  	( 3C ~Entry:Entry0 )
+    Exec    ExitWalk
+    Call    GotoMap         	( "cos_02" 1 )
+    Wait    100` 
+    Return
+    End
+}

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Prefab author="unnamed" textures="hos_tex">
+	<ModelTree>
+		<Node name="Root" id="4">
+			<Node name="bero_t1" id="0"/>
+			<Node name="bero_1" id="1"/>
+			<Node name="bero_t1" id="2"/>
+			<Node name="bero_t1" id="3"/>
+		</Node>
+	</ModelTree>
+	<ColliderTree>
+		<Node name="Root" id="3">
+			<Node name="deiliv" id="0"/>
+			<Node name="deilit1" id="1"/>
+			<Node name="o349" id="2"/>
+		</Node>
+	</ColliderTree>
+	<LightSets>
+		<LightSet name="Lights_None" a="0">
+		</LightSet>
+	</LightSets>
+	<Models>
+		<Model ver="2" type="ROOT" lightset="0">
+			<MapObject name="Root" id="4"/>
+			<BoundingBox empty="true" min="0,0,0" max="0,0,0"/>
+			<PropertyList>
+			</PropertyList>
+		</Model>
+		<Model ver="2" type="MODEL" lightset="0">
+			<MapObject name="bero_t1" id="3"/>
+			<ShapeMesh ver="3" texture="">
+				<DisplayList>
+					<F3DEX2 cmd="E7000000,0"/>
+					<F3DEX2 cmd="D9FDFFFF,0"/>
+					<F3DEX2 cmd="D9FFFFFF,200400"/>
+					<TriangleBatch ver="0">
+						<VertexTable>
+							<Vertex xyz="1075,-62,232" uv="1536,519"/>
+							<Vertex xyz="1111,-62,323" uv="-1884,519"/>
+							<Vertex xyz="1111,-82,323" uv="-1884,0"/>
+							<Vertex xyz="1075,-62,232" uv="1536,519"/>
+							<Vertex xyz="1111,-82,323" uv="-1884,0"/>
+							<Vertex xyz="1075,-82,232" uv="1536,0"/>
+						</VertexTable>
+						<TriangleList>
+							<Triangle ijk="0,1,2"/>
+							<Triangle ijk="3,4,5"/>
+						</TriangleList>
+					</TriangleBatch>
+				</DisplayList>
+			</ShapeMesh>
+			<PropertyList>
+				<Property v="5C,0,1"/>
+				<Property v="5D,0,2"/>
+				<Property v="5D,1,43E10000"/>
+				<Property v="5D,1,C3340000"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,C3340000"/>
+				<Property v="5D,0,1"/>
+				<Property v="5F,0,0"/>
+			</PropertyList>
+		</Model>
+		<Model ver="2" type="MODEL" lightset="0">
+			<MapObject name="bero_t1" id="2"/>
+			<ShapeMesh ver="3" texture="">
+				<DisplayList>
+					<F3DEX2 cmd="E7000000,0"/>
+					<F3DEX2 cmd="D9FDFFFF,0"/>
+					<F3DEX2 cmd="D9FFFFFF,200400"/>
+					<TriangleBatch ver="0">
+						<VertexTable>
+							<Vertex xyz="979,-62,270" uv="-1053,425"/>
+							<Vertex xyz="1075,-62,232" uv="2463,448"/>
+							<Vertex xyz="1075,-82,232" uv="2463,0"/>
+							<Vertex xyz="979,-62,270" uv="-1053,425"/>
+							<Vertex xyz="1075,-82,232" uv="2463,0"/>
+							<Vertex xyz="979,-81,270" uv="-1053,0"/>
+						</VertexTable>
+						<TriangleList>
+							<Triangle ijk="0,1,2"/>
+							<Triangle ijk="3,4,5"/>
+						</TriangleList>
+					</TriangleBatch>
+				</DisplayList>
+			</ShapeMesh>
+			<PropertyList>
+				<Property v="5C,0,1"/>
+				<Property v="5D,0,2"/>
+				<Property v="5D,1,43E10000"/>
+				<Property v="5D,1,C3340000"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,C3340000"/>
+				<Property v="5D,0,1"/>
+				<Property v="5F,0,0"/>
+			</PropertyList>
+		</Model>
+		<Model ver="2" type="MODEL" lightset="0">
+			<MapObject name="bero_1" id="1"/>
+			<ShapeMesh ver="3" texture="kmr_green_etif">
+				<DisplayList>
+					<F3DEX2 cmd="E7000000,0"/>
+					<F3DEX2 cmd="D9FDFFFF,0"/>
+					<F3DEX2 cmd="D9FFFFFF,200400"/>
+					<TriangleBatch ver="0">
+						<VertexTable>
+							<Vertex xyz="1019,-62,361" uv="1012,1036"/>
+							<Vertex xyz="1111,-62,323" uv="-12,1024"/>
+							<Vertex xyz="1075,-62,232"/>
+							<Vertex xyz="1019,-62,361" uv="1012,1036"/>
+							<Vertex xyz="1075,-62,232"/>
+							<Vertex xyz="979,-62,270" uv="1024,12"/>
+						</VertexTable>
+						<TriangleList>
+							<Triangle ijk="0,1,2"/>
+							<Triangle ijk="3,4,5"/>
+						</TriangleList>
+					</TriangleBatch>
+				</DisplayList>
+			</ShapeMesh>
+			<PropertyList>
+				<Property v="5C,0,1"/>
+				<Property v="5D,0,2"/>
+				<Property v="5D,1,43E10000"/>
+				<Property v="5D,1,C3340000"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,C3340000"/>
+				<Property v="5D,0,1"/>
+				<Property v="5F,0,0"/>
+			</PropertyList>
+		</Model>
+		<Model ver="2" type="MODEL" lightset="0">
+			<MapObject name="bero_t1" id="0"/>
+			<ShapeMesh ver="3" texture="">
+				<DisplayList>
+					<F3DEX2 cmd="E7000000,0"/>
+					<F3DEX2 cmd="D9FDFFFF,0"/>
+					<F3DEX2 cmd="D9FFFFFF,200400"/>
+					<TriangleBatch ver="0">
+						<VertexTable>
+							<Vertex xyz="1019,-62,361" uv="2591,512"/>
+							<Vertex xyz="979,-62,270" uv="0,512"/>
+							<Vertex xyz="979,-82,270"/>
+							<Vertex xyz="1019,-62,361" uv="2591,512"/>
+							<Vertex xyz="979,-82,270"/>
+							<Vertex xyz="1012,-81,345" uv="2048,0"/>
+						</VertexTable>
+						<TriangleList>
+							<Triangle ijk="0,1,2"/>
+							<Triangle ijk="3,4,5"/>
+						</TriangleList>
+					</TriangleBatch>
+				</DisplayList>
+			</ShapeMesh>
+			<PropertyList>
+				<Property v="5C,0,1"/>
+				<Property v="5D,0,2"/>
+				<Property v="5D,1,43E10000"/>
+				<Property v="5D,1,C3340000"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,0"/>
+				<Property v="5D,1,C3340000"/>
+				<Property v="5D,0,1"/>
+				<Property v="5F,0,0"/>
+			</PropertyList>
+		</Model>
+	</Models>
+	<Colliders>
+		<Collider ver="0" flags="0">
+			<MapObject name="Root" id="3"/>
+			<HitObject type="ROOT"/>
+		</Collider>
+		<Collider ver="0" flags="8000">
+			<MapObject name="o349" id="2"/>
+			<HitObject type="HIT"/>
+			<HitMesh ver="0">
+				<TriangleBatch ver="0">
+					<VertexTable>
+						<Vertex xyz="982,-62,269"/>
+						<Vertex xyz="982,38,269"/>
+						<Vertex xyz="1019,39,361"/>
+						<Vertex xyz="982,-62,269"/>
+						<Vertex xyz="1019,39,361"/>
+						<Vertex xyz="1019,-61,361"/>
+						<Vertex xyz="1111,-62,323"/>
+						<Vertex xyz="1111,38,323"/>
+						<Vertex xyz="1075,38,232"/>
+						<Vertex xyz="1111,-62,323"/>
+						<Vertex xyz="1075,38,232"/>
+						<Vertex xyz="1075,-62,232"/>
+					</VertexTable>
+					<TriangleList>
+						<Triangle ijk="0,1,2"/>
+						<Triangle ijk="3,4,5"/>
+						<Triangle ijk="6,7,8"/>
+						<Triangle ijk="9,10,11"/>
+					</TriangleList>
+				</TriangleBatch>
+			</HitMesh>
+		</Collider>
+		<Collider ver="0" flags="8000">
+			<MapObject name="deilit1" id="1"/>
+			<HitObject type="HIT"/>
+			<HitMesh ver="0">
+				<TriangleBatch ver="0">
+					<VertexTable>
+						<Vertex xyz="1075,-62,232"/>
+						<Vertex xyz="1075,38,232"/>
+						<Vertex xyz="982,38,269"/>
+						<Vertex xyz="1075,-62,232"/>
+						<Vertex xyz="982,38,269"/>
+						<Vertex xyz="982,-62,269"/>
+					</VertexTable>
+					<TriangleList>
+						<Triangle ijk="0,1,2"/>
+						<Triangle ijk="3,4,5"/>
+					</TriangleList>
+				</TriangleBatch>
+			</HitMesh>
+		</Collider>
+		<Collider ver="0" flags="8000">
+			<MapObject name="deiliv" id="0"/>
+			<HitObject type="HIT"/>
+			<HitMesh ver="0">
+				<TriangleBatch ver="0">
+					<VertexTable>
+						<Vertex xyz="1019,-61,361"/>
+						<Vertex xyz="1111,-62,323"/>
+						<Vertex xyz="1075,-62,232"/>
+						<Vertex xyz="1019,-61,361"/>
+						<Vertex xyz="1075,-62,232"/>
+						<Vertex xyz="982,-62,269"/>
+					</VertexTable>
+					<TriangleList>
+						<Triangle ijk="0,1,2"/>
+						<Triangle ijk="3,4,5"/>
+					</TriangleList>
+				</TriangleBatch>
+			</HitMesh>
+		</Collider>
+	</Colliders>
+</Prefab>

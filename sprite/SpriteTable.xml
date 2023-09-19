@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <SpriteTable>
 	<NpcSprites>
 		<Sprite id="1" src="01" name="World Goombario"/>
@@ -7,7 +7,7 @@
 		<Sprite id="4" src="04" name="World Parakarry"/>
 		<Sprite id="5" src="05" name="World Bow"/>
 		<Sprite id="6" src="06" name="World Watt"/>
-		<Sprite id="7" src="07" name="World Sushi"/>
+		<Sprite id="7" src="07 - World Salmos" name="World Salmos"/>
 		<Sprite id="8" src="08" name="World Lakilester"/>
 		<Sprite id="9" src="09" name="Battle Goombario"/>
 		<Sprite id="A" src="0A" name="Battle Kooper"/>
@@ -15,7 +15,7 @@
 		<Sprite id="C" src="0C" name="Battle Parakarry"/>
 		<Sprite id="D" src="0D" name="Battle Bow"/>
 		<Sprite id="E" src="0E" name="Battle Watt"/>
-		<Sprite id="F" src="0F" name="Battle Sushi"/>
+		<Sprite id="F" src="0F - Battle Salmos" name="Battle Salmos"/>
 		<Sprite id="10" src="10" name="Battle Lakilester"/>
 		<Sprite id="11" src="11" name="Kooper Without Shell"/>
 		<Sprite id="12" src="12" name="World Eldstar"/>
@@ -50,7 +50,7 @@
 		<Sprite id="2F" src="2F" name="Monty Mole"/>
 		<Sprite id="30" src="30" name="Cleft"/>
 		<Sprite id="31" src="31" name="Pokey"/>
-		<Sprite id="32" src="32" name="Bandit"/>
+		<Sprite id="32" src="32 - Cosmic Bandit" name="Cosmic Bandit"/>
 		<Sprite id="33" src="33" name="Buzzy Beetle"/>
 		<Sprite id="34" src="34" name="Swooper"/>
 		<Sprite id="35" src="35" name="Stone Chomp"/>
@@ -157,11 +157,11 @@
 		<Sprite id="9A" src="9A" name="Penguin"/>
 		<Sprite id="9B" src="9B" name="Shiver Toad"/>
 		<Sprite id="9C" src="9C" name="Alt Bandit"/>
-		<Sprite id="9D" src="9D" name="Goompapa"/>
+		<Sprite id="9D" src="9D" name="Goompa"/>
 		<Sprite id="9E" src="9E" name="Goombaria"/>
-		<Sprite id="9F" src="9F" name="Goomama"/>
-		<Sprite id="A0" src="A0" name="Goompa"/>
-		<Sprite id="A1" src="A1" name="Goomma"/>
+		<Sprite id="9F" src="9F" name="Gooma"/>
+		<Sprite id="A0" src="A0" name="Goompapa"/>
+		<Sprite id="A1" src="A1" name="Goomama"/>
 		<Sprite id="A2" src="A2" name="The Master"/>
 		<Sprite id="A3" src="A3" name="Chan"/>
 		<Sprite id="A4" src="A4" name="Lee"/>
@@ -193,7 +193,7 @@
 		<Sprite id="BE" src="BE" name="Oaklie"/>
 		<Sprite id="BF" src="BF" name="Bootler"/>
 		<Sprite id="C0" src="C0" name="Yakkey"/>
-		<Sprite id="C1" src="C1" name="Gourmet Guy"/>
+		<Sprite id="C1" src="C1 - Pluton" name="Pluton"/>
 		<Sprite id="C2" src="C2" name="Village Leader"/>
 		<Sprite id="C3" src="C3" name="Leaders Friend"/>
 		<Sprite id="C4" src="C4" name="Rafael Raven"/>
@@ -220,7 +220,7 @@
 		<Sprite id="D9" src="D9" name="Parade Luigi"/>
 		<Sprite id="DA" src="DA" name="Parade Partners"/>
 		<Sprite id="DB" src="DB" name="Parade Yoshis"/>
-		<Sprite id="DC" src="DC" name="Parada Kolorados"/>
+		<Sprite id="DC" src="DC" name="Parade Kolorados"/>
 		<Sprite id="DD" src="DD" name="Parade Chicks"/>
 		<Sprite id="DE" src="DE" name="Parade Ice Show"/>
 		<Sprite id="DF" src="DF" name="Parade Toads"/>
@@ -231,7 +231,7 @@
 		<Sprite id="E4" src="E4" name="Parade Tubba Balloon"/>
 		<Sprite id="E5" src="E5" name="Parade Wizards"/>
 		<Sprite id="E6" src="E6" name="Parade Mario"/>
-		<Sprite id="E7" src="E7" name="Parade Shy Guys"/>
+		<Sprite id="E7" src="E7 - Solar Stone" name="Solar Stone"/>
 		<Sprite id="E8" src="E8" name="Parade Twink"/>
 		<Sprite id="E9" src="E9" name="Leaf"/>
 	</NpcSprites>

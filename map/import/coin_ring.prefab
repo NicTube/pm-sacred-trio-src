@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Prefab author="NicTube" textures="hos_tex">
+	<MarkerTree>
+		<Node name="Root" id="4">
+			<Node name="Item_Coin1" id="FFFFFFFF"/>
+			<Node name="Item_Coin2" id="0"/>
+			<Node name="Item_Coin3" id="1"/>
+			<Node name="Item_Coin4" id="2"/>
+			<Node name="Item_Coin5" id="3"/>
+		</Node>
+	</MarkerTree>
+	<Markers>
+		<Marker ver="4" type="Root">
+			<MapObject name="Root" id="4"/>
+		</Marker>
+		<Marker ver="4" type="Entity" pos="-500,-84,1183" yaw="11.015280">
+			<MapObject name="Item_Coin5" id="3"/>
+			<Entity type="FFFFFFFF" flag="" item="Mushroom" itemSpawnMode="Fixed"/>
+		</Marker>
+		<Marker ver="4" type="Entity" pos="-527,-84,1098" yaw="11.015280">
+			<MapObject name="Item_Coin4" id="2"/>
+			<Entity type="FFFFFFFF" flag="" item="Mushroom" itemSpawnMode="Fixed"/>
+		</Marker>
+		<Marker ver="4" type="Entity" pos="-555,-84,1183" yaw="11.015280">
+			<MapObject name="Item_Coin3" id="1"/>
+			<Entity type="FFFFFFFF" flag="" item="Mushroom" itemSpawnMode="Fixed"/>
+		</Marker>
+		<Marker ver="4" type="Entity" pos="-486,-84,1132" yaw="11.015280">
+			<MapObject name="Item_Coin2" id="0"/>
+			<Entity type="FFFFFFFF" flag="" item="Mushroom" itemSpawnMode="Fixed"/>
+		</Marker>
+		<Marker ver="4" type="Entity" pos="-582,-84,1132" yaw="11.015280">
+			<MapObject name="Item_Coin1" id="FFFFFFFF"/>
+			<Entity type="FFFFFFFF" flag="" item="Mushroom" itemSpawnMode="Fixed"/>
+		</Marker>
+	</Markers>
+</Prefab>

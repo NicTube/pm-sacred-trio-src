@@ -1,0 +1,163 @@
+#define .NpcID:Gulpit_02            02
+#define .NpcID:Gulpit_03            03
+
+@ $Header {
+    [MainScript]  $Script_Main_EnterWalk
+    [EntryList]   $EntryList
+    [EntryCount]  3
+    [Background]  80200000
+    [MapTattle]   0019012D
+}
+
+@ $EntryList {
+    ~Vec4f:Entry0
+    ~Vec4f:Entry1
+    ~Vec4f:Entry2
+}
+
+
+@ $Script_Main_EnterWalk {
+    Set   *GB_WorldLocation  .Location:ShiverSnowfield
+    Call  SetSpriteShading  ( .Shading:None )
+    Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+    Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
+    Call  SetCamEnabled     ( .Cam:Default .True )
+    Set   *GF_Map_ShiverSnowfield  .True
+    Call  MakeNpcs  ( .False $NpcGroupList_80242330 )
+    ExecWait  $Script_80240980
+    Call  PlayEffect    ( ~FX:Snowfall 00000020 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+    Set   *Var0  $Script_80240A68
+    Exec  EnterWalk
+    Exec  $Script_MakeEntities 
+    Exec  $FellDown
+    If *GF_SalmosTalked2 == .False
+    Exec  $UpsideDownGoldenSpruce
+    EndIf
+    Call  EnableModel ( ~Model:cave_wall1 .False )
+    Wait  1`
+    Return
+    End
+}
+#new:Script $UpsideDownGoldenSpruce {
+    Wait  20`
+    Call  DisablePlayerInput ( .True )
+	Call  DisablePartnerAI ( 0 )
+    Wait 1
+    Call  SpeakToPlayer ( .Npc:Partner 00070004 00070001 00000000 002F002C )
+    Call  GetPlayerPos ( *Var1 *Var2 *Var3 )
+    Call  SetPanTarget ( .Cam:Default 82` 71` 53` )
+    Call  UseSettingsFrom       ( .Cam:Default *Var1 *Var2 *Var3 )
+    Call  SetCamPitch   ( .Cam:Default 00000012 FFFFFFFD )
+    Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
+    Call  PanToTarget ( .Cam:Default 0 1 )
+    Call  WaitForCam ( .Cam:Default *Fixed[1.0] )
+    Call  SetPanTarget ( .Cam:Default 82` -51` -502` )
+    Call  UseSettingsFrom       ( .Cam:Default 82` 71` -502` )
+    Call  PanToTarget ( .Cam:Default 0 1 )
+    Call  WaitForCam ( .Cam:Default *Fixed[1.0] )
+    Wait  20`
+    Call  SetPanTarget ( .Cam:Default 82` 71` 53` )
+    Call  PanToTarget ( .Cam:Default 0 1 )
+    Call  WaitForCam ( .Cam:Default *Fixed[1.0] )
+    Call  UseSettingsFrom       ( .Cam:Default *Var1 *Var2 *Var3 )
+    Call  PanToTarget ( .Cam:Default 0 0 )
+    Call  WaitForCam ( .Cam:Default *Fixed[1.0] )
+    Call  SpeakToPlayer ( .Npc:Partner 00070004 00070001 00000000 002F002D )
+    Set *GF_SalmosTalked2 .True
+    Label 1
+    Call  EnableModel ( ~Model:cave_wall1 .False )
+    Call  EnablePartnerAI ( )
+    Call  DisablePlayerInput ( .False )
+    Return
+    End
+}
+#new:Script $Script_MakeEntities {
+	Call  MakeItemEntity ( .Item:StarPiece ~Vec3d:Item_StarPiece1 .ItemSpawnMode:Fixed_NeverVanish *GF_SAM03_Item_StarPiece1 )
+	Call  MakeItemEntity ( .Item:Coin ~Vec3d:Item_Coin1 .ItemSpawnMode:Fixed_NeverVanish *GF_SAM03_Item_Coin1 )
+	Call  MakeItemEntity ( .Item:Coin ~Vec3d:Item_Coin2 .ItemSpawnMode:Fixed_NeverVanish *GF_SAM03_Item_Coin2 )
+	Call  MakeItemEntity ( .Item:Coin ~Vec3d:Item_Coin3 .ItemSpawnMode:Fixed_NeverVanish *GF_SAM03_Item_Coin3 )
+	Call  MakeItemEntity ( .Item:Coin ~Vec3d:Item_Coin4 .ItemSpawnMode:Fixed_NeverVanish *GF_SAM03_Item_Coin4 )
+	Call  MakeItemEntity ( .Item:Coin ~Vec3d:Item_Coin5 .ItemSpawnMode:Fixed_NeverVanish *GF_SAM03_Item_Coin5 )
+    Call  MakeEntity    ( .Entity:Signpost ~Vec4d:Entity_Signpost1 80000000 )
+    Call  AssignScript  ( $Script_ReadingSign )
+    Return
+	End
+}
+#new:Script $FellDown {
+    Loop
+        Call GetPlayerPos ( *Var1 *Var2 *Var3 )
+        If *Var2 < -100`
+            Call PlaySound ( 3E3 )
+            Call GetEntryID ( *VarA )
+            If   *VarA == 0
+                Call SetPlayerPos ( ~Vec3d:Entry0 )
+            EndIf
+            If   *VarA == 1
+                Call SetPlayerPos ( ~Vec3d:Entry0 )
+            EndIf
+            If   *VarA == 2
+                Call SetPlayerPos ( ~Vec3d:Entry2 )
+            EndIf
+        EndIf
+        Wait 1
+    EndLoop
+    Return
+    End
+}
+@ $NpcGroup_80241F50 {
+    .NpcID:Gulpit_02 $NpcSettings_80241A4C ~Vec3f:Gulpit_02 % 200 0 0
+    00000C00 00000000 00000000 00000000 0000010E
+    ~Items:5:Pebble:2:SuperShroom:8
+    ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:4
+    ~Movement:Gulpit_02
+    ~AnimationTable:Gulpit_02 % .Sprite:Gulpit
+    00000003 00000000 $ExtraAnimationList_80241B54 00000000 % no tattle string
+    %
+    % $NpcGroup_80241F50[1F0]
+    .NpcID:Gulpit_03 $NpcSettings_80241B20 ~Vec3f:Gulpit_03 % 0 -1000 0
+    00800D00 00000000 00000000 00000000 00000000
+    ~NoDrops
+    ~Movement:Gulpit_03
+    ~AnimationTable:Gulpit_03 % .Sprite:Gulpit
+    00000000 00000000 $ExtraAnimationList_80241B4C 00000000 % no tattle string
+}
+@ $Script_ExitWalk_802409B0 {
+    SetGroup  0000001B
+    Call  UseExitHeading    ( 0000003C ~Entry:Entry0 )
+    Exec  ExitWalk
+    Call  GotoMap   ( "hos_24" ~Entry:hos_24:Entry2 )
+    Wait  100`
+    Return
+    End
+}
+@ $Script_ExitWalk_80240A0C {
+    SetGroup  0000001B
+    Call  UseExitHeading    ( 0000003C ~Entry:Entry2 )
+    Exec  ExitWalk
+    Call   GotoMap         	( "sam_13" ~Entry:sam_13:Entry0 )
+    %Call  GotoMap   ( "hos_25" ~Entry:hos_25:Entry0 )
+    Wait  100`
+    Return
+    End
+}
+
+@ $Script_80240A68 {
+    Bind  $Script_ExitWalk_802409B0 .Trigger:FloorAbove ~Collider:deilie 00000001 00000000
+    Bind  $Script_ExitWalk_80240A0C .Trigger:FloorAbove ~Collider:deilin 00000001 00000000
+    Return
+    End
+}
+@ $NpcGroupList_80242330 {
+    00000002 $NpcGroup_80241B70 1D010001
+    00000002 $NpcGroup_80241F50 1D010001
+    00000000 00000000 00000000
+}
+
+#new:Script $Script_ReadingSign
+{
+    0:  Call  DisablePlayerInput        ( .True )
+   10:  Call  ShowMessageAtScreenPos    ( 002F0034 000000A0 00000028 ) % Welcome to Aquaticalma!
+   28:  Call  DisablePlayerInput        ( .False )
+   38:  Return
+   40:  End
+}

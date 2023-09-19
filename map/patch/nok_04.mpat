@@ -1,0 +1,822 @@
+#define .NpcID:Fuzzy_00             00
+#define .NpcID:WorldKooper_01       01
+#define .NpcID:Fuzzy_02             02
+#define .NpcID:Fuzzy_03             03
+#define .NpcID:Fuzzy_04             04
+#define .NpcID:Fuzzy_05             05
+#define .NpcID:WorldKooper_06       06
+
+@ $Script_ExitWalk_80241050 {
+    Call  UseExitHeading    ( 0000003C ~Entry:Entry0 )
+    Exec  ExitWalk
+    Call  GotoMap   ( "hos_24" 1 )
+    Wait  100`
+    Return
+    End
+}
+#new:Script $Script_MakeEntities {
+	Call  MakeItemEntity ( .Item:StarPiece ~Vec3d:Item_StarPiece1 .ItemSpawnMode:Fixed_NeverVanish *GF_NOK04_Item_StarPiece1 )
+	Call  MakeEntity    ( .Entity:Signpost ~Vec4d:Entity_Signpost1 80000000 )
+    Call  AssignScript  ( $Script_ReadingSign )
+    Return
+	End
+}
+#new:Script $Script_ReadingSign
+{
+    0:  Call  DisablePlayerInput        ( .True )
+   10:  Call  ShowMessageAtScreenPos    ( 002F0033 000000A0 00000028 ) % Welcome to Aquaticalma!
+   28:  Call  DisablePlayerInput        ( .False )
+   38:  Return
+   40:  End
+}
+@ $Script_802417F8 {
+    Call  PlayerFaceNpc ( .NpcID:Fuzzy_00 .False )
+    Call  ShowMessageAtScreenPos    ( 000C00BE  160`  40` ) % Meeeeeoooooork! Guess where I'm hiding?
+    Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
+    Call  SetCamType    ( .Cam:Default 00000001 .False )
+    Call  SetCamDistance    ( .Cam:Default  -597` )
+    Call  SetCamPitch   ( .Cam:Default  10`  -11` )
+    Call  SetCamPosA    ( .Cam:Default  0`  707` )
+    Call  SetCamPosB    ( .Cam:Default  0`  0` )
+    Call  SetCamPosC    ( .Cam:Default  0`  0` )
+    Call  SetPanTarget  ( .Cam:Default  90`  0`  228` )
+    Call  SetCamSpeed   ( .Cam:Default  3` )
+    Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
+    Wait  60`
+    Call  SetPlayerAnimation        ( 0001002A )
+    Call  SetNpcJumpscale   ( .NpcID:Fuzzy_00 00000003 )
+    Call  SetNpcJumpscale   ( .NpcID:WorldKooper_01 00000003 )
+    Call  SetNpcJumpscale   ( .NpcID:Fuzzy_03 00000003 )
+    Call  SetNpcJumpscale   ( .NpcID:Fuzzy_04 00000003 )
+    Call  SetNpcJumpscale   ( .NpcID:Fuzzy_05 00000003 )
+    Switch  *MapVar[0]
+        Case  ==  00000000
+            Set   *VarE  0000000A
+        Case  ==  00000001
+            Set   *VarE  00000009
+        Case  ==  00000002
+            Set   *VarE  00000008
+    EndSwitch
+    Call  RandInt   ( 00000003 *Var0 )
+    Add   *VarE  *Var0
+    Set   *Var6  00000000
+    Set   *Var7  00000000
+    Set   *Var8  00000000
+    Set   *Var9  00000000
+    Set   *VarF  *MapVar[1]
+    Loop  *VarE
+        Set   *VarA  *MapVar[1]
+        Call  $Function_80240630    ( *VarF *MapVar[1] )
+        Switch  *VarF
+            Case  ==  00000000
+                Set   *VarB  00000002
+                Set   *VarC  00000003
+            Case  ==  00000001
+                If  *VarA  ==  00000002
+                    Set   *VarB  00000000
+                    Set   *VarC  00000003
+                Else
+                    Set   *VarB  00000002
+                    Set   *VarC  00000003
+                EndIf
+            Case  ==  00000002
+                If  *VarA  ==  00000003
+                    Set   *VarB  00000000
+                    Set   *VarC  00000001
+                Else
+                    Set   *VarB  00000000
+                    Set   *VarC  00000003
+                EndIf
+            Case  ==  00000003
+                Set   *VarB  00000000
+                Set   *VarC  00000001
+            Case  ==  00000004
+                If  *VarA  ==  00000001
+                    Set   *VarB  00000000
+                    Set   *VarC  00000003
+                Else
+                    Set   *VarB  00000000
+                    Set   *VarC  00000001
+                EndIf
+            Case  ==  00000005
+                If  *VarA  ==  00000000
+                    Set   *VarB  00000002
+                    Set   *VarC  00000003
+                Else
+                    Set   *VarB  00000000
+                    Set   *VarC  00000003
+                EndIf
+        EndSwitch
+        Call  RandInt   ( 00000001 *Var0 )
+        If  *Var0  ==  00000000
+            Add   *VarF  FFFFFFFF
+        Else
+            Add   *VarF  00000001
+        EndIf
+        If  *VarF  >=  00000006
+            Set   *VarF  00000000
+        EndIf
+        If  *VarF  <  00000000
+            Set   *VarF  00000005
+        EndIf
+        Switch  *MapVar[0]
+            Case  ==  00000000
+                Set   *VarD  0000000F
+            Case  ==  00000001
+                Set   *VarD  0000000A
+            Case  ==  00000002
+                Set   *VarD  00000006
+        EndSwitch
+        Set   *Var0  00510001
+        Call  RandInt   ( 00000002 *Var1 )
+        Add   *Var0  *Var1
+        Call  SetNpcAnimation   ( .NpcID:Fuzzy_00 *Var0 )
+        Call  SetNpcAnimation   ( .NpcID:Fuzzy_03 *Var0 )
+        Call  SetNpcAnimation   ( .NpcID:Fuzzy_04 *Var0 )
+        Call  SetNpcAnimation   ( .NpcID:Fuzzy_05 *Var0 )
+        Call  PlaySound ( B0000017 )
+        Thread
+            Call  $Function_80240574    ( *MapVar[1] *Var0 *Var1 *Var2 )
+            Call  NpcJump0  ( .NpcID:Fuzzy_00 *Var0 *Var1 *Var2 *VarD )
+        EndThread
+        If  *MapVar[1]  !=  *VarA
+            Thread
+                Call  $Function_80240574    ( *MapVar[1] *Var0 *Var1 *Var2 )
+                Call  SetNpcPos ( .NpcID:Fuzzy_03 *Var0 *Var1 *Var2 )
+                Call  $Function_80240574    ( *VarA *Var0 *Var1 *Var2 )
+                Call  NpcJump0  ( .NpcID:Fuzzy_03 *Var0 *Var1 *Var2 *VarD )
+            EndThread
+            Set   *Flag[00]  .False
+            If  *VarB  ==  00000000
+                If  *VarC  ==  00000003
+                    Set   *Flag[00]  .True
+                EndIf
+            EndIf
+            If  *Flag[00]  ==  .False
+                Thread
+                    Call  $Function_80240574    ( *VarB *Var0 *Var1 *Var2 )
+                    Call  SetNpcPos ( .NpcID:Fuzzy_04 *Var0 *Var1 *Var2 )
+                    Call  $Function_80240574    ( *VarC *Var0 *Var1 *Var2 )
+                    Call  NpcJump0  ( .NpcID:Fuzzy_04 *Var0 *Var1 *Var2 *VarD )
+                EndThread
+                Thread
+                    Call  $Function_80240574    ( *VarC *Var0 *Var1 *Var2 )
+                    Call  SetNpcPos ( .NpcID:Fuzzy_05 *Var0 *Var1 *Var2 )
+                    Call  $Function_80240574    ( *VarB *Var0 *Var1 *Var2 )
+                    Call  NpcJump0  ( .NpcID:Fuzzy_05 *Var0 *Var1 *Var2 *VarD )
+                EndThread
+            Else
+                Thread
+                    Call  $Function_80240574    ( *VarB *Var0 *Var1 *Var2 )
+                    Call  SetNpcPos ( .NpcID:Fuzzy_04 *Var0 *Var1 *Var2 )
+                    Call  $Function_80240574    ( *VarB *Var0 *Var1 *Var2 )
+                    Call  NpcJump0  ( .NpcID:Fuzzy_04 *Var0 *Var1 *Var2 *VarD )
+                EndThread
+                Thread
+                    Call  $Function_80240574    ( *VarC *Var0 *Var1 *Var2 )
+                    Call  SetNpcPos ( .NpcID:Fuzzy_05 *Var0 *Var1 *Var2 )
+                    Call  $Function_80240574    ( *VarC *Var0 *Var1 *Var2 )
+                    Call  NpcJump0  ( .NpcID:Fuzzy_05 *Var0 *Var1 *Var2 *VarD )
+                EndThread
+            EndIf
+        Else
+            Thread
+                Add   *VarA  00000001
+                Mod   *VarA  00000004
+                Call  $Function_80240574    ( *VarA *Var0 *Var1 *Var2 )
+                Call  SetNpcPos ( .NpcID:Fuzzy_03 *Var0 *Var1 *Var2 )
+                Call  NpcJump0  ( .NpcID:Fuzzy_03 *Var0 *Var1 *Var2 *VarD )
+            EndThread
+            Thread
+                Add   *VarA  00000002
+                Mod   *VarA  00000004
+                Call  $Function_80240574    ( *VarA *Var0 *Var1 *Var2 )
+                Call  SetNpcPos ( .NpcID:Fuzzy_04 *Var0 *Var1 *Var2 )
+                Call  NpcJump0  ( .NpcID:Fuzzy_04 *Var0 *Var1 *Var2 *VarD )
+            EndThread
+            Thread
+                Add   *VarA  00000003
+                Mod   *VarA  00000004
+                Call  $Function_80240574    ( *VarA *Var0 *Var1 *Var2 )
+                Call  SetNpcPos ( .NpcID:Fuzzy_05 *Var0 *Var1 *Var2 )
+                Call  NpcJump0  ( .NpcID:Fuzzy_05 *Var0 *Var1 *Var2 *VarD )
+            EndThread
+        EndIf
+        Wait  2`
+        Call  $Function_80240574    ( *MapVar[1] *Var0 *Var1 *Var2 )
+        Add   *Var2  00000002
+        Call  NpcJump0  ( .NpcID:WorldKooper_01 *Var0 *Var1 *Var2 *VarD )
+        Call  SetNpcAnimation       ( .NpcID:Fuzzy_00 00510000 )
+        Call  SetNpcAnimation       ( .NpcID:Fuzzy_03 00510000 )
+        Call  SetNpcAnimation       ( .NpcID:Fuzzy_04 00510000 )
+        Call  SetNpcAnimation       ( .NpcID:Fuzzy_05 00510000 )
+        Call  $Function_802406C4    ( 00000000 00000000 )
+        Call  $Function_802406C4    ( 00000001 00000000 )
+        Call  $Function_802406C4    ( 00000002 00000000 )
+        Call  $Function_802406C4    ( 00000003 00000000 )
+        Call  PlaySound ( 00000166 )
+    EndLoop
+    Call  SetPlayerAnimation    ( 00010002 )
+    Wait  30`
+    Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
+    Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
+    Call  SetCamSpeed   ( .Cam:Default  3` )
+    Call  DisablePlayerPhysics  ( .False )
+    Call  DisablePlayerInput    ( .False )
+    Return
+    End
+}
+@ $Script_80242500 {
+    Set   *AreaFlag[003]  .True
+    If  *Flag[00]  ==  .False
+        Call  DisablePlayerInput    ( .True )
+        Thread
+            Wait  20`
+            Call  DisablePlayerPhysics  ( .True )
+        EndThread
+    EndIf
+    Call  $Function_802406C4    ( 00000002 00000000 )
+    Call  PlaySound ( 00000166 )
+    Call  SetNpcAnimation       ( .NpcID:Fuzzy_00 00510007 )
+    Call  $Function_80240574    ( 00000002 *Var0 *Var1 *Var2 )
+    Call  $Function_80240314    ( *Var0 *Var1 *Var2 )
+    Call  $Function_802403C0    ( 00000032 00000000 00000000 )
+    Call  GetNpcPointer ( .NpcID:Fuzzy_00 *Var0 )
+    Call  GetNpcPointer ( .NpcID:WorldKooper_01 *Var1 )
+    Call  $Function_80240548    ( *Var0 )
+    Call  $Function_8024051C    ( *Var1 )
+    Call  SetModelFlags ( ~Model:o177 00000010 .True )
+    If  *GB_StoryProgress  <  .Story:Ch1_FuzzyThiefHidInTree % FFFFFFA3
+        Set   *Var0  000C00BC
+        Set   *GB_StoryProgress  .Story:Ch1_FuzzyThiefHidInTree
+    Else
+        Set   *Var0  000C00BD
+    EndIf
+    Call  SpeakToPlayer ( .NpcID:Fuzzy_00 00510002 00510001 00000005 *Var0 ) % variable string ID
+    Call  SetMusicTrack ( 00000000 .Song:JrTroopaBattle 00000000 00000008 )
+    Call  $Function_802403C0    ( 00000000 00000000 0000001E )
+    Wait  30`
+    Call  SetModelFlags ( ~Model:o177 00000010 .False )
+    Call  $Function_8024051C    ( 00000000 )
+    Call  $Function_80240548    ( 00000000 )
+    Exec  $Script_802417F8
+    Return
+    End
+}
+@ $Script_Defeat_80242E68 {
+    Call  $Function_802404D0 ( )
+    Call  SetNpcAnimation       ( .NpcID:Fuzzy_02 00510002 )
+    Call  $Function_80240574    ( *MapVar[3] *Var0 *Var1 *Var2 )
+    Call  $Function_80240314    ( *Var0 *Var1 *Var2 )
+    Sub   *Var1  00000032
+    Call  GetNpcPointer ( .NpcID:Fuzzy_02 *Var3 )
+    Call  $Function_8024051C    ( *Var3 )
+    Call  $Function_80240548    ( 00000000 )
+    Call  $Function_802403C0    ( *Var1 00000000 FFFFFFFF )
+    Call  SetModelFlags ( ~Model:o177 00000010 .True )
+    Call  $Function_802403C0    ( 00000000 00000000 0000001E )
+    Wait  30`
+    Call  $Function_8024051C    ( 00000000 )
+    Call  SetModelFlags ( ~Model:o177 00000010 .False )
+    Set   *MapVar[2]  00000000
+    Return
+    End
+}
+@ $ItemList_80243374 {
+    .Item:UltraStone
+    00000000
+}
+@ $Script_80240F80 {
+    If  *GB_StoryProgress  <  .Story:Ch1_KooperJoinedParty % FFFFFFA4
+        Call  SetMusicTrack ( 00000000 .Song:GourmetGuyFreakout 00000000 00000008 )
+    Else
+        Call  SetMusicTrack ( 00000000 .Song:SunTowerSunny 00000000 00000008 )
+    EndIf
+    Return
+    End
+}
+@ $NpcGroup_80246050 {
+    .NpcID:WorldKooper_01 $NpcSettings_802412FC ~Vec3f:WorldKooper_01 % 0 -1000 0
+    00C40B09 $Script_Init_80245F18 00000000 00000000 00000000
+    ~NoDrops
+    ~Movement:WorldKooper_01
+    ~AnimationTable:WorldKooper_01 % .Sprite:WorldKooper
+    00000000 00000000 00000000 00000000 % no tattle string
+    %
+    % $NpcGroup_80246050[1F0]
+    .NpcID:Fuzzy_02 $NpcSettings_802412D0 ~Vec3f:Fuzzy_02 % 0 -1000 0
+    00C40B0D $Script_Init_80245F50 00000000 00000000 00000000
+    ~NoDrops
+    ~Movement:Fuzzy_02
+    ~AnimationTable:Fuzzy_02 % .Sprite:Fuzzy
+    00000000 00000000 00000000 00000000 % no tattle string
+    %
+    % $NpcGroup_80246050[3E0]
+    .NpcID:Fuzzy_03 $NpcSettings_802412D0 ~Vec3f:Fuzzy_03 % 0 -1000 0
+    00C40B09 $Script_Init_80245F88 00000000 00000000 00000000
+    ~NoDrops
+    ~Movement:Fuzzy_03
+    ~AnimationTable:Fuzzy_03 % .Sprite:Fuzzy
+    00000000 00000000 00000000 00000000 % no tattle string
+    %
+    % $NpcGroup_80246050[5D0]
+    .NpcID:Fuzzy_04 $NpcSettings_802412D0 ~Vec3f:Fuzzy_04 % 0 -1000 0
+    00C40B09 $Script_Init_80245F88 00000000 00000000 00000000
+    ~NoDrops
+    ~Movement:Fuzzy_04
+    ~AnimationTable:Fuzzy_04 % .Sprite:Fuzzy
+    00000000 00000000 00000000 00000000 % no tattle string
+    %
+    % $NpcGroup_80246050[7C0]
+    .NpcID:Fuzzy_05 $NpcSettings_802412D0 ~Vec3f:Fuzzy_05 % 0 -1000 0
+    00C40B09 $Script_Init_80245F88 00000000 00000000 00000000
+    ~NoDrops
+    ~Movement:Fuzzy_05
+    ~AnimationTable:Fuzzy_05 % .Sprite:Fuzzy
+    00000000 00000000 00000000 00000000 % no tattle string
+    %
+    % $NpcGroup_80246050[9B0]
+    .NpcID:WorldKooper_06 $NpcSettings_802412FC ~Vec3f:WorldKooper_06 % 0 -1000 0
+    00C40B09 $Script_Init_80245FAC 00000000 00000000 00000000
+    ~NoDrops
+    ~Movement:WorldKooper_06
+    ~AnimationTable:WorldKooper_06 % .Sprite:WorldKooper
+    00000000 00000000 00000000 00000000 % no tattle string
+}
+@ $Script_80244D0C {
+    Thread
+        Call  $Function_80240574    ( *Var0 *Var0 *Var1 *Var2 )
+        Call  GetPlayerPos  ( *VarA *VarB *VarC )
+        Call  UseSettingsFrom       ( .Cam:Default *VarA *VarB *VarC )
+        Add   *VarA  *Var0
+        Add   *VarC  *Var2
+        Div   *VarA  00000002
+        Div   *VarC  00000002
+        Call  SetPanTarget  ( .Cam:Default *VarA *VarB *VarC )
+        Call  SetCamPitch   ( .Cam:Default  15`  -11` )
+        Call  SetCamSpeed   ( .Cam:Default  3` )
+        Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
+    EndThread
+    Call  $Function_80240574    ( *Var0 *Var0 *Var1 *Var2 )
+    Call  GetNpcPointer ( .NpcID:Fuzzy_00 *VarE )
+    Call  GetNpcPointer ( .NpcID:WorldKooper_01 *VarF )
+    Set   *VarA  *Var0
+    Set   *VarB  *Var1
+    Set   *VarC  *Var2
+    Switch  *MapVar[0]
+        Case  ==  00000000
+            Set   *Var4  *VarC
+            Sub   *Var4  00000004
+            Call  $Function_80240314    ( *VarA *VarB *Var4 )
+            Call  SetModelFlags     ( ~Model:o177 00000010 .True )
+            Set   *Var3  *VarB
+            Div   *Var3  00000002
+            Set   *VarD  *VarB
+            Sub   *VarD  *Var3
+            Exec  $Script_8024303C
+            Wait  1`
+            Wait  30`
+            Call  $Function_8024051C    ( 00000000 )
+            Call  $Function_80240548    ( 00000000 )
+            Call  $Function_802403C0    ( 00000000 00000000 FFFFFFFF )
+            Call  $Function_802403C0    ( *Var3 00000000 FFFFFFFF )
+            Wait  1`
+            Call  $Function_8024051C    ( *VarF )
+            Wait  20`
+            Call  SetNpcAnimation   ( .NpcID:Fuzzy_00 00510002 )
+            Call  PlayerFaceNpc     ( .NpcID:Fuzzy_00 .False )
+            Call  SetNpcJumpscale   ( .NpcID:Fuzzy_00 00000000 )
+            Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_00 B0000017 00000000 )
+            Call  NpcJump0  ( .NpcID:Fuzzy_00 *VarA *VarD *VarC  30` )
+            Call  SetNpcAnimation   ( .NpcID:Fuzzy_00 00510002 )
+            Set   *Var9  *VarC
+            Call  SpeakToPlayer     ( .NpcID:Fuzzy_00 00510002 00510001 00000005 000C00BF ) % Meee-ooh? Not bad, chump! But that was just a warm ...
+            Call  $Function_802403C0    ( 00000000 00000000 0000001E )
+            Call  SetNpcAnimation   ( .NpcID:Fuzzy_00 00510002 )
+            Set   *VarC  *Var9
+            Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_00 B0000017 00000000 )
+            Call  NpcJump0  ( .NpcID:Fuzzy_00 *VarA *VarB *VarC  30` )
+            Call  $Function_8024051C    ( 00000000 )
+            Call  SetModelFlags     ( ~Model:o177 00000010 .False )
+            Add   *MapVar[0]  00000001
+            Exec  $Script_802417F8
+            Return
+        Case  ==  00000001
+            Set   *Var4  *VarC
+            Sub   *Var4  00000004
+            Call  $Function_80240314    ( *VarA *VarB *Var4 )
+            Call  SetModelFlags     ( ~Model:o177 00000010 .True )
+            Set   *Var3  *VarB
+            Mul   *Var3  00000002
+            Div   *Var3  00000003
+            Set   *VarD  *VarB
+            Sub   *VarD  *Var3
+            Exec  $Script_80242F9C
+            Wait  1`
+            Wait  30`
+            Call  $Function_8024051C    ( 00000000 )
+            Call  $Function_80240548    ( 00000000 )
+            Call  $Function_802403C0    ( 00000000 00000000 FFFFFFFF )
+            Call  $Function_802403C0    ( *Var3 00000000 FFFFFFFF )
+            Wait  1`
+            Call  $Function_8024051C    ( *VarF )
+            Wait  20`
+            Call  SetNpcAnimation   ( .NpcID:Fuzzy_00 00510008 )
+            Call  PlayerFaceNpc     ( .NpcID:Fuzzy_00 .False )
+            Call  SetNpcJumpscale   ( .NpcID:Fuzzy_00 00000000 )
+            Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_00 B0000017 00000000 )
+            Call  NpcJump0  ( .NpcID:Fuzzy_00 *VarA *VarD *VarC  30` )
+            Call  SetNpcAnimation   ( .NpcID:Fuzzy_00 00510002 )
+            Set   *Var9  *VarC
+            Call  SpeakToPlayer     ( .NpcID:Fuzzy_00 00510002 00510001 00000005 000C00C0 ) % York!? Meeoork? You got me twice!? Must've been lu ...
+            Call  $Function_802403C0    ( 00000000 00000000 0000001E )
+            Call  SetNpcAnimation   ( .NpcID:Fuzzy_00 00510002 )
+            Set   *VarC  *Var9
+            Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_00 B0000017 00000000 )
+            Call  NpcJump0  ( .NpcID:Fuzzy_00 *VarA *VarB *VarC  30` )
+            Call  $Function_8024051C    ( 00000000 )
+            Call  SetModelFlags     ( ~Model:o177 00000010 .False )
+            Add   *MapVar[0]  00000001
+            Exec  $Script_802417F8
+            Return
+        Case  ==  00000002
+            Call  SetNpcAnimation       ( .NpcID:Fuzzy_00 00510002 )
+            Call  PlayerFaceNpc ( .NpcID:Fuzzy_00 .False )
+            Call  $Function_80240314    ( *VarA *VarB *VarC )
+            Call  $Function_802403C0    ( 00000000 00000000 FFFFFFFF )
+            Set   *Var0  *VarB
+            Sub   *Var0  00000032
+            Call  $Function_802403C0    ( *Var0 00000000 00000000 )
+            Call  $Function_8024051C    ( *VarF )
+            Call  $Function_80240548    ( *VarE )
+            Call  SetModelFlags ( ~Model:o177 00000010 .True )
+            Wait  20`
+            Call  SetNpcAnimation       ( .NpcID:Fuzzy_00 00510002 )
+            Call  SpeakToPlayer ( .NpcID:Fuzzy_00 00510002 00510001 00000005 000C00C1 ) % Meeeeooooooh, noooo!!! I give! Uncle! Here, take t ...
+            Wait  10`
+            Call  $Function_8024051C    ( 00000000 )
+            Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
+            Add   *Var1  00000028
+            Call  SetNpcJumpscale       ( .NpcID:WorldKooper_01 *Fixed[0.6] )
+            Call  NpcJump0  ( .NpcID:WorldKooper_01 *Var0 *Var1 *Var2  10` )
+            Call  SetPlayerAnimation    ( 00010024 )
+            Thread
+                Wait  4`
+                Call  GetPlayerPos  ( *Var3 *Var4 *Var5 )
+                Add   *Var4  00000032
+                Add   *Var5  00000002
+                Add   *Var3  00000008
+                Call  PlayEffect    ( 00000011 00000003 *Var3 *Var4 *Var5 00000014 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+                Add   *Var3  FFFFFFF0
+                Call  PlayEffect    ( 00000011 00000003 *Var3 *Var4 *Var5 00000014 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+            EndThread
+            Call  PlaySound ( 000000D2 )
+            Call  ShowMessageAtScreenPos    ( 001D0006  160`  40` ) % You got Kooper's Shell!
+            Call  SetNpcPos ( .NpcID:WorldKooper_01  0`  -1000`  0` )
+            Call  SetPlayerAnimation    ( 00010002 )
+            Call  AddKeyItem        ( .Item:UltraStone )
+            Set   *GF_NOK04_Item_SolarStone .True
+            Wait  10`
+            Call  SpeakToPlayer     ( .NpcID:Fuzzy_00 00510002 00510001 00000005 000C00C2 ) % You're too tough for me. I won't be bad anymore, I ...
+            Call  SetNpcAnimation   ( .NpcID:Fuzzy_00 00510002 )
+            Call  $Function_802403C0    ( 00000000 00000000 00000014 )
+            Wait  20`
+            Call  SetModelFlags     ( ~Model:o177 00000010 .False )
+            Call  $Function_80240548    ( 00000000 )
+            Call  SetNpcPos ( .NpcID:Fuzzy_00  0`  -1000`  0` )
+            Call  SetNpcPos ( .NpcID:WorldKooper_01  0`  -1000`  0` )
+            Call  SetMusicTrack     ( 00000000 .Song:SunTowerSunny 00000000 00000008 )
+            Call  DisablePlayerPhysics  ( .False )
+            Call  DisablePlayerInput    ( .False )
+            Set   *AreaFlag[003]  .False
+            Exec  $Script_802433B8
+    EndSwitch
+    Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
+    Call  SetCamSpeed   ( .Cam:Default  3` )
+    Return
+    End
+}
+@ $Script_Init_80245F18 {
+    Call  EnableNpcShadow   ( .Npc:Self .False )
+    Call  SetNpcAnimation   ( .Npc:Self 00E70000 )
+    Return
+    End
+}
+@ $NpcGroup_80246BF0 {
+    .NpcID:Fuzzy_00 $NpcSettings_802412D0 ~Vec3f:Fuzzy_00 % 0 -1000 0
+    00400B0D $Script_Init_80245D08 00000000 00000000 00000000
+    ~NoDrops
+    ~Movement:Fuzzy_00
+    ~AnimationTable:Fuzzy_00 % .Sprite:Fuzzy
+    00000000 00000000 00000000 00000000 % no tattle string
+}
+@ $Script_80243258 {
+    Set   *Flag[0A]  .False
+    Call  DisablePlayerInput    ( .True )
+    Call  $Function_80240E70 ( )
+    Call  DisablePlayerInput    ( .False )
+    Unbind
+    Return
+    End
+}
+@ $Script_80245858 {
+    Thread
+        Call  $Function_80240574    ( *Var0 *Var0 *Var1 *Var2 )
+        Call  GetPlayerPos  ( *VarA *VarB *VarC )
+        Call  UseSettingsFrom       ( .Cam:Default *VarA *VarB *VarC )
+        Add   *VarA  *Var0
+        Add   *VarC  *Var2
+        Div   *VarA  00000002
+        Div   *VarC  00000002
+        Call  SetPanTarget  ( .Cam:Default *VarA *VarB *VarC )
+        Call  SetCamPitch   ( .Cam:Default  15`  -11` )
+        Call  SetCamSpeed   ( .Cam:Default  3` )
+        Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
+    EndThread
+    Wait  15`
+    Set   *MapVar[3]  *Var0
+    Call  $Function_80240574    ( *MapVar[3] *Var0 *Var1 *Var2 )
+    Call  GetNpcPointer ( .NpcID:WorldKooper_01 *VarF )
+    Set   *VarA  *Var0
+    Set   *VarB  *Var1
+    Set   *VarC  *Var2
+    Call  RandInt   ( 000003E7 *Var0 )
+    Switch  *Var0
+        Case  <  000000C8
+            Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
+            Call  MakeItemEntity    ( .Item:Heart *Var0 000000C8 *Var2 .ItemSpawnMode:Fall_SpawnAlways 00000000 )
+            Wait  30`
+        Case  <  00000190
+            Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
+            Call  MakeItemEntity    ( .Item:Coin *Var0 000000C8 *Var2 .ItemSpawnMode:Fall_SpawnAlways 00000000 )
+            Wait  30`
+        Case  <  000003E8
+            Call  SetNpcAnimation   ( .NpcID:Fuzzy_02 00510002 )
+            Call  SetNpcJumpscale   ( .NpcID:Fuzzy_02 00000001 )
+            Call  SetNpcPos ( .NpcID:Fuzzy_02 *VarA *VarB *VarC )
+            Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
+            Add   *Var2  0000000A
+            Add   *Var1  0000000A
+            Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_02 B0000017 00000000 )
+            Call  NpcJump0  ( .NpcID:Fuzzy_02 *Var0 *Var1 *Var2  20` )
+            Set   *MapVar[2]  00000001
+    EndSwitch
+    Label  0
+    If  *MapVar[2]  ==  00000001
+        Wait  1`
+        Goto  0
+    EndIf
+    Wait  20`
+    Exec  $Script_802417F8
+    Return
+    End
+}
+@ $Script_802433B8 {
+    Label  0
+    Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
+    Sub   *Var0  -270`
+    Sub   *Var2  240`
+    Mul   *Var0  FFFFFF9B
+    Mul   *Var2  00000023
+    Add   *Var0  *Var2
+    If  *Var0  <=  00000000
+        Wait  1`
+        Goto  0
+    EndIf
+    Call  DisablePlayerInput    ( .True )
+    Call  ShowMessageAtScreenPos    ( 000C00CF  160`  40` ) % Meeooreeeeork!
+    Call  UseSettingsFrom   ( .Cam:Default  -100`  0`  225` )
+    Call  SetPanTarget      ( .Cam:Default  -100`  0`  225` )
+    Call  SetCamDistance    ( .Cam:Default  -250` )
+    Call  SetCamSpeed       ( .Cam:Default  3` )
+    Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+    Wait  20`
+    Call  SetNpcAnimation   ( .NpcID:Fuzzy_00 00510002 )
+    Call  SetNpcPos ( .NpcID:Fuzzy_00  63`  0`  212` )
+    Call  EnableNpcShadow   ( .NpcID:Fuzzy_00 .True )
+    Call  SetNpcJumpscale   ( .NpcID:Fuzzy_00 *Fixed[2.0] )
+    Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_00 B0000017 00000000 )
+    Call  NpcJump0  ( .NpcID:Fuzzy_00  -100`  0`  225`  20` )
+    Set   *AreaFlag[006]  .False
+    Set   *AreaFlag[007]  .False
+    Set   *AreaFlag[005]  .False
+    Thread
+        Call  ShowMessageAtScreenPos    ( 000C00D0  160`  40` ) % I changed my mind, sucker! How about a fight?!
+        Set   *AreaFlag[006]  .True
+    EndThread
+    Call  GetNpcPos ( .NpcID:Fuzzy_00 *VarA *VarB *VarC )
+    Label  1E
+    Call  SetNpcJumpscale   ( .NpcID:Fuzzy_00 *Fixed[2.0] )
+    Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_00 B0000017 00000000 )
+    Call  NpcJump0  ( .NpcID:Fuzzy_00 *VarA *VarB *VarC  12` )
+    If  *AreaFlag[006]  ==  .False
+        Goto  1E
+    EndIf
+    Thread
+        Wait  27`
+        Call  BindNpcDefeat ( .NpcID:Fuzzy_00 $Script_Defeat_8024317C )
+        Call  BindNpcAI     ( .NpcID:Fuzzy_00 $Script_NpcAI_80243110 )
+    EndThread
+    Thread
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_00 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_00  -212`  0`  237`  15` )
+        Call  GetPlayerPos      ( *VarA *VarB *VarC )
+        Add   *VarB  00000025
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_00 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_00 *VarA *VarB *VarC  20` )
+        Wait  2`
+        Call  SetPlayerAnimation    ( 00080012 )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_00 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_00 *VarA *VarB *VarC  15` )
+        Call  SetPlayerAnimation    ( 00010002 )
+        Label  15
+        If  *AreaFlag[005]  ==  .False
+            Wait  1`
+            Goto  15
+        EndIf
+        Call  SetNpcPos ( .NpcID:Fuzzy_00  -255`  0`  287` )
+        Call  GetNpcPos ( .NpcID:Fuzzy_00 *VarA *VarB *VarC )
+        Label  1F
+        Call  SetNpcJumpscale   ( .NpcID:Fuzzy_00 *Fixed[2.0] )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_00 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_00 *VarA *VarB *VarC  15` )
+        If  *AreaFlag[007]  ==  .False
+            Goto  1F
+        EndIf
+        Add   *VarA  00000046
+        Add   *VarC  FFFFFFE2
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_00 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_00 *VarA *VarB *VarC  15` )
+        Add   *VarA  00000046
+        Add   *VarC  FFFFFFE2
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_00 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_00 *VarA *VarB *VarC  20` )
+        Call  EnableNpcShadow   ( .NpcID:Fuzzy_00 .False )
+        Call  SetNpcPos ( .NpcID:Fuzzy_00  0`  -1000`  0` )
+    EndThread
+    Call  UseSettingsFrom   ( .Cam:Default  -260`  0`  284` )
+    Call  SetPanTarget  ( .Cam:Default  -260`  0`  284` )
+    Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
+    Call  SetCamSpeed   ( .Cam:Default  2` )
+    Thread
+        Wait  5`
+        Call  SetNpcPos ( .NpcID:Fuzzy_03  63`  0`  212` )
+        Call  EnableNpcShadow   ( .NpcID:Fuzzy_03 .True )
+        Call  SetNpcJumpscale   ( .NpcID:Fuzzy_03 *Fixed[2.0] )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_03 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_03  -100`  0`  225`  10` )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_03 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_03  -197`  0`  227`  20` )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_03 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_03  -233`  0`  285`  10` )
+        Label  16
+        If  *AreaFlag[005]  ==  .False
+            Wait  1`
+            Goto  16
+        EndIf
+        Call  SetNpcPos ( .NpcID:Fuzzy_03  -210`  0`  244` )
+        Call  GetNpcPos ( .NpcID:Fuzzy_03 *VarA *VarB *VarC )
+        Label  20
+        Call  SetNpcJumpscale   ( .NpcID:Fuzzy_03 *Fixed[2.0] )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_03 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_03 *VarA *VarB *VarC  12` )
+        If  *AreaFlag[007]  ==  .False
+            Goto  20
+        EndIf
+        Add   *VarA  00000046
+        Add   *VarC  FFFFFFE2
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_03 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_03 *VarA *VarB *VarC  10` )
+        Add   *VarA  00000046
+        Add   *VarC  FFFFFFE2
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_03 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_03 *VarA *VarB *VarC  20` )
+        Call  EnableNpcShadow   ( .NpcID:Fuzzy_03 .False )
+        Call  SetNpcPos ( .NpcID:Fuzzy_03  0`  -1000`  0` )
+    EndThread
+    Thread
+        Wait  7`
+        Call  SetNpcPos ( .NpcID:Fuzzy_04  63`  0`  212` )
+        Call  EnableNpcShadow   ( .NpcID:Fuzzy_04 .True )
+        Call  SetNpcJumpscale   ( .NpcID:Fuzzy_04 *Fixed[2.0] )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_04 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_04  -122`  0`  219`  20` )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_04 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_04  -177`  0`  242`  10` )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_04 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_04  -213`  0`  300`  15` )
+        Label  17
+        If  *AreaFlag[005]  ==  .False
+            Wait  1`
+            Goto  17
+        EndIf
+        Call  SetNpcPos ( .NpcID:Fuzzy_04  -210`  0`  266` )
+        Call  GetNpcPos ( .NpcID:Fuzzy_04 *VarA *VarB *VarC )
+        Wait  2`
+        Label  21
+        Call  SetNpcJumpscale   ( .NpcID:Fuzzy_04 *Fixed[2.0] )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_04 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_04 *VarA *VarB *VarC  12` )
+        If  *AreaFlag[007]  ==  .False
+            Goto  21
+        EndIf
+        Add   *VarA  00000046
+        Add   *VarC  FFFFFFE2
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_04 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_04 *VarA *VarB *VarC  20` )
+        Add   *VarA  00000046
+        Add   *VarC  FFFFFFE2
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_04 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_04 *VarA *VarB *VarC  15` )
+        Call  EnableNpcShadow   ( .NpcID:Fuzzy_04 .False )
+        Call  SetNpcPos ( .NpcID:Fuzzy_04  0`  -1000`  0` )
+    EndThread
+    Thread
+        Wait  8`
+        Call  SetNpcPos ( .NpcID:Fuzzy_05  63`  0`  212` )
+        Call  EnableNpcShadow   ( .NpcID:Fuzzy_05 .True )
+        Call  SetNpcJumpscale   ( .NpcID:Fuzzy_05 *Fixed[2.0] )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_05 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_05  -100`  0`  269`  20` )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_05 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_05  -217`  0`  212`  10` )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_05 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_05  -253`  0`  270`  10` )
+        Label  18
+        If  *AreaFlag[005]  ==  .False
+            Wait  1`
+            Goto  18
+        EndIf
+        Call  SetNpcPos ( .NpcID:Fuzzy_05  -183`  0`  257` )
+        Call  GetNpcPos ( .NpcID:Fuzzy_05 *VarA *VarB *VarC )
+        Wait  5`
+        Label  22
+        Call  SetNpcJumpscale   ( .NpcID:Fuzzy_05 *Fixed[2.0] )
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_05 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_05 *VarA *VarB *VarC  12` )
+        If  *AreaFlag[007]  ==  .False
+            Goto  22
+        EndIf
+        Add   *VarA  00000046
+        Add   *VarC  FFFFFFE2
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_05 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_05 *VarA *VarB *VarC  15` )
+        Add   *VarA  00000046
+        Add   *VarC  FFFFFFE2
+        Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_05 B0000017 00000000 )
+        Call  NpcJump0  ( .NpcID:Fuzzy_05 *VarA *VarB *VarC  20` )
+        Call  EnableNpcShadow   ( .NpcID:Fuzzy_05 .False )
+        Call  SetNpcPos ( .NpcID:Fuzzy_05  0`  -1000`  0` )
+    EndThread
+    Label  28
+    If  *AreaFlag[005]  ==  .False
+        Wait  1`
+        Goto  28
+    EndIf
+    Call  SetPlayerPos  (  -305`  0`  329` )
+    Call  InterpPlayerYaw       (  50`  0` )
+    Call  SetNpcPos     ( .Npc:Partner  -335`  0`  355` )
+    Call  InterpNpcYaw  ( .Npc:Partner  50`  0` )
+    Call  ShowMessageAtScreenPos    ( 000C00D1  160`  40` ) % Meeoooorkoooonooo! We'll be good! We'll be good!
+    Set   *AreaFlag[007]  .True
+    Call  UseSettingsFrom       ( .Cam:Default  -260`  0`  284` )
+    Call  SetPanTarget  ( .Cam:Default  -260`  0`  284` )
+    Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
+    Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
+    Wait  15`
+    Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
+    Set   *AreaFlag[008]  .True
+    Wait  30`
+    Call  DisablePlayerInput    ( .False )
+    Return
+    End
+}
+@ $Script_Main_EnterWalk {
+    Set   *GB_WorldLocation  .Location:KoopaVillage
+    Call  SetSpriteShading  ( .Shading:None )
+    Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+    Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
+    Call  SetCamEnabled     ( .Cam:Default .True )
+    Call  SetCamLeadPlayer  ( .Cam:Default .False )
+    Set   *AreaFlag[003]  .False
+    Set   *AreaFlag[004]  .False
+    Call  ModifyColliderFlags   ( 00000000 ~Collider:o147 7FFFFE00 )
+    Call  MakeNpcs  ( .False $NpcGroupList_80246DE0 )
+    ExecWait  $Script_802412C0
+    Set   *Var0  00000000
+    Bind  $Script_80245BD8 .Trigger:WallHammer ~Collider:o59 00000001 00000000
+    Set   *Var0  00000001
+    Bind  $Script_80245BD8 .Trigger:WallHammer ~Collider:o58 00000001 00000000
+    Set   *Var0  00000002
+    Bind  $Script_80245BD8 .Trigger:WallHammer ~Collider:o57 00000001 00000000
+    Set   *Var0  00000003
+    Bind  $Script_80245BD8 .Trigger:WallHammer ~Collider:o56 00000001 00000000
+    Exec  $Script_80240F80
+    Call  ModifyColliderFlags   ( 00000000 ~Collider:deilitsw 7FFFFE00 )
+    Exec  $Script_MakeEntities
+    Set   *Var0  $Script_802410A0
+    Exec  EnterWalk
+    Wait  1`
+    Return
+    End
+}

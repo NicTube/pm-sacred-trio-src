@@ -1,0 +1,175 @@
+@ $Script_80240A20 {
+    Thread
+        Set   *Var4  000000B9
+        Set   *Var5  00000032
+        Loop
+            Set   *Var3  *Var4
+            Set   *Var4  *Var5
+            Set   *Var5  *Var3
+            Call  MakeLerp  ( *Var3 *Var4 0000001E .Easing:CosInOut )
+            Loop
+                Call  UpdateLerp ( )
+                DivF  *Var0  0000000A
+                Call  SetCamPitch   ( .Cam:Default *Var0 *Fixed[-3.0] )
+                Wait  1`
+                If  *Var1  ==  00000000
+                    BreakLoop
+                EndIf
+            EndLoop
+        EndLoop
+    EndThread
+    Set   *Var4  FFFFFFEC
+    Set   *Var5  00000050
+    Call  GetEntryID    ( *Var8 )
+    Loop
+        Set   *Var3  *Var4
+        Set   *Var4  *Var5
+        Set   *Var5  *Var3
+        Call  MakeLerp  ( *Var3 *Var4 0000001E .Easing:CosInOut )
+        Loop
+            Call  UpdateLerp ( )
+            SetF  *Var2  *Var0
+            MulF  *Var2  *Fixed[0.1]
+            Call  TranslateGroup    ( ~Model:ry *MapVar[A] *Var2 00000000 )
+            Call  RotateGroup       ( ~Model:ry *MapVar[B] 00000000 00000001 00000000 )
+            Call  GetModelCenter    ( ~Model:ry3 )
+            Call  SetPlayerPos      ( *Var0 *Var1 *Var2 )
+            If  *Var8  !=  ~Entry:Entry2
+                Add   *Var0  FFFFFFF6
+            Else
+                Add   *Var0  00000007
+            EndIf
+            Add   *Var2  00000005
+            Call  SetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
+            Wait  1`
+            If  *Var1  ==  00000000
+                BreakLoop
+            EndIf
+        EndLoop
+    EndLoop
+    Return
+    End
+}
+@ $Script_80240D00 {
+    Call  DisablePlayerInput    ( .True )
+    Call  DisablePlayerPhysics  ( .True )
+    If *GB_StoryProgress >= .Story:Ch1_FuzzyThiefHidInTree
+        Call  SetMusicTrack     ( 00000000 .Song:StarSanctuary 00000000 00000008 )
+    EndIf
+    Call  SetPlayerActionState  ( .ActionState:Land )
+    Call  InterpPlayerYaw   (  135`  0` )
+    Call  DisablePartnerAI  ( 00000000 )
+    Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
+    Call  SetNpcYaw ( .Npc:Partner  90` )
+    Call  UseSettingsFrom   ( .Cam:Default  0`  0`  0` )
+    Call  SetPanTarget      ( .Cam:Default  0`  0`  0` )
+    Call  SetCamPitch       ( .Cam:Default *Fixed[18.5] *Fixed[-3.0] )
+    Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
+    Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+    Set   *MapVar[A]  FFFFFED4
+    Set   *MapVar[B]  00000000
+    Exec  $Script_80240A20
+    Wait  1`
+    Call  PlaySound ( 0000017C )
+    If  *GB_StoryProgress  <  0000005D % 5D
+        Call  MakeLerp  ( FFFFFED4 00000000 00000078 .Easing:QuadraticOut )
+        Loop
+            Call  UpdateLerp ( )
+            Set   *MapVar[A]  *Var0
+            Wait  1`
+            If  *Var1  ==  00000000
+                BreakLoop
+            EndIf
+        EndLoop
+        Wait  100`
+        Call  PlaySound ( 0000057C )
+        If *GB_StoryProgress < .Story:Ch1_FuzzyThiefHidInTree
+            Call  ShowMessageAtScreenPos    ( 002F0000 000000A0 00000028 ) % Companions ...
+            Call  GotoMap   ( "hos_20" 1 ) % TODO: GotoMap (inside starshroom)
+        Else
+            Call    ShowMessageAtScreenPos    ( 002F0020  160`  40` ) % Kolorado speaking
+            Call    ShowMessageAtScreenPos    ( 002F002B  160`  40` ) % CREDITS
+            Loop 370
+                Wait 1
+            EndLoop 
+            Call    ShowMessageAtScreenPos    ( 002F0029  160`  40` ) % ULTRA SECRET
+            Loop
+                Wait 1
+            EndLoop 
+        EndIf
+    Else
+        Thread
+            Call  MakeLerp  ( FFFFFED4 00000000 00000078 .Easing:QuadraticOut )
+            Loop
+                Call  UpdateLerp ( )
+                Set   *MapVar[A]  *Var0
+                Wait  1`
+                If  *Var1  ==  00000000
+                    BreakLoop
+                EndIf
+            EndLoop
+            Wait  75`
+            Call  PlaySound ( 0000057C )
+            Call  PlaySound ( 000020A1 )
+            Call  MakeLerp  ( 00000000 0000012C 0000003C .Easing:CubicIn )
+            Loop
+                Call  UpdateLerp ( )
+                Set   *MapVar[A]  *Var0
+                Wait  1`
+                If  *Var1  ==  00000000
+                    BreakLoop
+                EndIf
+            EndLoop
+            Wait  20`
+        EndThread
+        Wait  60`
+        Loop  000000D7
+            Wait  1`
+            Call  $Function_80240310 ( )
+            If  *Var8  ==  00000001
+                BreakLoop
+            EndIf
+        EndLoop
+        Call  PlaySound ( 0000057C )
+        Call  GotoMap   ( "hos_20" 1 ) % hos_00
+    EndIf
+    Wait  100`
+    Return
+    End
+}
+
+@ $Script_802410DC {
+    Call  DisablePlayerInput    ( .True )
+    Call  DisablePlayerPhysics  ( .True )
+    Call  SetPlayerActionState  ( .ActionState:Land )
+    Call  InterpPlayerYaw       (  135`  0` )
+    Call  DisablePartnerAI      ( 00000000 )
+    Call  SetNpcFlagBits        ( .Npc:Partner 00000200 .False )
+    Call  SetNpcYaw     ( .Npc:Partner  90` )
+    Call  UseSettingsFrom       ( .Cam:Default  0`  0`  0` )
+    Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
+    Call  SetCamPitch   ( .Cam:Default *Fixed[18.5] *Fixed[-3.0] )
+    Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
+    Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
+    Call  PlaySound     ( 0000017C )
+    Set   *MapVar[A]  00000000
+    Set   *MapVar[B]  00000000
+    Exec  $Script_80240A20
+    Wait  100`
+    Call  PlaySound     ( 0000057C )
+    Call  PlaySound     ( 000020A1 )
+    Call  MakeLerp      ( 00000000 0000012C 0000003C .Easing:CubicIn )
+    Loop
+        Call  UpdateLerp ( )
+        Set   *MapVar[A]  *Var0
+        Wait  1`
+        If  *Var1  ==  00000000
+            BreakLoop
+        EndIf
+    EndLoop
+    Wait  20`
+    Call  GotoMap   ( "hos_22" 1 )
+    Wait  100`
+    Return
+    End
+}

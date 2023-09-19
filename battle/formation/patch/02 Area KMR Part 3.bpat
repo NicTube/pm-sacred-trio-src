@@ -1,0 +1,124 @@
+@ $JrTroopa5 {
+    % stats
+    [Index]        8Cb
+    [Level]        65`b
+    [MaxHP]        16`b
+    [Coins]         0`b
+    [Flags]       00000000
+    [StatusTable] $StatusTable_8022A634
+    % ai
+    [PartsCount]    2`s
+    [PartsTable]  $PartsTable_8022A6E0
+    [Script]      $Script_Init_8022ACE4
+    % move effectiveness
+    [Escape]        0`b
+    [Item]          0`b
+    [AirLift]       0`b
+    [Hurricane]     0`b % Bow's "Spook" as well
+    [UpAndAway]     0`b
+    [PowerBounce]  75`b
+    [SpinSmash]     0`b % weight (0-4)
+    % ui positions
+    [Size]         24`b  32`b % width height
+    [HealthBar]     0`b   0`b % dx dy
+    [StatusTurn]  -20`b  35`b % dx dy
+    [StatusIcon]   10`b  25`b % dx dy
+}
+
+@ $DefenseTable_8022A628 {
+    .Element:Normal 0
+    .Element:End
+}
+@ $Script_TakeTurn_8022B4F0 {
+    Call  UseIdleAnimation  ( .Actor:Self .False )
+    Call  EnableIdleScript  ( .Actor:Self 00000000 )
+    Call  SetTargetActor    ( .Actor:Self .Actor:Player )
+    Call  SetGoalToTarget   ( .Actor:Self )
+    Call  SetAnimation      ( .Actor:Self 00000001 00240006 )
+    Wait  8`
+    Call  PlaySoundAtActor  ( .Actor:Self .Sound:SpellCast1 )
+    Call  GetStatusFlags    ( .Actor:Self *Var0 )
+    If  *Var0  !&  ~Flags:StatusFlags:Shrink % 80000
+        Set   *Var3  00000000
+        Set   *Var4  00000024
+        SetF  *Var5  *Fixed[1.0]
+    Else
+        Set   *Var3  00000000
+        Set   *Var4  0000000E
+        SetF  *Var5  *Fixed[0.4]
+    EndIf
+    Call  GetActorPos       ( .Actor:Self *Var0 *Var1 *Var2 )
+    Add   *Var0  *Var3
+    Add   *Var1  *Var4
+    Call  PlayEffect        ( ~FX:GatherEnergyPink *Var0 *Var1 *Var2 *Var5 0000001E 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+    Wait  30`
+    Call  SetAnimation      ( .Actor:Self 00000001 00240007 )
+    Call  UseBattleCamPreset    ( 00000002 )
+    Call  EnemyTestTarget   ( .Actor:Self *VarA ~Flags:DamageType:NoContact 00000000 00000001 00000010 )
+    Switch  *VarA
+        CaseOR  ==  .HitResult:Miss % 6
+        CaseOR  ==  .HitResult:Lucky % 5
+            Call  PlaySoundAtActor  ( .Actor:Self .Sound:SpellCast2 )
+            Call  GetActorPos       ( .Actor:Player *Var3 *Var4 *Var5 )
+            Sub   *Var3  00000078
+            Add   *Var4  00000014
+            Call  GetStatusFlags    ( .Actor:Self *Var0 )
+            If  *Var0  !&  ~Flags:StatusFlags:Shrink % 80000
+                Set   *Var6  FFFFFFF8
+                Set   *Var7  00000014
+                SetF  *Var8  *Fixed[1.0]
+            Else
+                Set   *Var6  FFFFFFFD
+                Set   *Var7  00000008
+                SetF  *Var8  *Fixed[0.4]
+            EndIf
+            Call  GetActorPos   ( .Actor:Self *Var0 *Var1 *Var2 )
+            Add   *Var0  *Var6
+            Add   *Var1  *Var7
+            Call  PlayEffect    ( ~FX:ShapeSpell:Projectile *Var0 *Var1 *Var2 *Var3 *Var4 *Var5 0000001E 00000000 00000000 00000000 00000000 00000000 )
+            Wait  35`
+            If  *VarA  ==  .HitResult:Lucky % 5
+                Call  EnemyTestTarget   ( .Actor:Self *Var0 ~Flags:DamageType:TriggerLucky 00000000 00000000 00000000 )
+            EndIf
+            Call  EnableIdleScript  ( .Actor:Self 00000001 )
+            Call  UseIdleAnimation  ( .Actor:Self .True )
+            Return
+        EndCaseGroup
+    EndSwitch
+    Call  PlaySoundAtActor  ( .Actor:Self .Sound:SpellCast2 )
+    Call  GetActorPos       ( .Actor:Player *Var3 *Var4 *Var5 )
+    Add   *Var4  00000014
+    Call  GetStatusFlags    ( .Actor:Self *Var0 )
+    If  *Var0  !&  ~Flags:StatusFlags:Shrink % 80000
+        Set   *Var6  FFFFFFF8
+        Set   *Var7  00000014
+        SetF  *Var8  *Fixed[1.0]
+    Else
+        Set   *Var6  FFFFFFFD
+        Set   *Var7  00000008
+        SetF  *Var8  *Fixed[0.4]
+    EndIf
+    Call  GetActorPos       ( .Actor:Self *Var0 *Var1 *Var2 )
+    Add   *Var0  *Var6
+    Add   *Var1  *Var7
+    Call  PlayEffect        ( ~FX:ShapeSpell:Projectile *Var0 *Var1 *Var2 *Var3 *Var4 *Var5 0000000F 00000000 00000000 00000000 00000000 00000000 )
+    Wait  15`
+    Call  EnemyDamageTarget ( .Actor:Self *Var0 ~Flags:DamageType:NoContact|Magic 00000000 00000000 00000002 00000020 )
+    Switch  *Var0
+        Case  ==  .HitResult:Hit % 0
+            Call  GetActorVar   ( .Actor:Self 00000001 *Var0 )
+            If  *Var0  ==  00000000
+                Call  GetLastDamage ( .Actor:Player *Var1 )
+                If  *Var1  !=  00000000
+                    Call  SetActorVar   ( .Actor:Self 00000001 00000001 )
+                EndIf
+            EndIf
+    EndSwitch
+    Call  EnableIdleScript  ( .Actor:Self 00000001 )
+    Call  UseIdleAnimation  ( .Actor:Self .True )
+    Return
+    End
+}
+@ $ASCII_80234FC0 {
+    "hos_bg"
+}

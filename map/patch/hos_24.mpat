@@ -1,0 +1,98 @@
+#new:Header $Header
+{
+	[MainScript] $Script_Main
+	[Background] 80200000
+	[EntryList] $EntryList
+	[EntryCount] 3
+	[MapTattle]   00000000
+}
+
+#new:EntryList $EntryList
+{
+~Vec4f:Entry0
+~Vec4f:Entry1
+~Vec4f:Entry2
+}
+
+#new:Script_Main $Script_Main
+{
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True )
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+	Call  SetMusicTrack     ( 00000000 .Song:ShootingStarSummit 00000000 00000008 )
+	Set	   *Var[0] $Script_CreateExitTriggers
+    Exec    EnterWalk
+	Exec	$Script_MakeEntities
+	Call	ModifyColliderFlags		( 00000003 ~Collider:Dock1 00000004 )
+	Call	ModifyColliderFlags		( 00000000 ~Collider:Dock1 00080000 )
+	Call	ModifyColliderFlags		( 00000003 ~Collider:Dock2 00000004 )
+	Call	ModifyColliderFlags		( 00000000 ~Collider:Dock2 00080000 )
+	Call	ModifyColliderFlags		( 00000003 ~Collider:Dock3 00000004 )
+	Call	ModifyColliderFlags		( 00000000 ~Collider:Dock3 00080000 )
+	Call	ModifyColliderFlags		( 00000003 ~Collider:Dock4 00000004 )
+	Call	ModifyColliderFlags		( 00000000 ~Collider:Dock4 00080000 )
+	Call	ModifyColliderFlags		( 00000000 ~Collider:Dock5 00080000 )
+	Call  	ModifyColliderFlags   	( 00000003 ~Collider:space_float_area 00000001 )
+	Wait 1
+	Return
+	End
+}
+
+#new:Script $Script_MakeEntities {
+	Call  MakeItemEntity ( .Item:StarPiece ~Vec3d:Item_StarPiece1 .ItemSpawnMode:Fixed_NeverVanish *GF_HOS24_Item_StarPiece1 )
+	Call  MakeItemEntity ( .Item:Coin ~Vec3d:Item_Coin1 .ItemSpawnMode:Fixed_NeverVanish *GF_HOS24_Item_Coin1 )
+	Call  MakeItemEntity ( .Item:Coin ~Vec3d:Item_Coin2 .ItemSpawnMode:Fixed_NeverVanish *GF_HOS24_Item_Coin2 )
+	Call  MakeItemEntity ( .Item:Coin ~Vec3d:Item_Coin3 .ItemSpawnMode:Fixed_NeverVanish *GF_HOS24_Item_Coin3 )
+	Call  MakeItemEntity ( .Item:Coin ~Vec3d:Item_Coin4 .ItemSpawnMode:Fixed_NeverVanish *GF_HOS24_Item_Coin4 )
+	Call  MakeItemEntity ( .Item:Coin ~Vec3d:Item_Coin5 .ItemSpawnMode:Fixed_NeverVanish *GF_HOS24_Item_Coin5 )
+	Call  MakeEntity        ( .Entity:RedBlock ~Vec4d:Entity_RedBlock1 .Item:Multibounce 80000000 )
+   	Call  AssignBlockFlag   ( *GF_HOS24_Item_Badge1 )
+	Call  MakeEntity     	( .Entity:YellowBlock ~Vec4d:Entity_YellowBlock1 .Item:SuperShroom 80000000 )
+   	Call  AssignBlockFlag   ( *GF_HOS24_Item_Cosmoshroom1 )
+	Call  MakeEntity     	( .Entity:YellowBlock ~Vec4d:Entity_YellowBlock2 .Item:MapleSyrup 80000000 )
+   	Call  AssignBlockFlag   ( *GF_HOS24_Item_MeteorSyrup1 )
+	Call  MakeEntity     	( .Entity:MultiCoinBrick ~Vec4d:Entity_MultiCoinBrick1 80000000 )
+	Call  AssignBlockFlag   ( *GF_HOS24_MultiCoinBrick1 )
+	Return
+	End
+}
+#new:Script $Script_CreateExitTriggers
+{
+    Bind     $Script_Exit0  .Trigger:FloorAbove ~Collider:deiliv 1 0
+	Bind     $Script_Exit1  .Trigger:FloorAbove ~Collider:deilie 1 0
+	Bind     $Script_Exit2  .Trigger:FloorAbove ~Collider:deiliw 1 0
+	Return
+	End
+}
+
+#new:Script $Script_Exit0
+{
+    Call    UseExitHeading  	( 3C ~Entry:Entry0 )
+    Exec    ExitWalk
+    Call    GotoMap         	( "hos_23" 0 )
+    Wait    100` 
+    Return
+    End
+}
+
+#new:Script $Script_Exit1
+{
+    Call    UseExitHeading  	( 3C ~Entry:Entry1 )
+    Exec    ExitWalk
+    Call    GotoMap         	( "nok_04" 0 )
+    Wait    100` 
+    Return
+    End
+}
+
+#new:Script $Script_Exit2
+{
+    Call    UseExitHeading  	( 3C ~Entry:Entry2 )
+    Exec    ExitWalk
+    Call    GotoMap         	( "sam_03" ~Entry:sam_03:Entry0 )
+    Wait    100` 
+    Return
+    End
+}

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Prefab author="NicTube" textures="sam_tex">
+	<ModelTree>
+		<Node name="Root" id="2">
+			<Node name="leaves1" id="0"/>
+			<Node name="tree1" id="1"/>
+		</Node>
+	</ModelTree>
+	<LightSets>
+		<LightSet name="Lights_None" a="0">
+		</LightSet>
+	</LightSets>
+	<Models>
+		<Model ver="2" type="ROOT" lightset="0">
+			<MapObject name="Root" id="2"/>
+			<BoundingBox empty="true" min="0,0,0" max="0,0,0"/>
+			<PropertyList>
+			</PropertyList>
+		</Model>
+		<Model ver="2" type="MODEL" lightset="0">
+			<MapObject name="tree1" id="1"/>
+			<ShapeMesh ver="3" texture="sam_woody_plate_jtif">
+				<DisplayList>
+					<F3DEX2 cmd="E7000000,0"/>
+					<F3DEX2 cmd="D9FDFFFF,0"/>
+					<F3DEX2 cmd="D9FFFFFF,200400"/>
+					<TriangleBatch ver="0">
+						<VertexTable>
+							<Vertex xyz="135,-149,313" uv="8049,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="144,-118,312" uv="6607,855" rgba="0,0,0,255"/>
+							<Vertex xyz="134,-120,315" uv="8049,855" rgba="100,100,23,-1"/>
+							<Vertex xyz="135,-149,313" uv="8049,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="145,-149,311" uv="6607,-7" rgba="205,205,255,255"/>
+							<Vertex xyz="144,-118,312" uv="6607,855" rgba="0,0,0,255"/>
+							<Vertex xyz="141,-177,318" uv="8049,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="145,-149,311" uv="6607,-7" rgba="205,205,255,255"/>
+							<Vertex xyz="135,-149,313" uv="8049,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="141,-177,318" uv="8049,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="151,-177,311" uv="6607,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="145,-149,311" uv="6607,-7" rgba="205,205,255,255"/>
+							<Vertex xyz="134,-120,315" uv="8049,855" rgba="100,100,23,-1"/>
+							<Vertex xyz="143,-82,326" uv="6607,1717" rgba="0,0,0,255"/>
+							<Vertex xyz="133,-82,328" uv="8049,1717" rgba="0,0,0,255"/>
+							<Vertex xyz="134,-120,315" uv="8049,855" rgba="100,100,23,-1"/>
+							<Vertex xyz="144,-118,312" uv="6607,855" rgba="0,0,0,255"/>
+							<Vertex xyz="143,-82,326" uv="6607,1717" rgba="0,0,0,255"/>
+							<Vertex xyz="130,-173,296" uv="2280,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="127,-149,306" uv="838,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="128,-147,298" uv="2280,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="130,-173,296" uv="2280,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="127,-175,308" uv="838,-870" rgba="-1,-52,55,-1"/>
+							<Vertex xyz="127,-149,306" uv="838,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="127,-175,308" uv="838,-870" rgba="-1,-52,55,-1"/>
+							<Vertex xyz="135,-149,313" uv="-603,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="127,-149,306" uv="838,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="127,-175,308" uv="838,-870" rgba="-1,-52,55,-1"/>
+							<Vertex xyz="141,-177,318" uv="-603,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="135,-149,313" uv="-603,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="141,-177,318" uv="-603,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="121,-193,311" uv="190,-1337" rgba="255,204,51,255"/>
+							<Vertex xyz="139,-195,324" uv="-511,-1337" rgba="255,204,51,255"/>
+							<Vertex xyz="141,-177,318" uv="-603,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="127,-175,308" uv="838,-870" rgba="-1,-52,55,-1"/>
+							<Vertex xyz="121,-193,311" uv="190,-1337" rgba="255,204,51,255"/>
+							<Vertex xyz="128,-147,298" uv="2280,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="125,-116,309" uv="838,855" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="126,-115,297" uv="2280,855" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="128,-147,298" uv="2280,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="127,-149,306" uv="838,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="125,-116,309" uv="838,855" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="127,-149,306" uv="838,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="134,-120,315" uv="-603,855" rgba="100,100,23,-1"/>
+							<Vertex xyz="125,-116,309" uv="838,855" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="127,-149,306" uv="838,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="135,-149,313" uv="-603,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="134,-120,315" uv="-603,855" rgba="100,100,23,-1"/>
+							<Vertex xyz="126,-115,297" uv="2280,855" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="126,-82,322" uv="838,1717" rgba="0,0,0,255"/>
+							<Vertex xyz="128,-81,313" uv="2280,1717" rgba="0,0,0,255"/>
+							<Vertex xyz="126,-115,297" uv="2280,855" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="125,-116,309" uv="838,855" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="126,-82,322" uv="838,1717" rgba="0,0,0,255"/>
+							<Vertex xyz="125,-116,309" uv="838,855" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="133,-82,328" uv="-603,1717" rgba="0,0,0,255"/>
+							<Vertex xyz="126,-82,322" uv="838,1717" rgba="0,0,0,255"/>
+							<Vertex xyz="125,-116,309" uv="838,855" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="134,-120,315" uv="-603,855" rgba="100,100,23,-1"/>
+							<Vertex xyz="133,-82,328" uv="-603,1717" rgba="0,0,0,255"/>
+							<Vertex xyz="127,-175,308" uv="-603,-870" rgba="-1,-52,55,-1"/>
+							<Vertex xyz="124,-191,291" uv="190,-1337" rgba="255,204,51,255"/>
+							<Vertex xyz="121,-193,311" uv="-511,-1337" rgba="255,204,51,255"/>
+							<Vertex xyz="127,-175,308" uv="-603,-870" rgba="-1,-52,55,-1"/>
+							<Vertex xyz="130,-173,296" uv="838,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="124,-191,291" uv="190,-1337" rgba="255,204,51,255"/>
+							<Vertex xyz="139,-195,324" uv="8049,-1731" rgba="255,204,51,255"/>
+							<Vertex xyz="151,-177,311" uv="6607,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="141,-177,318" uv="8049,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="139,-195,324" uv="8049,-1731" rgba="255,204,51,255"/>
+							<Vertex xyz="157,-193,315" uv="6607,-1731"/>
+							<Vertex xyz="151,-177,311" uv="6607,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="142,-188,284" uv="3723,-1731" rgba="255,204,51,255"/>
+							<Vertex xyz="130,-173,296" uv="2280,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="142,-173,292" uv="3723,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="142,-188,284" uv="3723,-1731" rgba="255,204,51,255"/>
+							<Vertex xyz="124,-191,291" uv="2280,-1731" rgba="255,204,51,255"/>
+							<Vertex xyz="130,-173,296" uv="2280,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="142,-173,292" uv="3723,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="128,-147,298" uv="2280,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="137,-148,291" uv="3723,-7" rgba="255,204,51,255"/>
+							<Vertex xyz="142,-173,292" uv="3723,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="130,-173,296" uv="2280,-870" rgba="255,204,51,255"/>
+							<Vertex xyz="128,-147,298" uv="2280,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="137,-148,291" uv="3723,-7" rgba="255,204,51,255"/>
+							<Vertex xyz="126,-115,297" uv="2280,855" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="134,-114,292" uv="3723,855" rgba="100,100,23,-1"/>
+							<Vertex xyz="137,-148,291" uv="3723,-7" rgba="255,204,51,255"/>
+							<Vertex xyz="128,-147,298" uv="2280,-7" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="126,-115,297" uv="2280,855" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="134,-114,292" uv="3723,855" rgba="100,100,23,-1"/>
+							<Vertex xyz="128,-81,313" uv="2280,1717" rgba="0,0,0,255"/>
+							<Vertex xyz="135,-78,306" uv="3723,1717" rgba="0,0,0,255"/>
+							<Vertex xyz="134,-114,292" uv="3723,855" rgba="100,100,23,-1"/>
+							<Vertex xyz="126,-115,297" uv="2280,855" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="128,-81,313" uv="2280,1717" rgba="0,0,0,255"/>
+						</VertexTable>
+						<TriangleList>
+							<Triangle ijk="0,1,2"/>
+							<Triangle ijk="3,4,5"/>
+							<Triangle ijk="6,7,8"/>
+							<Triangle ijk="9,10,11"/>
+							<Triangle ijk="12,13,14"/>
+							<Triangle ijk="15,16,17"/>
+							<Triangle ijk="18,19,20"/>
+							<Triangle ijk="21,22,23"/>
+							<Triangle ijk="24,25,26"/>
+							<Triangle ijk="27,28,29"/>
+							<Triangle ijk="30,31,32"/>
+							<Triangle ijk="33,34,35"/>
+							<Triangle ijk="36,37,38"/>
+							<Triangle ijk="39,40,41"/>
+							<Triangle ijk="42,43,44"/>
+							<Triangle ijk="45,46,47"/>
+							<Triangle ijk="48,49,50"/>
+							<Triangle ijk="51,52,53"/>
+							<Triangle ijk="54,55,56"/>
+							<Triangle ijk="57,58,59"/>
+							<Triangle ijk="60,61,62"/>
+							<Triangle ijk="63,64,65"/>
+							<Triangle ijk="66,67,68"/>
+							<Triangle ijk="69,70,71"/>
+							<Triangle ijk="72,73,74"/>
+							<Triangle ijk="75,76,77"/>
+							<Triangle ijk="78,79,80"/>
+							<Triangle ijk="81,82,83"/>
+							<Triangle ijk="84,85,86"/>
+							<Triangle ijk="87,88,89"/>
+							<Triangle ijk="90,91,92"/>
+							<Triangle ijk="93,94,95"/>
+						</TriangleList>
+					</TriangleBatch>
+				</DisplayList>
+			</ShapeMesh>
+			<PropertyList>
+				<Property v="5C,0,1"/>
+				<Property v="5F,0,0"/>
+			</PropertyList>
+		</Model>
+		<Model ver="2" type="MODEL" lightset="0">
+			<MapObject name="leaves1" id="0"/>
+			<ShapeMesh ver="3" texture="sam_berosaidetif">
+				<DisplayList>
+					<F3DEX2 cmd="E7000000,0"/>
+					<F3DEX2 cmd="D9FDFFFF,0"/>
+					<F3DEX2 cmd="D9FFFFFF,200400"/>
+					<TriangleBatch ver="0">
+						<VertexTable>
+							<Vertex xyz="154,-27,319" uv="-815,-198"/>
+							<Vertex xyz="182,-55,284" uv="-1371,255"/>
+							<Vertex xyz="152,-28,297" uv="-858,152"/>
+							<Vertex xyz="154,-27,319" uv="-815,-198"/>
+							<Vertex xyz="183,-56,334" uv="-1219,-529"/>
+							<Vertex xyz="182,-55,284" uv="-1371,255"/>
+							<Vertex xyz="154,-27,319" uv="-815,-198"/>
+							<Vertex xyz="152,-28,297" uv="-858,152"/>
+							<Vertex xyz="130,12,305" uv="-488,101"/>
+							<Vertex xyz="152,-28,297" uv="-858,152"/>
+							<Vertex xyz="138,-61,256" uv="-776,841" rgba="255,204,55,255"/>
+							<Vertex xyz="134,-28,284" uv="-621,416" rgba="255,204,51,255"/>
+							<Vertex xyz="152,-28,297" uv="-858,152"/>
+							<Vertex xyz="182,-55,284" uv="-1371,255"/>
+							<Vertex xyz="138,-61,256" uv="-776,841" rgba="255,204,55,255"/>
+							<Vertex xyz="136,-29,328" uv="-505,-278"/>
+							<Vertex xyz="183,-56,334" uv="-1219,-529"/>
+							<Vertex xyz="154,-27,319" uv="-815,-198"/>
+							<Vertex xyz="136,-29,328" uv="-505,-278"/>
+							<Vertex xyz="138,-60,359" uv="-432,-770" rgba="255,204,155,255"/>
+							<Vertex xyz="183,-56,334" uv="-1219,-529"/>
+							<Vertex xyz="136,-29,328" uv="-505,-278"/>
+							<Vertex xyz="154,-27,319" uv="-815,-198"/>
+							<Vertex xyz="130,12,305" uv="-488,101"/>
+							<Vertex xyz="115,-32,317" uv="-213,-36" rgba="255,204,51,255"/>
+							<Vertex xyz="138,-60,359" uv="-432,-770" rgba="255,204,155,255"/>
+							<Vertex xyz="136,-29,328" uv="-505,-278"/>
+							<Vertex xyz="115,-32,317" uv="-213,-36" rgba="255,204,51,255"/>
+							<Vertex xyz="94,-65,333" uv="169,-216" rgba="255,204,51,255"/>
+							<Vertex xyz="138,-60,359" uv="-432,-770" rgba="255,204,155,255"/>
+							<Vertex xyz="115,-32,317" uv="-213,-36" rgba="255,204,51,255"/>
+							<Vertex xyz="136,-29,328" uv="-505,-278"/>
+							<Vertex xyz="130,12,305" uv="-488,101"/>
+							<Vertex xyz="152,-28,297" uv="-858,152"/>
+							<Vertex xyz="134,-28,284" uv="-621,416" rgba="255,204,51,255"/>
+							<Vertex xyz="130,12,305" uv="-488,101"/>
+							<Vertex xyz="134,-28,284" uv="-621,416" rgba="255,204,51,255"/>
+							<Vertex xyz="91,-66,282" uv="45,591" rgba="255,204,51,255"/>
+							<Vertex xyz="113,-30,295" uv="-255,314" rgba="255,204,51,255"/>
+							<Vertex xyz="134,-28,284" uv="-621,416" rgba="255,204,51,255"/>
+							<Vertex xyz="138,-61,256" uv="-776,841" rgba="255,204,55,255"/>
+							<Vertex xyz="91,-66,282" uv="45,591" rgba="255,204,51,255"/>
+							<Vertex xyz="113,-30,295" uv="-255,314" rgba="255,204,51,255"/>
+							<Vertex xyz="94,-65,333" uv="169,-216" rgba="255,204,51,255"/>
+							<Vertex xyz="115,-32,317" uv="-213,-36" rgba="255,204,51,255"/>
+							<Vertex xyz="113,-30,295" uv="-255,314" rgba="255,204,51,255"/>
+							<Vertex xyz="91,-66,282" uv="45,591" rgba="255,204,51,255"/>
+							<Vertex xyz="94,-65,333" uv="169,-216" rgba="255,204,51,255"/>
+							<Vertex xyz="113,-30,295" uv="-255,314" rgba="255,204,51,255"/>
+							<Vertex xyz="115,-32,317" uv="-213,-36" rgba="255,204,51,255"/>
+							<Vertex xyz="130,12,305" uv="-488,101"/>
+							<Vertex xyz="134,-28,284" uv="-621,416" rgba="255,204,51,255"/>
+							<Vertex xyz="113,-30,295" uv="-255,314" rgba="255,204,51,255"/>
+							<Vertex xyz="130,12,305" uv="-488,101"/>
+							<Vertex xyz="136,-61,308" uv="-572,34" rgba="-57,-115,55,-1"/>
+							<Vertex xyz="52,-131,309" uv="746,299" rgba="-1,-52,55,-1"/>
+							<Vertex xyz="102,-128,389" uv="232,-1119" rgba="-1,-52,55,-1"/>
+							<Vertex xyz="136,-61,308" uv="-572,34" rgba="-57,-115,55,-1"/>
+							<Vertex xyz="97,-134,228" uv="-229,1416" rgba="-1,-52,55,-1"/>
+							<Vertex xyz="52,-131,309" uv="746,299" rgba="-1,-52,55,-1"/>
+							<Vertex xyz="136,-61,308" uv="-572,34" rgba="-57,-115,55,-1"/>
+							<Vertex xyz="192,-137,225" uv="-1725,1145" rgba="-1,-52,51,-1"/>
+							<Vertex xyz="97,-134,228" uv="-229,1416" rgba="-1,-52,55,-1"/>
+							<Vertex xyz="136,-61,308" uv="-572,34" rgba="-57,-115,55,-1"/>
+							<Vertex xyz="245,-135,308" uv="-2276,-330"/>
+							<Vertex xyz="192,-137,225" uv="-1725,1145" rgba="-1,-52,51,-1"/>
+							<Vertex xyz="136,-61,308" uv="-572,34" rgba="-57,-115,55,-1"/>
+							<Vertex xyz="202,-130,389" uv="-1332,-1454"/>
+							<Vertex xyz="245,-135,308" uv="-2276,-330"/>
+							<Vertex xyz="136,-61,308" uv="-572,34" rgba="-57,-115,55,-1"/>
+							<Vertex xyz="102,-128,389" uv="232,-1119" rgba="-1,-52,55,-1"/>
+							<Vertex xyz="202,-130,389" uv="-1332,-1454"/>
+							<Vertex xyz="134,-31,308" uv="-540,40" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="67,-114,329" uv="578,-63" rgba="255,204,51,255"/>
+							<Vertex xyz="123,-105,382" uv="-120,-1079" rgba="255,204,51,255"/>
+							<Vertex xyz="134,-31,308" uv="-540,40" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="123,-105,382" uv="-120,-1079" rgba="255,204,51,255"/>
+							<Vertex xyz="199,-98,363" uv="-1372,-1037"/>
+							<Vertex xyz="134,-31,308" uv="-540,40" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="87,-111,255" uv="18,1027" rgba="255,204,51,255"/>
+							<Vertex xyz="67,-114,329" uv="578,-63" rgba="255,204,51,255"/>
+							<Vertex xyz="134,-31,308" uv="-540,40" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="161,-103,233" uv="-1213,1123" rgba="255,204,51,255"/>
+							<Vertex xyz="87,-111,255" uv="18,1027" rgba="255,204,51,255"/>
+							<Vertex xyz="134,-31,308" uv="-540,40" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="217,-96,286" uv="-1912,107"/>
+							<Vertex xyz="161,-103,233" uv="-1213,1123" rgba="255,204,51,255"/>
+							<Vertex xyz="134,-31,308" uv="-540,40" rgba="-57,-115,23,-1"/>
+							<Vertex xyz="199,-98,363" uv="-1372,-1037"/>
+							<Vertex xyz="217,-96,286" uv="-1912,107"/>
+						</VertexTable>
+						<TriangleList>
+							<Triangle ijk="0,1,2"/>
+							<Triangle ijk="3,4,5"/>
+							<Triangle ijk="6,7,8"/>
+							<Triangle ijk="9,10,11"/>
+							<Triangle ijk="12,13,14"/>
+							<Triangle ijk="15,16,17"/>
+							<Triangle ijk="18,19,20"/>
+							<Triangle ijk="21,22,23"/>
+							<Triangle ijk="24,25,26"/>
+							<Triangle ijk="27,28,29"/>
+							<Triangle ijk="30,31,32"/>
+							<Triangle ijk="33,34,35"/>
+							<Triangle ijk="36,37,38"/>
+							<Triangle ijk="39,40,41"/>
+							<Triangle ijk="42,43,44"/>
+							<Triangle ijk="45,46,47"/>
+							<Triangle ijk="48,49,50"/>
+							<Triangle ijk="51,52,53"/>
+							<Triangle ijk="54,55,56"/>
+							<Triangle ijk="57,58,59"/>
+							<Triangle ijk="60,61,62"/>
+							<Triangle ijk="63,64,65"/>
+							<Triangle ijk="66,67,68"/>
+							<Triangle ijk="69,70,71"/>
+							<Triangle ijk="72,73,74"/>
+							<Triangle ijk="75,76,77"/>
+							<Triangle ijk="78,79,80"/>
+							<Triangle ijk="81,82,83"/>
+							<Triangle ijk="84,85,86"/>
+							<Triangle ijk="87,88,89"/>
+						</TriangleList>
+					</TriangleBatch>
+				</DisplayList>
+			</ShapeMesh>
+			<PropertyList>
+				<Property v="5C,0,D"/>
+				<Property v="5F,0,0"/>
+			</PropertyList>
+		</Model>
+	</Models>
+</Prefab>

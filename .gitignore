@@ -1,14 +1,49 @@
-# Build artifacts
-mod.cfg
+# build/editor artifacts
 temp
 build
 cache
 /out
-
-# Editor files
 /logs
 /editor
 
-# Original game data
+# original game data
 src
 raw
+/audio/**/*.*
+!/audio/**/*.xml
+/image/**/*.*
+!/image/**/*.xml
+
+mod.cfg
+# modified game data (for multimedia which doesn't use src/patch directories)
+# (put overrides here, e.g. `!/sprite/npc/src/80` if you've changed bowser)
+
+# Altered Images
+!/image/assets/logo_nintendo.png
+!/image/assets/logo_intelligent_systems.png
+!/image/assets/item/key/ultra_stone.png
+!/image/assets/item/key/ultra_stone_alt.png
+!/image/assets/item/key/ruins_stone_moon.png
+!/image/assets/item/key/star_stone.png
+!/image/assets/item/key/SuperShroom.png
+!/image/assets/item/key/SuperShroom_alt.png
+!/image/assets/item/key/MapleSyrup.png
+!/image/assets/item/key/MapleSyrup_alt.png
+
+# Altered Backgrounds
+!/image/bg/title_bg.png
+!/image/compressed/title_1.png
+!/image/compressed/title_2.png
+!/image/compressed/title_3.png
+!/image/compressed/party_opuku.png
+
+# Altered Music
+!/audio/bgm/51_178.bgm
+!/audio/bgm/57_155.bgm
+!/audio/bgm/60_162.bgm
+
+# Altered Textures
+!/image/texture/hos_tex.txa
+!/image/texture/hos_tex/*.*
+!/image/texture/nok_tex.txa
+!/image/texture/nok_tex/*.*
